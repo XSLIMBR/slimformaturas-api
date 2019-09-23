@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SlimFormaturas.Domain\SlimFormaturas.Domain.csproj" />
+    <ProjectReference Include="..\SlimFormaturas.Infra.CrossCutting\SlimFormaturas.Infra.CrossCutting.Identity.csproj" />
+    <ProjectReference Include="..\SlimFormaturas.Infra.Data\SlimFormaturas.Infra.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="8.4.0" />
+  </ItemGroup>
+
+</Project>
