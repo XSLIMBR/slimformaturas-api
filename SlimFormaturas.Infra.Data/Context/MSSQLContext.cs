@@ -3,6 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using SlimFormaturas.Domain.Entities;
 using SlimFormaturas.Infra.Data.Mapping;
+using System.Linq;
+using System;
+using System.Reflection;
 
 namespace SlimFormaturas.Infra.Data.Context {
     public class MssqlContext : DbContext {
@@ -27,6 +30,18 @@ namespace SlimFormaturas.Infra.Data.Context {
                 .Build();
             // define the database to use
             optionsBuilder.UseSqlServer(config.GetConnectionString("DefaultConnection"));
+        }
+        public override int SaveChanges(){
+            foreach (var entry in ChangeTracker.Entries().Where(entry => entry.Entity.GetType().GetProperty("DateRegister") != null)){
+                if(entry.State == EntityState.Added){
+                    entry.Property("DateRegister").CurrentValue = DateTime.Now;
+                }
+
+                if (entry.State == EntityState.Modified) {
+                    entry.Property("DateRegister").IsModified = false;
+                }
+            }
+            return base.SaveChanges();
         }
     }
 }

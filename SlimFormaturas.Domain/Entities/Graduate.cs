@@ -8,7 +8,6 @@ namespace SlimFormaturas.Domain.Entities {
         }
         public string GraduateId { get; set; }
         public string Name { get; set; }
-        /*
         public string Cpf { get; set; }
         public string Rg { get; set; }
         public bool Sex { get; set; }
@@ -27,6 +26,5 @@ namespace SlimFormaturas.Domain.Entities {
 
         public virtual IList<Address> Address { get; set; }
         public virtual IList<Phone> Phone { get; set; }
-        */
     }
 }
