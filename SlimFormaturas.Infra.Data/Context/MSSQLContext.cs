@@ -5,7 +5,8 @@ using SlimFormaturas.Domain.Entities;
 using SlimFormaturas.Infra.Data.Mapping;
 using System.Linq;
 using System;
-using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace SlimFormaturas.Infra.Data.Context {
     public class MssqlContext : DbContext {
@@ -31,7 +32,7 @@ namespace SlimFormaturas.Infra.Data.Context {
             // define the database to use
             optionsBuilder.UseSqlServer(config.GetConnectionString("DefaultConnection"));
         }
-        public override int SaveChanges(){
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default){
             foreach (var entry in ChangeTracker.Entries().Where(entry => entry.Entity.GetType().GetProperty("DateRegister") != null)){
                 if(entry.State == EntityState.Added){
                     entry.Property("DateRegister").CurrentValue = DateTime.Now;
@@ -41,7 +42,7 @@ namespace SlimFormaturas.Infra.Data.Context {
                     entry.Property("DateRegister").IsModified = false;
                 }
             }
-            return base.SaveChanges();
+            return await base.SaveChangesAsync(cancellationToken);
         }
     }
 }

@@ -18,7 +18,6 @@ namespace SlimFormaturas.Domain.Entities {
         public string Uf { get; set; }
         public bool Active { get; set; }
 
-        public int GraduateId { get; set; }
         public virtual Graduate Graduate { get; set; }
     }
 }

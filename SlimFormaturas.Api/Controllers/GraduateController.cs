@@ -20,9 +20,9 @@ namespace SlimFormaturas.Api.Controllers  {
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody]Graduate graduate) {
+        public async Task<ActionResult<Graduate>> Post(Graduate graduate) {
             try {
-                _graduateService.Post<GraduateValidator>(graduate);
+                await _graduateService.Post<GraduateValidator>(graduate);
                 return new ObjectResult(graduate.GraduateId);
             } catch (ArgumentException ex) {
                 return NotFound(ex);
@@ -32,9 +32,9 @@ namespace SlimFormaturas.Api.Controllers  {
         }
 
         [HttpPut]
-        public IActionResult Put([FromBody] Graduate graduate) {
+        public async Task<ActionResult<Graduate>> Put(Graduate graduate) {
             try {
-                _graduateService.Put<GraduateValidator>(graduate);
+                await _graduateService.Put<GraduateValidator>(graduate);
                 return new ObjectResult(graduate);
             } catch (ArgumentNullException ex) {
                 return NotFound(ex);
@@ -44,9 +44,9 @@ namespace SlimFormaturas.Api.Controllers  {
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(string id) {
+        public async Task<ActionResult> Delete(string id) {
             try {
-                _graduateService.Delete(id);
+                await _graduateService.Delete(id);
                 return new NoContentResult();
             } catch (ArgumentException ex) {
                 return NotFound(ex);
@@ -56,9 +56,9 @@ namespace SlimFormaturas.Api.Controllers  {
         }
 
         [HttpGet]
-        public IActionResult Get() {
+        public async Task<ActionResult> Get() {
             try {
-                return new ObjectResult(_graduateService.Get());
+                return new ObjectResult(await _graduateService.Get());
             } catch (Exception ex) {
                 return BadRequest(ex);
             }
@@ -66,9 +66,9 @@ namespace SlimFormaturas.Api.Controllers  {
 
         [HttpGet]
         [Route("{id}")]
-        public IActionResult Get(string id) {
+        public async Task<ActionResult> Get(string id) {
             try {
-                return new ObjectResult(_graduateService.Get(id));
+                return new ObjectResult(await _graduateService.Get(id));
             } catch (ArgumentException ex) {
                 return NotFound(ex);
             } catch (Exception ex) {

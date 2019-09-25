@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SlimFormaturas.Infra.Data.Context;
 
 namespace SlimFormaturas.Infra.Data.Migrations
 {
     [DbContext(typeof(MssqlContext))]
-    partial class MssqlContextModelSnapshot : ModelSnapshot
+    [Migration("20190925021206_2")]
+    partial class _2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,7 +34,9 @@ namespace SlimFormaturas.Infra.Data.Migrations
 
                     b.Property<string>("Complement");
 
-                    b.Property<string>("GraduateId");
+                    b.Property<int>("GraduateId");
+
+                    b.Property<string>("GraduateId1");
 
                     b.Property<string>("Neighborhood");
 
@@ -44,7 +48,7 @@ namespace SlimFormaturas.Infra.Data.Migrations
 
                     b.HasKey("AddressId");
 
-                    b.HasIndex("GraduateId");
+                    b.HasIndex("GraduateId1");
 
                     b.ToTable("Address");
                 });
@@ -98,13 +102,15 @@ namespace SlimFormaturas.Infra.Data.Migrations
 
                     b.Property<string>("Ddd");
 
-                    b.Property<string>("GraduateId");
+                    b.Property<int>("GraduateId");
+
+                    b.Property<string>("GraduateId1");
 
                     b.Property<string>("PhoneNumber");
 
                     b.HasKey("PhoneId");
 
-                    b.HasIndex("GraduateId");
+                    b.HasIndex("GraduateId1");
 
                     b.ToTable("Phone");
                 });
@@ -113,14 +119,14 @@ namespace SlimFormaturas.Infra.Data.Migrations
                 {
                     b.HasOne("SlimFormaturas.Domain.Entities.Graduate", "Graduate")
                         .WithMany("Address")
-                        .HasForeignKey("GraduateId");
+                        .HasForeignKey("GraduateId1");
                 });
 
             modelBuilder.Entity("SlimFormaturas.Domain.Entities.Phone", b =>
                 {
                     b.HasOne("SlimFormaturas.Domain.Entities.Graduate", "Graduate")
                         .WithMany("Phone")
-                        .HasForeignKey("GraduateId");
+                        .HasForeignKey("GraduateId1");
                 });
 #pragma warning restore 612, 618
         }
