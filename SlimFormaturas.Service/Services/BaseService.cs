@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using FluentValidation;
 using SlimFormaturas.Domain.Interfaces.Repository;
 using SlimFormaturas.Domain.Interfaces.Service;
@@ -13,31 +14,31 @@ namespace SlimFormaturas.Service.Services {
             _repository = repository;
         }
 
-        public TEntity Post<TVEntity>(TEntity obj) where TVEntity : AbstractValidator<TEntity> {
+        public async Task<TEntity> Post<TVEntity>(TEntity obj) where TVEntity : AbstractValidator<TEntity> {
             Validate(obj, Activator.CreateInstance<TVEntity>());
-            _repository.Insert(obj);
+            await _repository.Insert(obj);
             return obj;
         }
 
-        public TEntity Put<TVEntity>(TEntity obj) where TVEntity : AbstractValidator<TEntity> {
+        public async Task<TEntity> Put<TVEntity>(TEntity obj) where TVEntity : AbstractValidator<TEntity> {
             Validate(obj, Activator.CreateInstance<TVEntity>());
-            _repository.Update(obj);
+            await _repository.Update(obj);
             return obj;
         }
 
-        public void Delete(string id) {
+        public async Task Delete(string id) {
             if (id == null)
                 throw new ArgumentException("O ID não pode ser vazio!");
-            _repository.Remove(id);
+            await _repository.Remove(id);
         }
 
-        public TEntity Get(string id) {
+        public async Task<TEntity> Get(string id) {
             if (id == null)
                 throw new ArgumentException("O ID não pode ser vazio!");
-            return _repository.GetById(id);
+            return await _repository.GetById(id);
         }
 
-        public IList<TEntity> Get() => _repository.GetAll();
+        public async Task<IList<TEntity>> Get() => await _repository.GetAll();
 
         private void Validate(TEntity obj, AbstractValidator<TEntity> validator) {
             if (obj == null)
@@ -47,7 +48,6 @@ namespace SlimFormaturas.Service.Services {
 
         public void Dispose() {
             _repository.Dispose();
-            //GC.SuppressFinalize(this);
         }
     }
 }

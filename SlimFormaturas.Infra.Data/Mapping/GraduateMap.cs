@@ -18,6 +18,61 @@ namespace SlimFormaturas.Infra.Data.Mapping {
                 .HasMaxLength(100)
                 .IsRequired();
 
+            builder.Property(c => c.Cpf)
+                .HasColumnType("varchar(11)")
+                .HasMaxLength(11)
+                .IsRequired();
+
+            builder.Property(c => c.Rg)
+                .IsRequired();
+
+            builder.Property(c => c.Sex)
+                .IsRequired();
+            
+            builder.Property(c => c.BirthDate)
+                .IsRequired();
+
+            builder.Property(c => c.DadName)
+                .HasColumnType("varchar(100)")
+                .HasMaxLength(100)
+                .IsRequired();
+            
+            builder.Property(c => c.MotherName)
+                .HasColumnType("varchar(100)")
+                .HasMaxLength(100)
+                .IsRequired();
+            
+            builder.Property(c => c.Committee)
+                .IsRequired();
+
+            builder.Property(c => c.Email)
+                .HasColumnType("varchar(100)")
+                .HasMaxLength(100)
+                .IsRequired();
+
+            builder.Property(c => c.Photo)
+                .HasColumnType("varchar")
+                .HasMaxLength(255)
+                .IsRequired();
+
+            builder.Property(c => c.Bank)
+                .HasColumnType("varchar(50)")
+                .HasMaxLength(50)
+                .IsRequired();
+
+            builder.Property(c => c.Agency)
+                .HasColumnType("varchar(50)")
+                .HasMaxLength(50)
+                .IsRequired();
+
+            builder.Property(c => c.CheckingAccount)
+                .HasColumnType("varchar(50)")
+                .HasMaxLength(50)
+                .IsRequired();
+
+            builder.Property(c => c.DateRegister)
+                .IsRequired();
+
             builder.ToTable("Graduate");
         }
     }
