@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SlimFormaturas.Domain.Entities;
-using SlimFormaturas.Domain.Interfaces;
 using SlimFormaturas.Domain.Interfaces.Service;
 using SlimFormaturas.Service.Validators;
+using System;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
-namespace SlimFormaturas.Api.Controllers  {
+namespace SlimFormaturas.Api.Controllers
+{
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class GraduateController : ControllerBase {
@@ -64,8 +63,7 @@ namespace SlimFormaturas.Api.Controllers  {
             }
         }
 
-        [HttpGet]
-        [Route("{id}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult> Get(string id) {
             try {
                 return new ObjectResult(await _graduateService.Get(id));

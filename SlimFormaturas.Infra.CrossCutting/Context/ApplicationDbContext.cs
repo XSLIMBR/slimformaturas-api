@@ -1,17 +1,16 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Hosting;
 
 namespace SlimFormaturas.Infra.CrossCutting.Identity.Context {
     public class ApplicationDbContext : IdentityDbContext<IdentityUser> {
-        private readonly IHostingEnvironment _environment;
+        private readonly IWebHostEnvironment _environment;
 
         public ApplicationDbContext(
-            DbContextOptions<ApplicationDbContext> options, 
-            IHostingEnvironment env) : base(options)
+            DbContextOptions<ApplicationDbContext> options,
+            IWebHostEnvironment env) : base(options)
         {
             _environment = env;
         }

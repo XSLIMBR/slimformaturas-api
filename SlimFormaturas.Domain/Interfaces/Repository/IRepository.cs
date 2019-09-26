@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace SlimFormaturas.Domain.Interfaces.Repository {
     public interface IRepository<TEntity> where TEntity : class {
 
-        Task<TEntity> GetById(string id);
+        ValueTask<TEntity> GetById(string id);
         Task<TEntity> FirstOrDefault(Expression<Func<TEntity, bool>> predicate);
 
         Task Insert(TEntity obj);

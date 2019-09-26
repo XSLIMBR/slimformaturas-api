@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace SlimFormaturas.Domain.Entities {
     public class Address {

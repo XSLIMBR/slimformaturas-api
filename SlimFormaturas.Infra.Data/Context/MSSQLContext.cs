@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Hosting;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using SlimFormaturas.Domain.Entities;
 using SlimFormaturas.Infra.Data.Mapping;
@@ -7,12 +6,13 @@ using System.Linq;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 
 namespace SlimFormaturas.Infra.Data.Context {
     public class MssqlContext : DbContext {
-        private readonly IHostingEnvironment _environment;
+        private readonly IWebHostEnvironment _environment;
 
-        public MssqlContext(IHostingEnvironment environment) {
+        public MssqlContext(IWebHostEnvironment environment) {
             _environment = environment;
         }
 

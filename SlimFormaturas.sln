@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.645
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29318.209
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Application", "1 - Application", "{C405A1ED-007E-4280-8FA4-9647FF0F5382}"
 EndProject
@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SlimFormaturas.Infra.Data",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SlimFormaturas.Infra.CrossCutting.Identity", "SlimFormaturas.Infra.CrossCutting\SlimFormaturas.Infra.CrossCutting.Identity.csproj", "{0020044A-E8E3-4E0C-90D8-4DC3949E9BDD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlimFormaturas.Infra.CrossCutting.IoC", "SlimFormaturas.Infra.CrossCutting.IoC\SlimFormaturas.Infra.CrossCutting.IoC.csproj", "{63E4882E-5EDF-4FC1-A212-16908C800609}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SlimFormaturas.Infra.CrossCutting.IoC", "SlimFormaturas.Infra.CrossCutting.IoC\SlimFormaturas.Infra.CrossCutting.IoC.csproj", "{63E4882E-5EDF-4FC1-A212-16908C800609}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

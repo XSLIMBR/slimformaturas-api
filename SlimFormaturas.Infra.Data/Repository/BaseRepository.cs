@@ -16,7 +16,7 @@ namespace SlimFormaturas.Infra.Data.Repository {
         public BaseRepository(MssqlContext context) {
             Context = context;
         }
-        public Task<TEntity> GetById(string id) => Context.Set<TEntity>().FindAsync(id);
+        public ValueTask<TEntity> GetById(string id) => Context.Set<TEntity>().FindAsync(id);
         public Task<TEntity> FirstOrDefault(Expression<Func<TEntity, bool>> predicate) => Context.Set<TEntity>().FirstOrDefaultAsync(predicate);
 
         public async Task Insert(TEntity obj) {
