@@ -13,7 +13,6 @@ namespace SlimFormaturas.Domain.Entities {
         public string Neighborhood { get; set; }
         public string City { get; set; }
         public string Uf { get; set; }
-        public bool Active { get; set; }
 
         public virtual Graduate Graduate { get; set; }
     }

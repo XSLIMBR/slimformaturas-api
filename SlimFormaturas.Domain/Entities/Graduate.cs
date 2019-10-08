@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
 
 namespace SlimFormaturas.Domain.Entities {
     public class Graduate {
@@ -22,8 +23,12 @@ namespace SlimFormaturas.Domain.Entities {
         public string Agency { get; set; }
         public string CheckingAccount { get; set; }
         #endregion
+
+        public string UserId { get; set; }
+
         public DateTime DateRegister { get; set; }
 
+        public virtual User User { get; set; }
         public virtual IList<Address> Address { get; set; }
         public virtual IList<Phone> Phone { get; set; }
     }

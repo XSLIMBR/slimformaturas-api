@@ -70,8 +70,15 @@ namespace SlimFormaturas.Infra.Data.Mapping {
                 .HasMaxLength(50)
                 .IsRequired();
 
+            builder.Property(c => c.UserId)
+                .HasColumnType("nvarchar(450)")
+                .HasMaxLength(450)
+                .IsRequired();
+
             builder.Property(c => c.DateRegister)
                 .IsRequired();
+
+
 
             builder.ToTable("Graduate");
         }
