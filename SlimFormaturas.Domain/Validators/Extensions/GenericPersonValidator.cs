@@ -3,7 +3,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using FluentValidation.Validators;
 
-namespace SlimFormaturas.Service.Validators.Extensions {
+namespace SlimFormaturas.Domain.Validators.Extensions {
     public abstract class GenericPersonValidator : PropertyValidator {
         private readonly int _validLength;
 

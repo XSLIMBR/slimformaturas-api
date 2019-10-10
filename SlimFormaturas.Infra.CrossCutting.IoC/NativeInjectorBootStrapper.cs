@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using SlimFormaturas.Domain.Interfaces.Repository;
 using SlimFormaturas.Domain.Interfaces.Service;
+using SlimFormaturas.Domain.Notifications;
 using SlimFormaturas.Infra.CrossCutting.Identity.Context;
 using SlimFormaturas.Infra.Data.Context;
 using SlimFormaturas.Infra.Data.Repository;
@@ -22,6 +24,9 @@ namespace SlimFormaturas.Infra.CrossCutting.IoC {
             //Context
             services.AddDbContext<MssqlContext>();
             services.AddDbContext<ApplicationDbContext>();
+
+
+            services.AddScoped<NotificationHandler>();
 
         }
     }

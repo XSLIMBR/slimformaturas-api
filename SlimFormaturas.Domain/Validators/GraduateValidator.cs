@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using FluentValidation;
 using SlimFormaturas.Domain.Entities;
-using SlimFormaturas.Service.Validators.Extensions;
+using SlimFormaturas.Domain.Validators.Extensions;
 
-namespace SlimFormaturas.Service.Validators {
+namespace SlimFormaturas.Domain.Validators {
     public class GraduateValidator : AbstractValidator<Graduate> {
         public GraduateValidator() {
             RuleFor(c => c)

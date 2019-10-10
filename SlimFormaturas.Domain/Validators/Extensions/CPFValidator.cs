@@ -1,4 +1,4 @@
-﻿namespace SlimFormaturas.Service.Validators.Extensions {
+﻿namespace SlimFormaturas.Domain.Validators.Extensions {
     public class CPFValidator : GenericPersonValidator {
         internal CPFValidator(int validLength, string errorMessage)
             : base(validLength, errorMessage) { }

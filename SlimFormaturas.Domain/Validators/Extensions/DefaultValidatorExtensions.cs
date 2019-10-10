@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace SlimFormaturas.Service.Validators.Extensions {
+namespace SlimFormaturas.Domain.Validators.Extensions {
     /// <summary>
     /// A partial class with brazilian extension methods for validations
     /// </summary>

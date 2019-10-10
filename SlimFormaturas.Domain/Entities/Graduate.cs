@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
+using SlimFormaturas.Domain.Validators;
 
 namespace SlimFormaturas.Domain.Entities {
     public class Graduate {
-        public Graduate() {
+
+        public Graduate(){
             GraduateId = Guid.NewGuid().ToString();
         }
         public string GraduateId { get; set; }

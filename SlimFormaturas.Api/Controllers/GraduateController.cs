@@ -1,77 +1,55 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SlimFormaturas.Domain.Entities;
 using SlimFormaturas.Domain.Interfaces.Service;
-using SlimFormaturas.Service.Validators;
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using FluentValidation;
+using SlimFormaturas.Domain.Validators;
+using MediatR;
+using SlimFormaturas.Domain.Notifications;
 
 namespace SlimFormaturas.Api.Controllers
 {
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class GraduateController : ControllerBase {
+    public class GraduateController : ApiController {
         private readonly IGraduateService _graduateService;
 
-        public GraduateController(IGraduateService graduateService) {
+        public GraduateController(
+            IGraduateService graduateService,
+            NotificationHandler notifications) : base (notifications)
+        {
             _graduateService = graduateService;
         }
 
         [HttpPost]
         public async Task<ActionResult<Graduate>> Post(Graduate graduate) {
-            try {
-                await _graduateService.Post<GraduateValidator>(graduate);
-                return new ObjectResult(graduate.GraduateId);
-            } catch (ArgumentException ex) {
-                return NotFound(ex);
-            } catch (Exception ex) {
-                return BadRequest(ex);
-            }
+            await _graduateService.Post<GraduateValidator>(graduate);
+            return Response(graduate);
         }
 
         [HttpPut]
         public async Task<ActionResult<Graduate>> Put(Graduate graduate) {
-            try {
-                await _graduateService.Put<GraduateValidator>(graduate);
-                return new ObjectResult(graduate);
-            } catch (ArgumentNullException ex) {
-                return NotFound(ex);
-            } catch (Exception ex) {
-                return BadRequest(ex);
-            }
+            await _graduateService.Put<GraduateValidator>(graduate);
+            return Response(graduate);
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(string id) {
-            try {
-                await _graduateService.Delete(id);
-                return new NoContentResult();
-            } catch (ArgumentException ex) {
-                return NotFound(ex);
-            } catch (Exception ex) {
-                return BadRequest(ex);
-            }
+            await _graduateService.Delete(id);
+            return Response();
         }
 
         [HttpGet]
         public async Task<ActionResult> Get() {
-            try {
-                return new ObjectResult(await _graduateService.Get());
-            } catch (Exception ex) {
-                return BadRequest(ex);
-            }
+            return Response(await _graduateService.Get());
         }
-
+        
         [HttpGet("{id}")]
         public async Task<ActionResult> Get(string id) {
-            try {
-                return new ObjectResult(await _graduateService.Get(id));
-            } catch (ArgumentException ex) {
-                return NotFound(ex);
-            } catch (Exception ex) {
-                return BadRequest(ex);
-            }
+            return Response(await _graduateService.Get(id));
         }
     }
 }
