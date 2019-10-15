@@ -42,6 +42,11 @@ namespace SlimFormaturas.Api.Controllers
             return Response();
         }
 
+        // GET api/values
+        /// <summary>
+        /// Get API Value
+        /// </summary>
+        /// <remarks>This API will get the values.</remarks>
         [HttpGet]
         public async Task<ActionResult> Get() {
             return Response(await _graduateService.Get());

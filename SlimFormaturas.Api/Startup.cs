@@ -18,6 +18,10 @@ using SlimFormaturas.Infra.CrossCutting.IoC;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
+using Swashbuckle.AspNetCore.Swagger;
+using System.Reflection;
+using System.IO;
+using Microsoft.OpenApi.Models;
 
 namespace SlimFormaturas.Api
 {
@@ -90,6 +94,34 @@ namespace SlimFormaturas.Api
                 options.OutputFormatters.Remove(new XmlDataContractSerializerOutputFormatter());
             }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Version = "v1", Title = "API" });
+
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = "JWT Authorization header using the bearer scheme",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {new OpenApiSecurityScheme {
+                            Reference = new OpenApiReference {
+                                Id = "Bearer",
+                                Type = ReferenceType.SecurityScheme
+                            }}, new List<string>()
+                    }
+                }); 
+
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+            });
+
+
             RegisterServices(services);
         }
 
@@ -98,18 +130,19 @@ namespace SlimFormaturas.Api
             if (env.IsDevelopment()){
                 app.UseDeveloperExceptionPage();
             }
-
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseHsts();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-           });
+            });
+            app.UseSwagger();
+            app.UseSwaggerUI(c => {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "SlimFormaturas");
+            });
         }
         private static void RegisterServices(IServiceCollection services) {
             // Adding dependencies from another layers (isolated from Presentation)
