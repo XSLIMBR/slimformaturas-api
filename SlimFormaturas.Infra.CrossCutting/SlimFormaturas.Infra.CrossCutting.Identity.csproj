@@ -25,8 +25,4 @@
     <ProjectReference Include="..\SlimFormaturas.Domain\SlimFormaturas.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Authorization\" />
-  </ItemGroup>
-
 </Project>

@@ -1,13 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SlimFormaturas.Domain.Entities;
 using SlimFormaturas.Domain.Interfaces.Service;
-using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using FluentValidation;
 using SlimFormaturas.Domain.Validators;
-using MediatR;
 using SlimFormaturas.Domain.Notifications;
+using static SlimFormaturas.Infra.CrossCutting.Identity.Authorization.CustomAuthorize;
 
 namespace SlimFormaturas.Api.Controllers
 {
@@ -24,29 +22,33 @@ namespace SlimFormaturas.Api.Controllers
             _graduateService = graduateService;
         }
 
+        [ClaimsAuthorize("Graduate", "Incluir")]
         [HttpPost]
         public async Task<ActionResult<Graduate>> Post(Graduate graduate) {
             await _graduateService.Post<GraduateValidator>(graduate);
             return Response(graduate);
         }
 
+        [ClaimsAuthorize("Graduate", "Editar")]
         [HttpPut]
         public async Task<ActionResult<Graduate>> Put(Graduate graduate) {
             await _graduateService.Put<GraduateValidator>(graduate);
             return Response(graduate);
         }
 
+        [ClaimsAuthorize("Graduate", "Excluir")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(string id) {
             await _graduateService.Delete(id);
             return Response();
         }
 
-        // GET api/values
+        // GET api/Graduate
         /// <summary>
-        /// Get API Value
+        /// Get all graduates
         /// </summary>
         /// <remarks>This API will get the values.</remarks>
+        /// 
         [HttpGet]
         public async Task<ActionResult> Get() {
             return Response(await _graduateService.Get());
