@@ -18,9 +18,11 @@ namespace SlimFormaturas.Infra.CrossCutting.IoC {
             //Services
             services.AddScoped(typeof(IService<>), typeof(BaseService<>));
             services.AddScoped<IGraduateService, GraduateService>();
+            services.AddScoped<ITypeGenericService, TypeGenericService>();
             //Infra - Data
             services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
             services.AddScoped<IGraduateRepository,GraduateRepository>();
+            services.AddScoped<ITypeGenericRepository, TypeGenericRepository>();
             //Context
             services.AddDbContext<MssqlContext>();
             services.AddDbContext<ApplicationDbContext>();

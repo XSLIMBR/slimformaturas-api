@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using SlimFormaturas.Domain.Validators;
 using SlimFormaturas.Domain.Notifications;
-using static SlimFormaturas.Infra.CrossCutting.Identity.Authorization.CustomAuthorize;
+using SlimFormaturas.Infra.CrossCutting.Identity.Authorization;
 
 namespace SlimFormaturas.Api.Controllers
 {
@@ -22,21 +22,21 @@ namespace SlimFormaturas.Api.Controllers
             _graduateService = graduateService;
         }
 
-        [ClaimsAuthorize("Graduate", "Incluir")]
+        [CustomAuthorize.ClaimsAuthorizeAttribute("Graduate", "Incluir")]
         [HttpPost]
         public async Task<ActionResult<Graduate>> Post(Graduate graduate) {
             await _graduateService.Post<GraduateValidator>(graduate);
             return Response(graduate);
         }
 
-        [ClaimsAuthorize("Graduate", "Editar")]
+        [CustomAuthorize.ClaimsAuthorize("Graduate", "Editar")]
         [HttpPut]
         public async Task<ActionResult<Graduate>> Put(Graduate graduate) {
             await _graduateService.Put<GraduateValidator>(graduate);
             return Response(graduate);
         }
 
-        [ClaimsAuthorize("Graduate", "Excluir")]
+        [CustomAuthorize.ClaimsAuthorize("Graduate", "Excluir")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(string id) {
             await _graduateService.Delete(id);

@@ -14,6 +14,7 @@ namespace SlimFormaturas.Domain.Entities {
         public string City { get; set; }
         public string Uf { get; set; }
 
+        public virtual TypeGeneric TypeGeneric { get; set; }
         public virtual Graduate Graduate { get; set; }
     }
 }

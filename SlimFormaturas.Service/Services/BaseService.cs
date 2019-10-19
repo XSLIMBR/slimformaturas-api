@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using FluentValidation;
@@ -53,8 +54,20 @@ namespace SlimFormaturas.Service.Services {
         private async Task<ValidationResult> Validate(TEntity obj, AbstractValidator<TEntity> validator) {
             if (obj == null)
                 throw new Exception("Registros não detectados!");
-           return await validator.ValidateAsync(obj);
+            return await validator.ValidateAsync(obj);
         }
+
+        public async Task<TEntity> FirstOrDefault(Expression<Func<TEntity, bool>> predicate) {
+            return await _repository.FirstOrDefault(predicate);  
+        }
+
+        public async Task<IList<TEntity>> GetWhere(Expression<Func<TEntity, bool>> predicate) {
+            return await _repository.GetWhere(predicate);
+        }
+ 
+        public async Task<int> CountAll() => await _repository.CountAll();
+ 
+        public async Task<int> CountWhere(Expression<Func<TEntity, bool>> predicate) => await _repository.CountWhere(predicate);
 
         public void Dispose() {
             _repository.Dispose();

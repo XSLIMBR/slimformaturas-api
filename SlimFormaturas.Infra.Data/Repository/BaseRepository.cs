@@ -16,21 +16,21 @@ namespace SlimFormaturas.Infra.Data.Repository {
         public BaseRepository(MssqlContext context) {
             Context = context;
         }
-        public ValueTask<TEntity> GetById(string id) => Context.Set<TEntity>().FindAsync(id);
-        public Task<TEntity> FirstOrDefault(Expression<Func<TEntity, bool>> predicate) => Context.Set<TEntity>().FirstOrDefaultAsync(predicate);
+        public async ValueTask<TEntity> GetById(string id) => await Context.Set<TEntity>().FindAsync(id);
+        public async Task<TEntity> FirstOrDefault(Expression<Func<TEntity, bool>> predicate) => await Context.Set<TEntity>().FirstOrDefaultAsync(predicate);
 
         public async Task Insert(TEntity obj) {
             await Context.Set<TEntity>().AddAsync(obj);
             await Context.SaveChangesAsync();
         }
-        public  Task Update(TEntity obj) {
+        public async Task<int> Update(TEntity obj) {
             Context.Set<TEntity>().Update(obj);
-            return Context.SaveChangesAsync();
+            return await Context.SaveChangesAsync();
         }
 
-        public Task Remove(string id) {
+        public async Task<int> Remove(string id) {
             Context.Set<TEntity>().Remove(Context.Set<TEntity>().Find(id));
-            return Context.SaveChangesAsync();
+            return await Context.SaveChangesAsync();
         }
 
         public async Task<IList<TEntity>> GetAll() {
@@ -41,9 +41,9 @@ namespace SlimFormaturas.Infra.Data.Repository {
             return await Context.Set<TEntity>().Where(predicate).ToListAsync();
         }
  
-        public Task<int> CountAll() => Context.Set<TEntity>().CountAsync();
+        public async Task<int> CountAll() => await Context.Set<TEntity>().CountAsync();
  
-        public Task<int> CountWhere(Expression<Func<TEntity, bool>> predicate) => Context.Set<TEntity>().CountAsync(predicate);
+        public async Task<int> CountWhere(Expression<Func<TEntity, bool>> predicate) => await Context.Set<TEntity>().CountAsync(predicate);
 
         public void Dispose() {
             Context.Dispose();

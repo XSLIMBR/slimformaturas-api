@@ -10,8 +10,8 @@ namespace SlimFormaturas.Domain.Interfaces.Repository {
         Task<TEntity> FirstOrDefault(Expression<Func<TEntity, bool>> predicate);
 
         Task Insert(TEntity obj);
-        Task Update(TEntity obj);
-        Task Remove(string id);
+        Task<int> Update(TEntity obj);
+        Task<int> Remove(string id);
 
         Task<IList<TEntity>> GetAll();
         Task<IList<TEntity>> GetWhere(Expression<Func<TEntity, bool>> predicate);
