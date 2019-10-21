@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using SlimFormaturas.Domain.Entities;
 using SlimFormaturas.Domain.Interfaces.Service;
 using SlimFormaturas.Domain.Notifications;
+using SlimFormaturas.Domain.Validators;
 
 namespace SlimFormaturas.Api.Controllers
 {
@@ -20,9 +21,16 @@ namespace SlimFormaturas.Api.Controllers
         }
 
         // GET: api/Type
-        [HttpGet]
-        public async Task<ActionResult> Address() {
-            return Response(await _typeGenericService.GetWhere(c => c.localization == locate.Address));
+        [HttpGet("Address")]
+        public async Task<ActionResult> AddressGet() {
+            return Response(await _typeGenericService.GetWhere(c => c.Localization == Locate.Address));
+        }
+
+        [HttpPost("Address")]
+        public async Task<ActionResult<TypeGeneric>> AddressPost(TypeGeneric typeGeneric) {
+            typeGeneric.Localization = Locate.Address;
+            await _typeGenericService.Post<TypeGenericValidator>(typeGeneric);
+            return typeGeneric;
         }
 
     }

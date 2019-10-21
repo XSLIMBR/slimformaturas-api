@@ -9,12 +9,12 @@ namespace SlimFormaturas.Domain.Entities {
         }
         public string TypeGenericId { get; set; }
         public string Name { get; set; }
-        public locate localization { get; set; }
+        public Locate Localization { get; set; }
 
         public DateTime DateRegister { get; set; }
     }
 
-    public enum locate {
+    public enum Locate {
         Address,
         Telephone
     }
