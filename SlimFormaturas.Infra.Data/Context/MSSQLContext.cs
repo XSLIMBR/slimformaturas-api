@@ -20,7 +20,7 @@ namespace SlimFormaturas.Infra.Data.Context {
         public DbSet<Address> Address { get; set; }
         public DbSet<Phone> Phone { get; set; }
         public DbSet<User> User { get; set; }
-        public DbSet<TypeGeneric> typeGeneric { get; set; }
+        public DbSet<TypeGeneric> TypeGeneric { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             modelBuilder.ApplyConfiguration(new GraduateMap());

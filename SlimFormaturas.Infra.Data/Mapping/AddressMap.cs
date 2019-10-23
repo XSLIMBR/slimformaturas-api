@@ -44,6 +44,9 @@ namespace SlimFormaturas.Infra.Data.Mapping {
                 .HasMaxLength(2)
                 .IsRequired();
 
+            builder.Property(u => u.TypeGenericId)
+                .IsRequired();
+
             builder.ToTable("Address");
         }
     }

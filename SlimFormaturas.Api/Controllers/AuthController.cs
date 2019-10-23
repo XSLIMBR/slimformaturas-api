@@ -32,8 +32,7 @@ namespace SlimFormaturas.Api.Controllers
         }
 
         [HttpPost("Register")]
-        public async Task<ActionResult> Register(Register registerUser)
-        {
+        public async Task<ActionResult> Register(Register registerUser) {
             if (!ModelState.IsValid) return BadRequest(ModelState.Values.SelectMany(e => e.Errors));
 
             var user = new IdentityUser {

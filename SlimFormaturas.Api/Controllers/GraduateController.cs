@@ -7,8 +7,7 @@ using SlimFormaturas.Domain.Validators;
 using SlimFormaturas.Domain.Notifications;
 using SlimFormaturas.Infra.CrossCutting.Identity.Authorization;
 
-namespace SlimFormaturas.Api.Controllers
-{
+namespace SlimFormaturas.Api.Controllers {
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
@@ -17,14 +16,14 @@ namespace SlimFormaturas.Api.Controllers
 
         public GraduateController(
             IGraduateService graduateService,
-            NotificationHandler notifications) : base (notifications)
-        {
+            NotificationHandler notifications) : base (notifications) {
             _graduateService = graduateService;
         }
 
-        [CustomAuthorize.ClaimsAuthorizeAttribute("Graduate", "Incluir")]
+        //[CustomAuthorize.ClaimsAuthorize("Graduate", "Incluir")]
         [HttpPost]
         public async Task<ActionResult<Graduate>> Post(Graduate graduate) {
+            graduate.UserId =  await _graduateService.CreateUser(graduate.Cpf, graduate.Email);
             await _graduateService.Post<GraduateValidator>(graduate);
             return Response(graduate);
         }

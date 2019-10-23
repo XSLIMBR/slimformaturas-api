@@ -8,6 +8,7 @@ namespace SlimFormaturas.Domain.Entities {
 
         public Graduate(){
             GraduateId = Guid.NewGuid().ToString();
+            
         }
         public string GraduateId { get; set; }
         public string Name { get; set; }
