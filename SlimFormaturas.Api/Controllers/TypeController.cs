@@ -14,7 +14,7 @@ namespace SlimFormaturas.Api.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class TypeController : ApiController {
-        private readonly ITypeGenericService _typeGenericService;
+         readonly ITypeGenericService _typeGenericService;
 
         public TypeController(ITypeGenericService typeGenericService,NotificationHandler notifications) : base (notifications) {
             _typeGenericService = typeGenericService;
@@ -29,7 +29,7 @@ namespace SlimFormaturas.Api.Controllers
         [HttpPost("Address")]
         public async Task<ActionResult<TypeGeneric>> AddressPost(TypeGeneric typeGeneric) {
             typeGeneric.Localization = Locate.Address;
-            await _typeGenericService.Post<TypeGenericValidator>(typeGeneric);
+            await _typeGenericService.Post(typeGeneric);
             return typeGeneric;
         }
 

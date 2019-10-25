@@ -18,9 +18,9 @@ namespace SlimFormaturas.Api.Controllers
     public class AuthController : ControllerBase
     {
 
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly AppSettings _appSettings;
+         readonly SignInManager<IdentityUser> _signInManager;
+         readonly UserManager<IdentityUser> _userManager;
+         readonly AppSettings _appSettings;
 
         public AuthController(SignInManager<IdentityUser> signInManager, 
             UserManager<IdentityUser> userManager,
@@ -65,7 +65,7 @@ namespace SlimFormaturas.Api.Controllers
             return BadRequest("Usuário ou senha inválidos");
         }
 
-        private async Task<string> GerarJwt(string email)
+         async Task<string> GerarJwt(string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
 

@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace SlimFormaturas.Infra.Data.Context {
     public class MssqlContext : DbContext {
-        private readonly IWebHostEnvironment _environment;
+         readonly IWebHostEnvironment _environment;
 
         public MssqlContext(IWebHostEnvironment environment) {
             _environment = environment;

@@ -5,7 +5,7 @@ using FluentValidation.Validators;
 
 namespace SlimFormaturas.Domain.Validators.Extensions {
     public abstract class GenericPersonValidator : PropertyValidator {
-        private readonly int _validLength;
+         readonly int _validLength;
 
         protected abstract int[] FirstMultiplierCollection { get; }
         protected abstract int[] SecondMultiplierCollection { get; }

@@ -48,6 +48,16 @@ namespace SlimFormaturas.Api
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            // Configure Identity
+            services.Configure<IdentityOptions>(options => 
+            {
+                // Password settings
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 11;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
+            });
 
             // JWT
 
@@ -144,7 +154,7 @@ namespace SlimFormaturas.Api
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "SlimFormaturas");
             });
         }
-        private static void RegisterServices(IServiceCollection services) {
+         static void RegisterServices(IServiceCollection services) {
             // Adding dependencies from another layers (isolated from Presentation)
             NativeInjectorBootStrapper.RegisterServices(services);
         }

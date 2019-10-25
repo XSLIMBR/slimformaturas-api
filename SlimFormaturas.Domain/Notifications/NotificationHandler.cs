@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SlimFormaturas.Domain.Notifications {
     public class NotificationHandler{
-        private List<Notification> _notifications;
+         List<Notification> _notifications;
         public IReadOnlyCollection<Notification> Notifications => _notifications;
         public bool HasNotifications => _notifications.Any();
 

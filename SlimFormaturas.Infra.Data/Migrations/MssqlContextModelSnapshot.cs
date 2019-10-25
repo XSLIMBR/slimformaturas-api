@@ -260,7 +260,7 @@ namespace SlimFormaturas.Infra.Data.Migrations
             modelBuilder.Entity("SlimFormaturas.Domain.Entities.Address", b =>
                 {
                     b.HasOne("SlimFormaturas.Domain.Entities.Graduate", "Graduate")
-                        .WithMany("Address")
+                        .WithMany()
                         .HasForeignKey("GraduateId");
 
                     b.HasOne("SlimFormaturas.Domain.Entities.TypeGeneric", "TypeGeneric")

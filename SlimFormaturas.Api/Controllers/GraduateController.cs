@@ -8,11 +8,11 @@ using SlimFormaturas.Domain.Notifications;
 using SlimFormaturas.Infra.CrossCutting.Identity.Authorization;
 
 namespace SlimFormaturas.Api.Controllers {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class GraduateController : ApiController {
-        private readonly IGraduateService _graduateService;
+         readonly IGraduateService _graduateService;
 
         public GraduateController(
             IGraduateService graduateService,
@@ -22,17 +22,18 @@ namespace SlimFormaturas.Api.Controllers {
 
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Incluir")]
         [HttpPost]
-        public async Task<ActionResult<Graduate>> Post(Graduate graduate) {
-            graduate.UserId =  await _graduateService.CreateUser(graduate.Cpf, graduate.Email);
-            await _graduateService.Post<GraduateValidator>(graduate);
-            return Response(graduate);
+        public async Task<ActionResult<string>> Post(Graduate graduate) {
+            //graduate.UserId =  await _graduateService.CreateUser(graduate.Cpf, graduate.Email);
+            //await _graduateService.Post<GraduateValidator>(graduate);
+            await _graduateService.Insert(graduate);
+            return Response(graduate.GraduateId);
         }
 
         [CustomAuthorize.ClaimsAuthorize("Graduate", "Editar")]
         [HttpPut]
-        public async Task<ActionResult<Graduate>> Put(Graduate graduate) {
-            await _graduateService.Put<GraduateValidator>(graduate);
-            return Response(graduate);
+        public async Task<ActionResult<string>> Put(Graduate graduate) {
+            await _graduateService.Update(graduate);
+            return Response(graduate.GraduateId);
         }
 
         [CustomAuthorize.ClaimsAuthorize("Graduate", "Excluir")]

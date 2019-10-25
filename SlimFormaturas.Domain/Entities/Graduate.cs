@@ -1,15 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
+using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Identity;
 using SlimFormaturas.Domain.Validators;
 
 namespace SlimFormaturas.Domain.Entities {
-    public class Graduate {
-
-        public Graduate(){
+    public class Graduate : Entity{
+        //Limpo para o entityframework
+        public Graduate() {
             GraduateId = Guid.NewGuid().ToString();
-            
         }
+
+        public Graduate(string graduateId, string name, string cpf, string rg, bool sex, DateTime birthDate, string dadName, string motherName, bool committee, string email, string photo, string bank, string agency, string checkingAccount) {
+            GraduateId = graduateId;
+            Name = name;
+            Cpf = cpf;
+            Rg = rg;
+            Sex = sex;
+            BirthDate = birthDate;
+            DadName = dadName;
+            MotherName = motherName;
+            Committee = committee;
+            Email = email;
+            Photo = photo;
+            Bank = bank;
+            Agency = agency;
+            CheckingAccount = checkingAccount;
+            Address = new List<Address>();
+            Phone = new List<Phone>();
+            Validate(this, new GraduateValidator());
+        }
+
         public string GraduateId { get; set; }
         public string Name { get; set; }
         public string Cpf { get; set; }
@@ -31,8 +53,22 @@ namespace SlimFormaturas.Domain.Entities {
 
         public DateTime DateRegister { get; set; }
 
-        public virtual User User { get; set; }
-        public virtual IList<Address> Address { get; set; }
-        public virtual IList<Phone> Phone { get; set; }
+        public User User { get; set; }
+        public IList<Address> Address { get; set; }
+        public IList<Phone> Phone { get; set; } 
+
+        public void AddUser(string userId) {
+            UserId = userId;
+        }
+        public void AddAddress(IList<Address> addresses) {
+            foreach (var address in addresses) {
+                Address.Add(address);
+            }
+        }
+        public void AddPhone(IList<Phone> phones) {
+            foreach (var phone in phones) {
+                Phone.Add(phone);
+            }
+        }
     }
 }

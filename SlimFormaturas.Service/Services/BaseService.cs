@@ -11,29 +11,27 @@ using SlimFormaturas.Domain.Notifications;
 
 namespace SlimFormaturas.Service.Services {
     public class BaseService<TEntity> : IDisposable, IService<TEntity> where TEntity : class{
-        private readonly IRepository<TEntity> _repository;
-        protected readonly NotificationHandler _notifications;
+         readonly IRepository<TEntity> _repository;
+        
 
         public BaseService(
-            IRepository<TEntity> repository,
-            NotificationHandler notifications) {
+            IRepository<TEntity> repository) {
             _repository = repository;
-            _notifications = notifications;
         }
 
-        public async Task<TEntity> Post<TVEntity>(TEntity obj) where TVEntity : AbstractValidator<TEntity> {
-            _notifications.AddNotifications(await Validate(obj, Activator.CreateInstance<TVEntity>()));
-            if (!_notifications.HasNotifications){
+        public async Task<TEntity> Post(TEntity obj) {
+            //_notifications.AddNotifications(await Validate(obj, Activator.CreateInstance<TVEntity>()));
+            //if (!_notifications.HasNotifications){
                 await _repository.Insert(obj);
-            }
+            //}
             return obj;
         }
 
-        public async Task<TEntity> Put<TVEntity>(TEntity obj) where TVEntity : AbstractValidator<TEntity> {
-            _notifications.AddNotifications(await Validate(obj, Activator.CreateInstance<TVEntity>()));
-            if(!_notifications.HasNotifications){
+        public async Task<TEntity> Put(TEntity obj){
+            //_notifications.AddNotifications(await Validate(obj, Activator.CreateInstance<TVEntity>()));
+            //if(!_notifications.HasNotifications){
                 await _repository.Update(obj);
-            }
+            //}
             return obj;
         }
 
@@ -51,11 +49,11 @@ namespace SlimFormaturas.Service.Services {
 
         public async Task<IList<TEntity>> Get() => await _repository.GetAll();
 
-        private async Task<ValidationResult> Validate(TEntity obj, AbstractValidator<TEntity> validator) {
-            if (obj == null)
-                throw new Exception("Registros não detectados!");
-            return await validator.ValidateAsync(obj);
-        }
+        // async Task<ValidationResult> Validate(TEntity obj, AbstractValidator<TEntity> validator) {
+        //    if (obj == null)
+        //        throw new Exception("Registros não detectados!");
+        //    return await validator.ValidateAsync(obj);
+        //}
 
         public async Task<TEntity> FirstOrDefault(Expression<Func<TEntity, bool>> predicate) {
             return await _repository.FirstOrDefault(predicate);  
