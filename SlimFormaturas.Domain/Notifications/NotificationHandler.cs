@@ -1,13 +1,9 @@
 ﻿using FluentValidation.Results;
-using MediatR;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace SlimFormaturas.Domain.Notifications {
+namespace SlimFormaturas.Domain.Notifications
+{
     public class NotificationHandler{
          List<Notification> _notifications;
         public IReadOnlyCollection<Notification> Notifications => _notifications;

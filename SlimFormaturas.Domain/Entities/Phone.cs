@@ -1,27 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using SlimFormaturas.Domain.Validators;
 
 namespace SlimFormaturas.Domain.Entities {
-    public class Phone {
+    public class Phone : Entity{
         public Phone() {
             PhoneId = Guid.NewGuid().ToString();
         }
 
-        public Phone(string phoneId, string ddd, string phoneNumber, string graduateId) {
+        public Phone(string phoneId, string ddd, string phoneNumber, string typeGenericId, string graduateId) {
             PhoneId = phoneId;
             Ddd = ddd;
             PhoneNumber = phoneNumber;
+            TypeGenericId = typeGenericId;
             GraduateId = graduateId;
-            //add validation
+            Validate(this, new PhoneValidator());
         }
 
         public string PhoneId { get; private set; }
         public string Ddd { get; set; }
         public string PhoneNumber { get; set; }
 
-        public string GraduateId { get; private set;}
+        public string TypeGenericId { get; set; }
+        public string GraduateId { get; set;}
 
+
+        public virtual TypeGeneric TypeGeneric { get; protected set; }
         public virtual Graduate Graduate { get; protected set; }
     }
 }

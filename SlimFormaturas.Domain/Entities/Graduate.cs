@@ -61,12 +61,12 @@ namespace SlimFormaturas.Domain.Entities {
 
         public void AddAddress(IList<Address> addresses) {
             foreach (var address in addresses) {
-                Address.Add(new Address(address.AddressId,address.Cep,address.Street,address.Number,address.Complement,address.Neighborhood,address.City,address.Uf,address.TypeGeneric.TypeGenericId,this.GraduateId));
+                Address.Add(new Address(address.AddressId,address.Cep,address.Street,address.Number,address.Complement,address.Neighborhood,address.City,address.Uf,address.TypeGenericId,this.GraduateId));
             }
         }
         public void AddPhone(IList<Phone> phones) {
             foreach (var phone in phones) {
-                Phone.Add(new Phone(phone.PhoneId,phone.Ddd,phone.PhoneNumber,this.GraduateId));
+                Phone.Add(new Phone(phone.PhoneId,phone.Ddd,phone.PhoneNumber, phone.TypeGenericId, this.GraduateId));
             }
         }
     }

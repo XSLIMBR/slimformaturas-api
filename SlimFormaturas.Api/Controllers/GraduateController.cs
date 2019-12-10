@@ -37,14 +37,14 @@ namespace SlimFormaturas.Api.Controllers
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Incluir")]
         [HttpPost]
         public async Task<ActionResult<string>> Post(Graduate graduate) {
-            await _graduateService.Insert(graduate);
+            _ = await _graduateService.Insert(graduate);
             return Response(graduate.GraduateId);
         }
 
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Editar")]
         [HttpPut]
         public async Task<ActionResult<string>> Put(Graduate graduate) {
-            await _graduateService.Update(graduate);
+            _ = await _graduateService.Update(graduate);
             return Response(graduate.GraduateId);
         }
 

@@ -34,13 +34,11 @@ namespace SlimFormaturas.Infra.Data.Mapping {
 
             builder.Property(c => c.DadName)
                 .HasColumnType("varchar(100)")
-                .HasMaxLength(100)
-                .IsRequired();
-            
+                .HasMaxLength(100);
+
             builder.Property(c => c.MotherName)
                 .HasColumnType("varchar(100)")
-                .HasMaxLength(100)
-                .IsRequired();
+                .HasMaxLength(100);
             
             builder.Property(c => c.Committee)
                 .IsRequired();
@@ -52,8 +50,7 @@ namespace SlimFormaturas.Infra.Data.Mapping {
 
             builder.Property(c => c.Photo)
                 .HasColumnType("varchar")
-                .HasMaxLength(255)
-                .IsRequired();
+                .HasMaxLength(255);
 
             builder.Property(c => c.Bank)
                 .HasColumnType("varchar(50)")
@@ -62,13 +59,11 @@ namespace SlimFormaturas.Infra.Data.Mapping {
 
             builder.Property(c => c.Agency)
                 .HasColumnType("varchar(50)")
-                .HasMaxLength(50)
-                .IsRequired();
+                .HasMaxLength(50);
 
             builder.Property(c => c.CheckingAccount)
                 .HasColumnType("varchar(50)")
-                .HasMaxLength(50)
-                .IsRequired();
+                .HasMaxLength(50);
 
             builder.Property(c => c.UserId)
                 .HasColumnType("nvarchar(450)")
@@ -77,8 +72,6 @@ namespace SlimFormaturas.Infra.Data.Mapping {
 
             builder.Property(c => c.DateRegister)
                 .IsRequired();
-
-
 
             builder.ToTable("Graduate");
         }

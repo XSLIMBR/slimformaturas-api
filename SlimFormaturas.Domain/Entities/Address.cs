@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using SlimFormaturas.Domain.Validators;
 
 namespace SlimFormaturas.Domain.Entities {
-    public class Address {
+    public class Address : Entity {
         public Address() {
             AddressId = Guid.NewGuid().ToString();
         }
@@ -17,7 +19,7 @@ namespace SlimFormaturas.Domain.Entities {
             Uf = uf;
             TypeGenericId = typeGenericId;
             GraduateId = graduateId;
-            //add validation
+            Validate(this, new AddressValidator());
         }
 
         public string AddressId { get; private set; }

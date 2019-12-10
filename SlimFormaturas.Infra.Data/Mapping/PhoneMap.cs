@@ -22,6 +22,12 @@ namespace SlimFormaturas.Infra.Data.Mapping  {
                 .IsRequired()
                 .HasColumnName("PhoneNumber");
 
+            builder.Property(u => u.TypeGenericId)
+                .IsRequired();
+
+            builder.Property(u => u.GraduateId)
+                .IsRequired();
+
             builder.ToTable("Phone");
 
         }

@@ -26,8 +26,7 @@ namespace SlimFormaturas.Infra.Data.Mapping {
 
             builder.Property(u => u.Complement)
                 .HasColumnType("varchar(50)")
-                .HasMaxLength(50)
-                .IsRequired();
+                .HasMaxLength(50);
 
             builder.Property(u => u.Neighborhood)
                 .HasColumnType("varchar(50)")
