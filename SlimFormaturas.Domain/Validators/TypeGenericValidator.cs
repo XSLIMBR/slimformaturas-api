@@ -12,6 +12,9 @@ namespace SlimFormaturas.Domain.Validators {
             RuleFor(c => c.Name)
                 .NotEmpty().WithMessage("O nome nao pode ser em branco")
                 .NotNull().WithMessage("É necessário informar o Nome.");
+            RuleFor(c => c.Localization)
+                .NotEmpty().WithMessage("O tipo de registro nao pode ser em branco")
+                .NotNull().WithMessage("É necessário informar o tipo de registro.");
         }
     }
 }

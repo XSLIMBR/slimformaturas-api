@@ -1,14 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SlimFormaturas.Domain.Entities;
 using SlimFormaturas.Domain.Interfaces.Service;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using SlimFormaturas.Domain.Validators;
 using SlimFormaturas.Domain.Notifications;
+using System.Threading.Tasks;
 using SlimFormaturas.Infra.CrossCutting.Identity.Authorization;
 
-namespace SlimFormaturas.Api.Controllers {
+namespace SlimFormaturas.Api.Controllers
+{
     //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
@@ -43,14 +41,14 @@ namespace SlimFormaturas.Api.Controllers {
             return Response(graduate.GraduateId);
         }
 
-        [CustomAuthorize.ClaimsAuthorize("Graduate", "Editar")]
+        //[CustomAuthorize.ClaimsAuthorize("Graduate", "Editar")]
         [HttpPut]
         public async Task<ActionResult<string>> Put(Graduate graduate) {
             await _graduateService.Update(graduate);
             return Response(graduate.GraduateId);
         }
 
-        [CustomAuthorize.ClaimsAuthorize("Graduate", "Excluir")]
+        //[CustomAuthorize.ClaimsAuthorize("Graduate", "Excluir")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(string id) {
             await _graduateService.Delete(id);

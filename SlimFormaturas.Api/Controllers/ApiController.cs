@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace SlimFormaturas.Api.Controllers {
     public class ApiController : ControllerBase {
-        protected readonly NotificationHandler _notifications;
+        protected readonly NotificationHandler Notifications;
         protected ApiController(NotificationHandler notifications ) {
-            _notifications = notifications;
+            Notifications = notifications;
         }
 
         protected bool IsValidOperation() {
-            return !_notifications.HasNotifications;
+            return !Notifications.HasNotifications;
         }
 
         protected new ActionResult Response(object result = null) {
@@ -31,7 +31,7 @@ namespace SlimFormaturas.Api.Controllers {
             return BadRequest(new
             {
                 success = false,
-                errors = _notifications.Notifications.GroupBy(m => m.PropertyName).Select(a => a.ToArray())
+                errors = Notifications.Notifications.GroupBy(m => m.PropertyName).Select(a => a.ToArray())
             });
         }
 

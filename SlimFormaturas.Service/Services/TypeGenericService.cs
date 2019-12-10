@@ -10,22 +10,22 @@ using SlimFormaturas.Domain.Notifications;
 namespace SlimFormaturas.Service.Services {
     public class TypeGenericService : BaseService<TypeGeneric>, ITypeGenericService {
          readonly ITypeGenericRepository _typeGenericRepository;
-        protected readonly NotificationHandler _notifications;
+        protected readonly NotificationHandler Notifications;
 
         public TypeGenericService(
             ITypeGenericRepository typeGenericRepository,
              NotificationHandler notifications
             ) : base(typeGenericRepository) {
             _typeGenericRepository = typeGenericRepository;
-            _notifications = notifications;
+            Notifications = notifications;
         }
 
         public async Task<TypeGeneric> Insert(TypeGeneric obj) {
-            TypeGeneric typeGeneric = new TypeGeneric();
+            TypeGeneric typeGeneric = new TypeGeneric(obj.TypeGenericId, obj.Name, obj.Localization);
             if (typeGeneric.Valid) {
                 await Post(typeGeneric);
             } else {
-                _notifications.AddNotifications(typeGeneric.ValidationResult);
+                Notifications.AddNotifications(typeGeneric.ValidationResult);
             }
 
             return typeGeneric;
@@ -36,7 +36,7 @@ namespace SlimFormaturas.Service.Services {
             if (typeGeneric.Valid) {
                 await Put(typeGeneric);
             } else {
-                _notifications.AddNotifications(typeGeneric.ValidationResult);
+                Notifications.AddNotifications(typeGeneric.ValidationResult);
             }
 
             return typeGeneric;

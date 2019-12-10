@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SlimFormaturas.Domain.Entities;
 using SlimFormaturas.Domain.Interfaces.Service;
 using SlimFormaturas.Domain.Notifications;
-using SlimFormaturas.Domain.Validators;
+using System.Threading.Tasks;
 
 namespace SlimFormaturas.Api.Controllers
 {
@@ -16,21 +11,25 @@ namespace SlimFormaturas.Api.Controllers
     public class TypeController : ApiController {
          readonly ITypeGenericService _typeGenericService;
 
-        public TypeController(ITypeGenericService typeGenericService,NotificationHandler notifications) : base (notifications) {
+        public TypeController(
+            ITypeGenericService typeGenericService, 
+            NotificationHandler notifications) : base (notifications) {
             _typeGenericService = typeGenericService;
         }
 
         // GET: api/Type
-        [HttpGet("Address")]
-        public async Task<ActionResult> AddressGet() {
-            return Response(await _typeGenericService.GetWhere(c => c.Localization == Locate.Address));
+        //[HttpGet("Address")]
+        [HttpGet]
+        public async Task<ActionResult> Get() {
+            return Response(await _typeGenericService.Get());
         }
 
-        [HttpPost("Address")]
-        public async Task<ActionResult<TypeGeneric>> AddressPost(TypeGeneric typeGeneric) {
-            typeGeneric.Localization = Locate.Address;
-            await _typeGenericService.Post(typeGeneric);
-            return typeGeneric;
+        //[HttpPost("Address")]
+        [HttpPost]
+        public async Task<ActionResult<TypeGeneric>> Post(TypeGeneric typeGeneric) {
+            //typeGeneric.Localization = Locate.Address;
+            await _typeGenericService.Insert(typeGeneric);
+            return Response(typeGeneric.TypeGenericId);
         }
 
     }

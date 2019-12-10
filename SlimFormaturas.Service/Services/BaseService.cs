@@ -1,15 +1,12 @@
-﻿using System;
+﻿using SlimFormaturas.Domain.Interfaces.Repository;
+using SlimFormaturas.Domain.Interfaces.Service;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
-using FluentValidation;
-using FluentValidation.Results;
-using SlimFormaturas.Domain.Interfaces.Repository;
-using SlimFormaturas.Domain.Interfaces.Service;
-using SlimFormaturas.Domain.Notifications;
 
-namespace SlimFormaturas.Service.Services {
+namespace SlimFormaturas.Service.Services
+{
     public class BaseService<TEntity> : IDisposable, IService<TEntity> where TEntity : class{
          readonly IRepository<TEntity> _repository;
         

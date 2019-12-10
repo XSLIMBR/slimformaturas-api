@@ -7,11 +7,10 @@ namespace SlimFormaturas.Domain.Entities {
             TypeGenericId = Guid.NewGuid().ToString();
         }
 
-        public TypeGeneric(string typeGenericId, string name, Locate localization, DateTime dateRegister) {
+        public TypeGeneric(string typeGenericId, string name, Locate localization) {
             TypeGenericId = typeGenericId;
             Name = name;
             Localization = localization;
-            DateRegister = dateRegister;
             Validate(this, new TypeGenericValidator());
         }
 
@@ -19,7 +18,7 @@ namespace SlimFormaturas.Domain.Entities {
         public string Name { get; set; }
         public Locate Localization { get; set; }
 
-        public DateTime DateRegister { get; set; }
+        public DateTime DateRegister { get; protected set; }
     }
 
     public enum Locate {
