@@ -3,12 +3,15 @@ using System;
 
 namespace SlimFormaturas.Domain.Entities {
     public class TypeGeneric : Entity{
-        public TypeGeneric() {}
-
-        public TypeGeneric(string name, Locate localization) {
+        public TypeGeneric() {
             TypeGenericId = Guid.NewGuid().ToString();
+        }
+
+        public TypeGeneric(string typeGenericId, string name, Locate localization, DateTime dateRegister) {
+            TypeGenericId = typeGenericId;
             Name = name;
             Localization = localization;
+            DateRegister = dateRegister;
             Validate(this, new TypeGenericValidator());
         }
 

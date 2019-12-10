@@ -20,19 +20,13 @@ namespace SlimFormaturas.Service.Services {
         }
 
         public async Task<TEntity> Post(TEntity obj) {
-            //_notifications.AddNotifications(await Validate(obj, Activator.CreateInstance<TVEntity>()));
-            //if (!_notifications.HasNotifications){
-                await _repository.Insert(obj);
-            //}
-            return obj;
+            await _repository.Insert(obj);
+                return obj;
         }
 
         public async Task<TEntity> Put(TEntity obj){
-            //_notifications.AddNotifications(await Validate(obj, Activator.CreateInstance<TVEntity>()));
-            //if(!_notifications.HasNotifications){
-                await _repository.Update(obj);
-            //}
-            return obj;
+            await _repository.Update(obj);
+                return obj;
         }
 
         public async Task Delete(string id) {
@@ -49,11 +43,6 @@ namespace SlimFormaturas.Service.Services {
 
         public async Task<IList<TEntity>> Get() => await _repository.GetAll();
 
-        // async Task<ValidationResult> Validate(TEntity obj, AbstractValidator<TEntity> validator) {
-        //    if (obj == null)
-        //        throw new Exception("Registros não detectados!");
-        //    return await validator.ValidateAsync(obj);
-        //}
 
         public async Task<TEntity> FirstOrDefault(Expression<Func<TEntity, bool>> predicate) {
             return await _repository.FirstOrDefault(predicate);  

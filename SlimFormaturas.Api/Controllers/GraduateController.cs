@@ -3,6 +3,7 @@ using SlimFormaturas.Domain.Entities;
 using SlimFormaturas.Domain.Interfaces.Service;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using SlimFormaturas.Domain.Validators;
 using SlimFormaturas.Domain.Notifications;
 using SlimFormaturas.Infra.CrossCutting.Identity.Authorization;
@@ -20,11 +21,24 @@ namespace SlimFormaturas.Api.Controllers {
             _graduateService = graduateService;
         }
 
+        /// <summary>
+        /// Inserir um novo formando na base
+        /// </summary>
+        /// <remarks>
+        /// Exemplo:
+        ///
+        ///     POST /Todo
+        ///     {
+        ///        "id": 1,
+        ///        "name": "Item1",
+        ///        "isComplete": true
+        ///     }
+        ///
+        /// </remarks>
+        /// <returns>O id do novo formando inserido</returns>
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Incluir")]
         [HttpPost]
         public async Task<ActionResult<string>> Post(Graduate graduate) {
-            //graduate.UserId =  await _graduateService.CreateUser(graduate.Cpf, graduate.Email);
-            //await _graduateService.Post<GraduateValidator>(graduate);
             await _graduateService.Insert(graduate);
             return Response(graduate.GraduateId);
         }

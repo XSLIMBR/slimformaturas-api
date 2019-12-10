@@ -60,14 +60,14 @@ namespace SlimFormaturas.Service.Services {
         }
 
         public async Task<Graduate> Update(Graduate obj) {
-            //Graduate graduate = new Graduate(obj.Name, obj.Cpf, obj.Rg, obj.Sex, obj.BirthDate, obj.DadName, obj.MotherName, obj.Committee, obj.Email, obj.Photo, obj.Bank, obj.Agency, obj.CheckingAccount);
-            if (obj.Valid) {
-                await Put(obj);
+            Graduate graduate = new Graduate(obj.GraduateId, obj.Name, obj.Cpf, obj.Rg, obj.Sex, obj.BirthDate, obj.DadName, obj.MotherName, obj.Committee, obj.Email, obj.Photo, obj.Bank, obj.Agency, obj.CheckingAccount);
+            if (graduate.Valid) {
+                await Put(graduate);
             } else {
-                _notifications.AddNotifications(obj.ValidationResult);
+                _notifications.AddNotifications(graduate.ValidationResult);
             }
 
-            return obj;
+            return graduate;
         }
 
     }

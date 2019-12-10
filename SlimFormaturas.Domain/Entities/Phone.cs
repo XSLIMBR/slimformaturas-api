@@ -7,9 +7,21 @@ namespace SlimFormaturas.Domain.Entities {
         public Phone() {
             PhoneId = Guid.NewGuid().ToString();
         }
-        public string PhoneId { get; set; }
+
+        public Phone(string phoneId, string ddd, string phoneNumber, string graduateId) {
+            PhoneId = phoneId;
+            Ddd = ddd;
+            PhoneNumber = phoneNumber;
+            GraduateId = graduateId;
+            //add validation
+        }
+
+        public string PhoneId { get; private set; }
         public string Ddd { get; set; }
         public string PhoneNumber { get; set; }
-        public virtual Graduate Graduate { get; set; }
+
+        public string GraduateId { get; private set;}
+
+        public virtual Graduate Graduate { get; protected set; }
     }
 }

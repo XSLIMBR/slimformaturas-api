@@ -5,7 +5,22 @@ namespace SlimFormaturas.Domain.Entities {
         public Address() {
             AddressId = Guid.NewGuid().ToString();
         }
-        public string AddressId { get; set; }
+
+        public Address(string addressId, string cep, string street, string number, string complement, string neighborhood, string city, string uf, string typeGenericId, string graduateId) {
+            AddressId = addressId;
+            Cep = cep;
+            Street = street;
+            Number = number;
+            Complement = complement;
+            Neighborhood = neighborhood;
+            City = city;
+            Uf = uf;
+            TypeGenericId = typeGenericId;
+            GraduateId = graduateId;
+            //add validation
+        }
+
+        public string AddressId { get; private set; }
         public string Cep { get; set; }
         public string Street { get; set; }
         public string Number { get; set; }
@@ -15,8 +30,11 @@ namespace SlimFormaturas.Domain.Entities {
         public string Uf { get; set; }
 
         public string TypeGenericId { get; set; }
+        public string GraduateId { get; set; }
 
-        public virtual TypeGeneric TypeGeneric { get; set; }
-        public virtual Graduate Graduate { get; set; }
+
+        public virtual TypeGeneric TypeGeneric { get; protected set; }
+        public virtual Graduate Graduate { get; protected set; }
+
     }
 }

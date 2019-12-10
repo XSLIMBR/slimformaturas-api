@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using FluentValidation;
-using FluentValidation.Results;
-using Microsoft.AspNetCore.Identity;
 using SlimFormaturas.Domain.Validators;
 
 namespace SlimFormaturas.Domain.Entities {
     public class Graduate : Entity{
+
         //Limpo para o entityframework
         public Graduate() {
             GraduateId = Guid.NewGuid().ToString();
@@ -32,7 +30,7 @@ namespace SlimFormaturas.Domain.Entities {
             Validate(this, new GraduateValidator());
         }
 
-        public string GraduateId { get; set; }
+        public string GraduateId { get; private set; }
         public string Name { get; set; }
         public string Cpf { get; set; }
         public string Rg { get; set; }
@@ -49,25 +47,26 @@ namespace SlimFormaturas.Domain.Entities {
         public string CheckingAccount { get; set; }
         #endregion
 
-        public string UserId { get; set; }
+        public string UserId { get; private set; }
 
-        public DateTime DateRegister { get; set; }
+        public DateTime DateRegister { get; protected set; }
 
-        public User User { get; set; }
+        public User User { get; protected set;}
         public IList<Address> Address { get; set; }
         public IList<Phone> Phone { get; set; } 
 
         public void AddUser(string userId) {
             UserId = userId;
         }
+
         public void AddAddress(IList<Address> addresses) {
             foreach (var address in addresses) {
-                Address.Add(address);
+                Address.Add(new Address(address.AddressId,address.Cep,address.Street,address.Number,address.Complement,address.Neighborhood,address.City,address.Uf,address.TypeGeneric.TypeGenericId,this.GraduateId));
             }
         }
         public void AddPhone(IList<Phone> phones) {
             foreach (var phone in phones) {
-                Phone.Add(phone);
+                Phone.Add(new Phone(phone.PhoneId,phone.Ddd,phone.PhoneNumber,this.GraduateId));
             }
         }
     }
