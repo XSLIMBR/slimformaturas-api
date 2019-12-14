@@ -46,12 +46,12 @@ namespace SlimFormaturas.Service.Services {
                 graduate.AddPhone(obj.Phone);
             }
             if (graduate.Valid) {
-                graduate.AddUser(await CreateUser(graduate.Cpf, graduate.Email));
-                if (graduate.UserId != null) {
+                //graduate.AddUser(await CreateUser(graduate.Cpf, graduate.Email));
+                //if (graduate.UserId != null) {
                     await Post(graduate);
-                } else {
-                    throw new Exception("Erro ao criar usuário para o formando!");
-                }
+                //} else {
+                //    throw new Exception("Erro ao criar usuário para o formando!");
+                //}
             } else {
                 _notifications.AddNotifications(graduate.ValidationResult);
             }

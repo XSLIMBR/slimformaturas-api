@@ -25,11 +25,11 @@ namespace SlimFormaturas.Domain.Validators {
                 .NotNull()
                 .Length(1,50).WithMessage("O campo bairro deve ter no maximo 50 caracteres");
             RuleFor(c => c.Complement)
-                .Length(50).WithMessage("O campo complemento deve ter no maixmo 50 caracteres");
+                .Length(0,50).WithMessage("O campo complemento deve ter no maixmo 50 caracteres");
             RuleFor(c => c.City)
                 .NotEmpty().WithMessage("É necessário informar a cidade.")
                 .NotNull()
-                .Length(50).WithMessage("O campo cidade deve ter no maximo 50 caracteres");
+                .Length(1,50).WithMessage("O campo cidade deve ter no maximo 50 caracteres");
             RuleFor(c => c.Uf)
                 .NotEmpty().WithMessage("É necessário informar a UF.")
                 .NotNull()

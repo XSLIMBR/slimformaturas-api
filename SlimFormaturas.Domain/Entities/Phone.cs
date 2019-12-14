@@ -25,7 +25,7 @@ namespace SlimFormaturas.Domain.Entities {
         public string GraduateId { get; set;}
 
 
-        public virtual TypeGeneric TypeGeneric { get; protected set; }
-        public virtual Graduate Graduate { get; protected set; }
+        public virtual TypeGeneric TypeGeneric { get; private set; }
+        public virtual Graduate Graduate { get; private set; }
     }
 }

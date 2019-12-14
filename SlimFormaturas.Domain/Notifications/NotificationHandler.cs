@@ -5,7 +5,7 @@ using System.Linq;
 namespace SlimFormaturas.Domain.Notifications
 {
     public class NotificationHandler{
-         List<Notification> _notifications;
+        List<Notification> _notifications;
         public IReadOnlyCollection<Notification> Notifications => _notifications;
         public bool HasNotifications => _notifications.Any();
 

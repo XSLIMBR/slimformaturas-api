@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using SlimFormaturas.Domain.Validators;
 
 namespace SlimFormaturas.Domain.Entities {
-    public class Graduate : Entity{
+    public class Graduate : Entity {
 
         //Limpo para o entityframework
         public Graduate() {
@@ -51,7 +51,7 @@ namespace SlimFormaturas.Domain.Entities {
 
         public DateTime DateRegister { get; protected set; }
 
-        public User User { get; protected set;}
+        public User User { get; private set;}
         public IList<Address> Address { get; set; }
         public IList<Phone> Phone { get; set; } 
 

@@ -40,13 +40,13 @@ namespace SlimFormaturas.Domain.Validators
                 .NotEmpty().WithMessage("É necessário informar se é comissão de formatura.")
                 .NotNull();
             RuleFor(c => c.Photo)
-                .Length(255).WithMessage("O campo foto deve conter no maximo 255 caracteres");
+                .Length(1,255).WithMessage("O campo foto deve conter no maximo 255 caracteres");
             RuleFor(c => c.Bank)
-                .Length(50).WithMessage("O campo foto deve conter no maximo 50 caracteres");
+                .Length(1,50).WithMessage("O campo foto deve conter no maximo 50 caracteres");
             RuleFor(c => c.Agency)
-                .Length(50).WithMessage("O campo foto deve conter no maximo 50 caracteres");
+                .Length(1,50).WithMessage("O campo foto deve conter no maximo 50 caracteres");
             RuleFor(c => c.CheckingAccount)
-                .Length(50).WithMessage("O campo foto deve conter no maximo 50 caracteres");
+                .Length(1,50).WithMessage("O campo foto deve conter no maximo 50 caracteres");
         }
     }
 }
