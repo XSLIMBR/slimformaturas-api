@@ -1,6 +1,7 @@
 ﻿using FluentValidation.Results;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Identity;
 
 namespace SlimFormaturas.Domain.Notifications
 {
@@ -37,6 +38,12 @@ namespace SlimFormaturas.Domain.Notifications
         public void AddNotifications(ValidationResult validationResult){
             foreach (var error in validationResult.Errors) {
                 AddNotification(error.ErrorCode, error.PropertyName, error.ErrorMessage);
+            }
+        }
+
+        public void AddIdentityErrors(IdentityResult result) {
+            foreach (var error in result.Errors) {
+                AddNotification(error.Code, "User",error.Description);
             }
         }
     }

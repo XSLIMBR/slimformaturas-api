@@ -32,30 +32,49 @@ namespace SlimFormaturas.Service.Services {
             
             var result = await _userManager.CreateAsync(user, cpf);
 
-            if (!result.Succeeded) return null;
+            if (!result.Succeeded) {
+                _notifications.AddIdentityErrors(result);
+                return null;
+            }
 
             return user.Id;
         }
 
         public async Task<Graduate> Insert(Graduate obj) {
+
             Graduate graduate = new Graduate(obj.GraduateId, obj.Name, obj.Cpf, obj.Rg, obj.Sex, obj.BirthDate, obj.DadName, obj.MotherName, obj.Committee, obj.Email, obj.Photo, obj.Bank, obj.Agency, obj.CheckingAccount);
+            
             if(obj.Address != null) {
                 graduate.AddAddress(obj.Address);
+                foreach (var address in graduate.Address) {
+                    if (address.Invalid) {
+                        _notifications.AddNotifications(address.ValidationResult);
+                    }
+                }
             }
+
             if(obj.Phone != null) {
                 graduate.AddPhone(obj.Phone);
+                foreach (var phone in graduate.Phone) {
+                    if (phone.Invalid) {
+                        _notifications.AddNotifications(phone.ValidationResult);
+                    }
+                }
             }
-            if (graduate.Valid) {
-                //graduate.AddUser(await CreateUser(graduate.Cpf, graduate.Email));
-                //if (graduate.UserId != null) {
-                    await Post(graduate);
-                //} else {
-                //    throw new Exception("Erro ao criar usuário para o formando!");
-                //}
-            } else {
+
+            if (graduate.Invalid) {
                 _notifications.AddNotifications(graduate.ValidationResult);
             }
-           
+
+
+            if (!_notifications.HasNotifications) {
+                //graduate.AddUser(await CreateUser(graduate.Cpf, graduate.Email));
+            }
+
+            if (!_notifications.HasNotifications) {
+                await Post(graduate);
+            }
+
             return obj;
         }
 

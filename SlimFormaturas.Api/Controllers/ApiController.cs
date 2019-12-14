@@ -34,11 +34,5 @@ namespace SlimFormaturas.Api.Controllers {
                 errors = Notifications.Notifications.GroupBy(m => m.PropertyName).Select(a => a.ToArray())
             });
         }
-
-        //protected void AddIdentityErrors(IdentityResult result) {
-        //    foreach (var error in result.Errors) {
-        //       new Notification(result.ToString(), error.Description);
-        //    }
-        //}
     }
 }
