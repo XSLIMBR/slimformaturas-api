@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SlimFormaturas.Domain.Entities {
     public abstract class Entity {
         [NotMapped]
-        public Guid Id { get; protected set; }
+        public Guid Id { get; private set; }
         [NotMapped]
         public bool Valid { get;  private set; }
         [NotMapped]

@@ -73,6 +73,14 @@ namespace SlimFormaturas.Infra.Data.Mapping {
             builder.Property(c => c.DateRegister)
                 .IsRequired();
 
+            builder.HasMany(c => c.Address)
+                .WithOne(e => e.Graduate)
+                .HasForeignKey(a => a.AddressId);
+
+            builder.HasMany(c => c.Phone)
+                .WithOne(e => e.Graduate)
+                .HasForeignKey(a => a.PhoneId);
+
             builder.ToTable("Graduate");
         }
     }

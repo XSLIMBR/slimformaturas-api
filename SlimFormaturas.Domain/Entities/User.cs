@@ -14,10 +14,9 @@ namespace SlimFormaturas.Domain.Entities {
         public virtual string PhoneNumber { get; private set; }
         public virtual bool PhoneNumberConfirmed { get; private set; }
         public virtual bool TwoFactorEnabled { get; private set; }
-        public virtual DateTime? LockoutEndDateUtc { get; private set; }
+        public virtual DateTime? LockoutEnd { get; private set; }
         public virtual bool LockoutEnabled { get; private set; }
         public virtual int AccessFailedCount { get; private set; }
         public virtual string UserName { get; private set; }
-        public virtual bool Active { get; private set; }
     }
 }

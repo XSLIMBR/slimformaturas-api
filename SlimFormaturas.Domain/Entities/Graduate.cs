@@ -51,9 +51,9 @@ namespace SlimFormaturas.Domain.Entities {
 
         public DateTime DateRegister { get; protected set; }
 
-        public User User { get; private set;}
-        public IList<Address> Address { get; set; }
-        public IList<Phone> Phone { get; set; } 
+        public virtual User User { get; private set;}
+        public virtual IList<Address> Address { get; set; }
+        public virtual IList<Phone> Phone { get; set; } 
 
         public void AddUser(string userId) {
             UserId = userId;

@@ -40,7 +40,7 @@ namespace SlimFormaturas.Infra.Data.Migrations
                         .HasMaxLength(50);
 
                     b.Property<string>("GraduateId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Neighborhood")
                         .IsRequired()
@@ -67,8 +67,6 @@ namespace SlimFormaturas.Infra.Data.Migrations
                         .HasMaxLength(2);
 
                     b.HasKey("AddressId");
-
-                    b.HasIndex("GraduateId");
 
                     b.HasIndex("TypeGenericId");
 
@@ -163,7 +161,7 @@ namespace SlimFormaturas.Infra.Data.Migrations
 
                     b.Property<string>("GraduateId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
@@ -176,8 +174,6 @@ namespace SlimFormaturas.Infra.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("PhoneId");
-
-                    b.HasIndex("GraduateId");
 
                     b.HasIndex("TypeGenericId");
 
@@ -262,7 +258,9 @@ namespace SlimFormaturas.Infra.Data.Migrations
                 {
                     b.HasOne("SlimFormaturas.Domain.Entities.Graduate", "Graduate")
                         .WithMany("Address")
-                        .HasForeignKey("GraduateId");
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SlimFormaturas.Domain.Entities.TypeGeneric", "TypeGeneric")
                         .WithMany()
@@ -284,7 +282,7 @@ namespace SlimFormaturas.Infra.Data.Migrations
                 {
                     b.HasOne("SlimFormaturas.Domain.Entities.Graduate", "Graduate")
                         .WithMany("Phone")
-                        .HasForeignKey("GraduateId")
+                        .HasForeignKey("PhoneId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -46,6 +46,11 @@ namespace SlimFormaturas.Infra.Data.Mapping {
             builder.Property(u => u.TypeGenericId)
                 .IsRequired();
 
+            builder.HasOne(c => c.Graduate)
+                .WithMany(p => p.Address);
+
+            builder.HasOne(c => c.TypeGeneric);
+
             builder.ToTable("Address");
         }
     }

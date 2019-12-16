@@ -38,7 +38,9 @@ namespace SlimFormaturas.Infra.Data.Context {
                 .AddJsonFile("appsettings.json")
                 .Build();
             // define the database to use
-            optionsBuilder.UseSqlServer(config.GetConnectionString("DefaultConnection"));
+            optionsBuilder
+                //.UseLazyLoadingProxies()
+                .UseSqlServer(config.GetConnectionString("DefaultConnection"));
         }
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default){
             foreach (var entry in ChangeTracker.Entries().Where(entry => entry.Entity.GetType().GetProperty("DateRegister") != null)){

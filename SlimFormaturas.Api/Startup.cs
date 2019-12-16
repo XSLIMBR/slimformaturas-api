@@ -131,7 +131,6 @@ namespace SlimFormaturas.Api
                 c.IncludeXmlComments(xmlPath);
             });
 
-
             RegisterServices(services);
         }
 

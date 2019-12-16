@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using SlimFormaturas.Domain.Entities;
 using SlimFormaturas.Domain.Interfaces.Repository;
 using SlimFormaturas.Infra.Data.Context;
 
@@ -34,7 +35,9 @@ namespace SlimFormaturas.Infra.Data.Repository {
         }
 
         public async Task<IList<TEntity>> GetAll() {
-            return await Context.Set<TEntity>().ToListAsync();
+            var teste = await Context.Set<TEntity>().ToListAsync();
+            return teste;
+            //return await Context.Set<TEntity>().ToListAsync();
         }
 
         public async Task<IList<TEntity>> GetWhere(Expression<Func<TEntity, bool>> predicate) {
