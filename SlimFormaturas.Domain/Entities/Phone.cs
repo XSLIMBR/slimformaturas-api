@@ -8,12 +8,11 @@ namespace SlimFormaturas.Domain.Entities {
             PhoneId = Guid.NewGuid().ToString();
         }
 
-        public Phone(string phoneId, string ddd, string phoneNumber, string typeGenericId, string graduateId) {
+        public Phone(string phoneId, string ddd, string phoneNumber, TypeGeneric typeGeneric) {
             PhoneId = phoneId;
             Ddd = ddd;
             PhoneNumber = phoneNumber;
-            TypeGenericId = typeGenericId;
-            GraduateId = graduateId;
+            TypeGeneric = typeGeneric;
             Validate(this, new PhoneValidator());
         }
 
@@ -25,7 +24,7 @@ namespace SlimFormaturas.Domain.Entities {
         public string GraduateId { get; set;}
 
 
-        public virtual TypeGeneric TypeGeneric { get; private set; }
-        public virtual Graduate Graduate { get; private set; }
+        public TypeGeneric TypeGeneric { get; set; }
+        public Graduate Graduate { get; set; }
     }
 }

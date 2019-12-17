@@ -21,7 +21,7 @@ namespace SlimFormaturas.Infra.Data.Repository {
         public async Task<TEntity> FirstOrDefault(Expression<Func<TEntity, bool>> predicate) => await Context.Set<TEntity>().FirstOrDefaultAsync(predicate);
 
         public async Task Insert(TEntity obj) {
-            await Context.Set<TEntity>().AddAsync(obj);
+            Context.Set<TEntity>().Add(obj);
             await Context.SaveChangesAsync();
         }
         public async Task<int> Update(TEntity obj) {
@@ -35,9 +35,7 @@ namespace SlimFormaturas.Infra.Data.Repository {
         }
 
         public async Task<IList<TEntity>> GetAll() {
-            var teste = await Context.Set<TEntity>().ToListAsync();
-            return teste;
-            //return await Context.Set<TEntity>().ToListAsync();
+            return await Context.Set<TEntity>().ToListAsync();
         }
 
         public async Task<IList<TEntity>> GetWhere(Expression<Func<TEntity, bool>> predicate) {

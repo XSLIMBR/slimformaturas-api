@@ -25,16 +25,11 @@ namespace SlimFormaturas.Infra.Data.Mapping  {
             builder.Property(u => u.TypeGenericId)
                 .IsRequired();
 
-            builder.Property(u => u.GraduateId)
-                .IsRequired();
-
             builder.HasOne(c => c.Graduate)
-                .WithMany(p => p.Phone);
-
-            builder.HasOne(c => c.TypeGeneric);
+                .WithMany(p => p.Phone)
+                .HasForeignKey(e => e.GraduateId);
 
             builder.ToTable("Phone");
-
         }
     }
 }

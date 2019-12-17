@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
 using SlimFormaturas.Domain.Validators;
 
 namespace SlimFormaturas.Domain.Entities {
@@ -30,7 +31,7 @@ namespace SlimFormaturas.Domain.Entities {
             Validate(this, new GraduateValidator());
         }
 
-        public string GraduateId { get; private set; }
+        public string GraduateId { get; set; }
         public string Name { get; set; }
         public string Cpf { get; set; }
         public string Rg { get; set; }
@@ -51,23 +52,12 @@ namespace SlimFormaturas.Domain.Entities {
 
         public DateTime DateRegister { get; protected set; }
 
-        public virtual User User { get; private set;}
-        public virtual IList<Address> Address { get; set; }
-        public virtual IList<Phone> Phone { get; set; } 
+        public User User { get; private set;}
+        public IList<Address> Address { get; set; }
+        public IList<Phone> Phone { get; set; } 
 
-        public void AddUser(string userId) {
-            UserId = userId;
-        }
-
-        public void AddAddress(IList<Address> addresses) {
-            foreach (var address in addresses) {
-                Address.Add(new Address(address.AddressId,address.Cep,address.Street,address.Number,address.Complement,address.Neighborhood,address.City,address.Uf,address.TypeGenericId,this.GraduateId));
-            }
-        }
-        public void AddPhone(IList<Phone> phones) {
-            foreach (var phone in phones) {
-                Phone.Add(new Phone(phone.PhoneId,phone.Ddd,phone.PhoneNumber, phone.TypeGenericId, this.GraduateId));
-            }
+        public void AddUser(string user) {
+            UserId = user;
         }
     }
 }

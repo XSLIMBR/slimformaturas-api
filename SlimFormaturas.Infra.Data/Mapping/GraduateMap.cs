@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SlimFormaturas.Domain.Entities;
 
@@ -75,11 +72,13 @@ namespace SlimFormaturas.Infra.Data.Mapping {
 
             builder.HasMany(c => c.Address)
                 .WithOne(e => e.Graduate)
-                .HasForeignKey(a => a.AddressId);
+                .HasForeignKey(y => y.AddressId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasMany(c => c.Phone)
                 .WithOne(e => e.Graduate)
-                .HasForeignKey(a => a.PhoneId);
+                .HasForeignKey(y => y.PhoneId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.ToTable("Graduate");
         }

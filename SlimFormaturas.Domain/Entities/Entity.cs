@@ -14,7 +14,7 @@ namespace SlimFormaturas.Domain.Entities {
         [NotMapped]
         public ValidationResult ValidationResult { get; private set; }
 
-        protected bool Validate<TModel>(TModel model, AbstractValidator<TModel> validator) {
+        public bool Validate<TModel>(TModel model, AbstractValidator<TModel> validator) {
             ValidationResult = validator.Validate(model);
             return Valid = ValidationResult.IsValid;
         }

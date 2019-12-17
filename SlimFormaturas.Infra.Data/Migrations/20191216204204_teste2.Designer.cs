@@ -3,73 +3,23 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SlimFormaturas.Infra.Data.Context;
 
 namespace SlimFormaturas.Infra.Data.Migrations
 {
     [DbContext(typeof(MssqlContext))]
-    partial class MssqlContextModelSnapshot : ModelSnapshot
+    [Migration("20191216204204_teste2")]
+    partial class teste2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("IdentityUser");
-                });
 
             modelBuilder.Entity("SlimFormaturas.Domain.Entities.Address", b =>
                 {
@@ -196,8 +146,7 @@ namespace SlimFormaturas.Infra.Data.Migrations
 
                     b.HasKey("GraduateId");
 
-                    b.HasIndex("UserId")
-                        .IsUnique();
+                    b.HasIndex("UserId");
 
                     b.ToTable("Graduate");
                 });
@@ -215,6 +164,7 @@ namespace SlimFormaturas.Infra.Data.Migrations
                         .HasMaxLength(3);
 
                     b.Property<string>("GraduateId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("PhoneNumber")
@@ -259,12 +209,59 @@ namespace SlimFormaturas.Infra.Data.Migrations
                     b.ToTable("TypeGeneric");
                 });
 
+            modelBuilder.Entity("SlimFormaturas.Domain.Entities.User", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LockoutEnd")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AspNetUsers");
+                });
+
             modelBuilder.Entity("SlimFormaturas.Domain.Entities.Address", b =>
                 {
                     b.HasOne("SlimFormaturas.Domain.Entities.Graduate", "Graduate")
                         .WithMany("Address")
-                        .HasForeignKey("GraduateId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("GraduateId");
 
                     b.HasOne("SlimFormaturas.Domain.Entities.TypeGeneric", "TypeGeneric")
                         .WithMany()
@@ -275,9 +272,9 @@ namespace SlimFormaturas.Infra.Data.Migrations
 
             modelBuilder.Entity("SlimFormaturas.Domain.Entities.Graduate", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
-                        .WithOne()
-                        .HasForeignKey("SlimFormaturas.Domain.Entities.Graduate", "UserId")
+                    b.HasOne("SlimFormaturas.Domain.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -287,7 +284,8 @@ namespace SlimFormaturas.Infra.Data.Migrations
                     b.HasOne("SlimFormaturas.Domain.Entities.Graduate", "Graduate")
                         .WithMany("Phone")
                         .HasForeignKey("GraduateId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SlimFormaturas.Domain.Entities.TypeGeneric", "TypeGeneric")
                         .WithMany()

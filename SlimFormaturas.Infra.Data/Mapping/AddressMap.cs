@@ -14,6 +14,7 @@ namespace SlimFormaturas.Infra.Data.Mapping {
                 .HasColumnType("varchar(8)")
                 .HasMaxLength(8)
                 .IsRequired();
+
             builder.Property(u => u.Street)
                 .HasColumnType("varchar(50)")
                 .HasMaxLength(50)
@@ -47,9 +48,8 @@ namespace SlimFormaturas.Infra.Data.Mapping {
                 .IsRequired();
 
             builder.HasOne(c => c.Graduate)
-                .WithMany(p => p.Address);
-
-            builder.HasOne(c => c.TypeGeneric);
+                .WithMany(p => p.Address)
+                .HasForeignKey(y => y.GraduateId);
 
             builder.ToTable("Address");
         }

@@ -7,7 +7,7 @@ namespace SlimFormaturas.Domain.Entities {
             AddressId = Guid.NewGuid().ToString();
         }
 
-        public Address(string addressId, string cep, string street, string number, string complement, string neighborhood, string city, string uf, string typeGenericId, string graduateId) {
+        public Address(string addressId, string cep, string street, string number, string complement, string neighborhood, string city, string uf, TypeGeneric typeGeneric) {
             AddressId = addressId;
             Cep = cep;
             Street = street;
@@ -16,8 +16,7 @@ namespace SlimFormaturas.Domain.Entities {
             Neighborhood = neighborhood;
             City = city;
             Uf = uf;
-            TypeGenericId = typeGenericId;
-            GraduateId = graduateId;
+            TypeGeneric = typeGeneric;
             Validate(this, new AddressValidator());
         }
 
@@ -34,8 +33,8 @@ namespace SlimFormaturas.Domain.Entities {
         public string GraduateId { get; set; }
 
 
-        public virtual TypeGeneric TypeGeneric { get; private set; }
-        public virtual Graduate Graduate { get; private set; }
+        public TypeGeneric TypeGeneric { get; set; }
+        public Graduate Graduate { get; set; }
 
     }
 }

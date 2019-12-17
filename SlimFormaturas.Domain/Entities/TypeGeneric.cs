@@ -22,8 +22,8 @@ namespace SlimFormaturas.Domain.Entities {
     }
 
     public enum Locate {
-        Address,
-        Telephone
+        Address = 1,
+        Telephone = 2
     }
 
 }

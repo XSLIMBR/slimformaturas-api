@@ -6,6 +6,7 @@ using SlimFormaturas.Domain.Entities;
 using SlimFormaturas.Domain.Interfaces.Repository;
 using SlimFormaturas.Domain.Interfaces.Service;
 using SlimFormaturas.Domain.Notifications;
+using SlimFormaturas.Domain.Validators;
 
 namespace SlimFormaturas.Service.Services {
     public class TypeGenericService : BaseService<TypeGeneric>, ITypeGenericService {
@@ -32,11 +33,24 @@ namespace SlimFormaturas.Service.Services {
         }
 
         public async Task<TypeGeneric> Update(TypeGeneric obj) {
-            TypeGeneric typeGeneric = new TypeGeneric();
-            if (typeGeneric.Valid) {
-                await Put(typeGeneric);
+
+            TypeGeneric typeGeneric = await _typeGenericRepository.GetById(obj.TypeGenericId);
+
+            if (typeGeneric != null) {
+
+                typeGeneric.Name = obj.Name;
+                typeGeneric.Localization = obj.Localization;
+
+                typeGeneric.Validate(typeGeneric, new TypeGenericValidator());
+
+                if (typeGeneric.Valid) {
+                    await Put(typeGeneric);
+                } else {
+                    Notifications.AddNotifications(typeGeneric.ValidationResult);
+                }
+
             } else {
-                Notifications.AddNotifications(typeGeneric.ValidationResult);
+                Notifications.AddNotification("404", "TypeGenericId", "Graduate with id = " + obj.TypeGenericId + " not found");
             }
 
             return typeGeneric;
