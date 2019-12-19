@@ -16,6 +16,7 @@ namespace SlimFormaturas.Infra.CrossCutting.Identity.Authorization
             if (!context.HttpContext.User.Identity.IsAuthenticated)
             {
                 context.Result = new StatusCodeResult(401);
+                return;
             }
             if (!CustomAuthorize.ValidarClaimsUsuario(context.HttpContext, _claim.Type, _claim.Value))
             {

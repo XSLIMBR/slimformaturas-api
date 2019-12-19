@@ -67,8 +67,8 @@ namespace SlimFormaturas.Api
             var appSettings = appSettingsSection.Get<AppSettings>();
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);
 
-            services.AddAuthentication(x =>
-            {
+            services.AddAuthentication(x => {
+                x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(x =>
@@ -139,10 +139,14 @@ namespace SlimFormaturas.Api
             if (env.IsDevelopment()){
                 app.UseDeveloperExceptionPage();
             }
-            app.UseHttpsRedirection();
+
             app.UseRouting();
+            //app.UseCors();
+
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseHttpsRedirection();
             app.UseHsts();
             app.UseEndpoints(endpoints =>
             {

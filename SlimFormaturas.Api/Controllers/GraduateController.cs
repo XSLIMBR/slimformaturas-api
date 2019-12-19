@@ -3,13 +3,14 @@ using SlimFormaturas.Domain.Entities;
 using SlimFormaturas.Domain.Interfaces.Service;
 using SlimFormaturas.Domain.Notifications;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using SlimFormaturas.Infra.CrossCutting.Identity.Authorization;
 
 namespace SlimFormaturas.Api.Controllers
 {
-    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class GraduateController : ApiController {
          readonly IGraduateService _graduateService;
 
@@ -61,11 +62,13 @@ namespace SlimFormaturas.Api.Controllers
         /// </summary>
         /// <remarks>This API will get the values.</remarks>
         /// 
+        [CustomAuthorize.ClaimsAuthorizeAttribute("Graduate", "Consultar")]
         [HttpGet]
         public async Task<ActionResult> Get() {
             return Response(await _graduateService.Get());
         }
-        
+
+        //[CustomAuthorize.ClaimsAuthorize("Graduate", "Consultar")]
         [HttpGet("{id}")]
         public async Task<ActionResult> Get(string id) {
             return Response(await _graduateService.Get(id));

@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SlimFormaturas.Domain.Entities;
 using SlimFormaturas.Domain.Interfaces.Service;
 using SlimFormaturas.Domain.Notifications;
+using SlimFormaturas.Infra.CrossCutting.Identity.Authorization;
 using System.Threading.Tasks;
 
 namespace SlimFormaturas.Api.Controllers
@@ -18,21 +20,21 @@ namespace SlimFormaturas.Api.Controllers
             _phoneService = phoneService;
         }
 
-        //[CustomAuthorize.ClaimsAuthorize("Graduate", "Incluir")]
+        //[CustomAuthorize.ClaimsAuthorize("Phone", "Incluir")]
         [HttpPost]
         public async Task<ActionResult<string>> Post(Phone phone) {
             _ = await _phoneService.Insert(phone);
             return Response(phone.PhoneId);
         }
 
-        //[CustomAuthorize.ClaimsAuthorize("Graduate", "Editar")]
+        //[CustomAuthorize.ClaimsAuthorize("Phone", "Editar")]
         [HttpPut]
         public async Task<ActionResult<string>> Put(Phone phone) {
             _ = await _phoneService.Update(phone);
             return Response(phone.PhoneId);
         }
 
-        //[CustomAuthorize.ClaimsAuthorize("Graduate", "Excluir")]
+        //[CustomAuthorize.ClaimsAuthorize("Phone", "Excluir")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(string id) {
             await _phoneService.Delete(id);
@@ -45,11 +47,13 @@ namespace SlimFormaturas.Api.Controllers
         /// </summary>
         /// <remarks>This API will get the values.</remarks>
         /// 
+        //[CustomAuthorize.ClaimsAuthorize("Phone", "Consultar")]
         [HttpGet]
         public async Task<ActionResult> Get() {
             return Response(await _phoneService.Get());
         }
-        
+
+        //[CustomAuthorize.ClaimsAuthorize("Phone", "Consultar")]
         [HttpGet("{id}")]
         public async Task<ActionResult> GetGraduate(string id) {
             return Response(await _phoneService.GetWhere(c => c.GraduateId == id));
