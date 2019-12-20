@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SlimFormaturas.Api.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class TypeController : ApiController {
@@ -20,21 +20,21 @@ namespace SlimFormaturas.Api.Controllers
             _typeGenericService = typeGenericService;
         }
 
-        //[CustomAuthorize.ClaimsAuthorize("Type", "Incluir")]
+        [CustomAuthorize.ClaimsAuthorize("Type", "Incluir")]
         [HttpPost]
         public async Task<ActionResult<string>> Post(TypeGeneric typeGeneric) {
             _ = await _typeGenericService.Insert(typeGeneric);
             return Response(typeGeneric.TypeGenericId);
         }
 
-        //[CustomAuthorize.ClaimsAuthorize("Type", "Editar")]
+        [CustomAuthorize.ClaimsAuthorize("Type", "Editar")]
         [HttpPut]
         public async Task<ActionResult<string>> Put(TypeGeneric typeGeneric) {
             _ = await _typeGenericService.Update(typeGeneric);
             return Response(typeGeneric.TypeGenericId);
         }
 
-        //[CustomAuthorize.ClaimsAuthorize("Type", "Excluir")]
+        [CustomAuthorize.ClaimsAuthorize("Type", "Excluir")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(string id) {
             await _typeGenericService.Delete(id);
@@ -48,13 +48,13 @@ namespace SlimFormaturas.Api.Controllers
         /// <remarks>This 
         /// API will get the values.</remarks>
         /// 
-        //[CustomAuthorize.ClaimsAuthorize("Type", "Consultar")]
+        [CustomAuthorize.ClaimsAuthorize("Type", "Consultar")]
         [HttpGet]
         public async Task<ActionResult> Get() {
             return Response(await _typeGenericService.Get());
         }
 
-        //[CustomAuthorize.ClaimsAuthorize("Type", "Consultar")]
+        [CustomAuthorize.ClaimsAuthorize("Type", "Consultar")]
         [HttpGet("{id}")]
         public async Task<ActionResult> Get(string id) {
             return Response(await _typeGenericService.Get(id));

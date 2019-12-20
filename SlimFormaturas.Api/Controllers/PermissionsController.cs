@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SlimFormaturas.Api.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PermissionsController : ApiController
