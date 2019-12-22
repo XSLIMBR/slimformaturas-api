@@ -10,7 +10,7 @@ namespace SlimFormaturas.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class GraduateController : ApiController {
          readonly IGraduateService _graduateService;
 
@@ -35,21 +35,21 @@ namespace SlimFormaturas.Api.Controllers
         ///
         /// </remarks>
         /// <returns>O id do novo formando inserido</returns>
-        [CustomAuthorize.ClaimsAuthorize("Graduate", "Incluir")]
+        //[CustomAuthorize.ClaimsAuthorize("Graduate", "Incluir")]
         [HttpPost]
         public async Task<ActionResult<string>> Post(Graduate graduate) {
             _ = await _graduateService.Insert(graduate);
             return Response(graduate.GraduateId);
         }
 
-        [CustomAuthorize.ClaimsAuthorize("Graduate", "Editar")]
+        //[CustomAuthorize.ClaimsAuthorize("Graduate", "Editar")]
         [HttpPut]
         public async Task<ActionResult<string>> Put(Graduate graduate) {
             _ = await _graduateService.Update(graduate);
             return Response(graduate.GraduateId);
         }
 
-        [CustomAuthorize.ClaimsAuthorize("Graduate", "Excluir")]
+        //[CustomAuthorize.ClaimsAuthorize("Graduate", "Excluir")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(string id) {
             await _graduateService.Delete(id);
@@ -62,7 +62,7 @@ namespace SlimFormaturas.Api.Controllers
         /// </summary>
         /// <remarks>This API will get the values.</remarks>
         /// 
-        [CustomAuthorize.ClaimsAuthorizeAttribute("Graduate", "Consultar")]
+       // [CustomAuthorize.ClaimsAuthorizeAttribute("Graduate", "Consultar")]
         [HttpGet]
         public async Task<ActionResult> Get() {
             return Response(await _graduateService.Get());

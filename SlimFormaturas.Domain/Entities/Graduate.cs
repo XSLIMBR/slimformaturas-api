@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
+using Newtonsoft.Json;
 using SlimFormaturas.Domain.Validators;
 
 namespace SlimFormaturas.Domain.Entities {
@@ -11,7 +12,7 @@ namespace SlimFormaturas.Domain.Entities {
             GraduateId = Guid.NewGuid().ToString();
         }
 
-        public Graduate(string graduateId, string name, string cpf, string rg, bool sex, DateTime birthDate, string dadName, string motherName, bool committee, string email, string photo, string bank, string agency, string checkingAccount) {
+        public Graduate(string graduateId, string name, string cpf, string rg, string sex, DateTime birthDate, string dadName, string motherName, bool committee, string email, string photo, string bank, string agency, string checkingAccount) {
             GraduateId = graduateId;
             Name = name;
             Cpf = cpf;
@@ -35,7 +36,7 @@ namespace SlimFormaturas.Domain.Entities {
         public string Name { get; set; }
         public string Cpf { get; set; }
         public string Rg { get; set; }
-        public bool Sex { get; set; }
+        public string Sex { get; set; }
         public DateTime BirthDate { get; set; }
         public string DadName { get; set; }
         public string MotherName { get; set; }

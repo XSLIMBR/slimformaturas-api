@@ -24,6 +24,8 @@ namespace SlimFormaturas.Infra.Data.Mapping {
                 .IsRequired();
 
             builder.Property(c => c.Sex)
+                .HasColumnType("varchar(1)")
+                .HasMaxLength(1)
                 .IsRequired();
             
             builder.Property(c => c.BirthDate)
