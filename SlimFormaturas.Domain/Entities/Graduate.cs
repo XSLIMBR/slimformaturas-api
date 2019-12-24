@@ -12,7 +12,7 @@ namespace SlimFormaturas.Domain.Entities {
             GraduateId = Guid.NewGuid().ToString();
         }
 
-        public Graduate(string graduateId, string name, string cpf, string rg, string sex, DateTime birthDate, string dadName, string motherName, bool committee, string email, string photo, string bank, string agency, string checkingAccount) {
+        public Graduate(string graduateId, string name, string cpf, string rg, string sex, DateTime birthDate, string dadName, string motherName, string email, string photo, string bank, string agency, string checkingAccount) {
             GraduateId = graduateId;
             Name = name;
             Cpf = cpf;
@@ -21,7 +21,6 @@ namespace SlimFormaturas.Domain.Entities {
             BirthDate = birthDate;
             DadName = dadName;
             MotherName = motherName;
-            Committee = committee;
             Email = email;
             Photo = photo;
             Bank = bank;
@@ -40,7 +39,6 @@ namespace SlimFormaturas.Domain.Entities {
         public DateTime BirthDate { get; set; }
         public string DadName { get; set; }
         public string MotherName { get; set; }
-        public bool Committee { get; set; }
         public string Email { get; set; }
         public string Photo { get; set; }
         #region ContaBancária
@@ -53,9 +51,11 @@ namespace SlimFormaturas.Domain.Entities {
 
         public DateTime DateRegister { get; protected set; }
 
-        public User User { get; private set;}
+        public User User { get; private set; }
         public IList<Address> Address { get; set; }
-        public IList<Phone> Phone { get; set; } 
+        public IList<Phone> Phone { get; set; }
+        public IList<GraduateAlbum>  GraduateAlbum { get;set; }
+        public IList<GraduateCeremonial> GraduateCeremonial { get; set; }
 
         public void AddUser(string user) {
             UserId = user;

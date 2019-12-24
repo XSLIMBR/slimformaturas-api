@@ -22,9 +22,17 @@ namespace SlimFormaturas.Domain.Entities {
 
         public string TypeGenericId { get; set; }
         public string GraduateId { get; set;}
+        public string CollegeId { get; set; }
+        public string EmployeeId { get; set; }
+        public string SellerId { get; set; }
+        public string ShippingCompanyId { get; set; }
 
 
         public TypeGeneric TypeGeneric { get; set; }
         public Graduate Graduate { get; set; }
+        public College College { get; set; }
+        public Employee Employee { get; set; }
+        public Seller Seller { get; set; }
+        public ShippingCompany ShippingCompany { get; set; }
     }
 }
