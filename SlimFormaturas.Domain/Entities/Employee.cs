@@ -4,8 +4,29 @@ using System.Text;
 
 namespace SlimFormaturas.Domain.Entities
 {
-    public class Employee {
-        public string EmployeeId{ get;set; }
+    public class Employee : Entity{
+        public Employee() {
+            EmployeeId = Guid.NewGuid().ToString();
+        }
+
+        public Employee(string employeeId, string name, string cpf, string rg,string sex, DateTime birthDate,string dadName,string motherName,string email, string photo,string bank,string agency,string checkingAccount) {
+            EmployeeId = employeeId;
+            Name = name;
+            Cpf = cpf;
+            Rg = rg;
+            Sex = sex;
+            BirthDate = birthDate;
+            DadName = dadName;
+            MotherName = motherName;
+            Email = email;
+            Photo = photo;
+            Bank = bank;
+            Agency = agency;
+            CheckingAccount = checkingAccount;
+            Address = new List<Address>();
+            Phone = new List<Phone>();
+        }
+        public string EmployeeId { get;set; }
         public string Name { get; set; }
         public string Cpf { get; set; }
         public string Rg { get; set; }
@@ -22,14 +43,11 @@ namespace SlimFormaturas.Domain.Entities
         #endregion
         public DateTime DateRegister { get; protected set; }
 
-
-
         public string UserId { get; private set; }
 
         public User User { get; private set; }
         public IList<Address> Address { get; set; }
         public IList<Phone> Phone { get; set; }
-
 
         public void AddUser(string user) {
             UserId = user;

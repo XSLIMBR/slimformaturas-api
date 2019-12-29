@@ -4,6 +4,7 @@ using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SlimFormaturas.Domain.Entities {
+    [NotMapped]
     public abstract class Entity {
         [NotMapped]
         public Guid Id { get; private set; }
