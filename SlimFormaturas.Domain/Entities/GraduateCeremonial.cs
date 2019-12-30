@@ -2,13 +2,19 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SlimFormaturas.Domain.Entities
-{
-    public class GraduateCeremonial
-    {
+namespace SlimFormaturas.Domain.Entities {
+    public class GraduateCeremonial : Entity{
+        public GraduateCeremonial() {
+            GraduateCeremonialId = Guid.NewGuid().ToString();
+        }
+
+        public GraduateCeremonial(string graduateCeremonialId, bool committee, string courseId) {
+            GraduateCeremonialId = graduateCeremonialId;
+            Committee = committee;
+            CourseId = courseId;
+        }
         public string GraduateCeremonialId { get; set;}
         public bool Committee { get; set; }
-
 
         public string GraduateId { get; set; }
         public string ContractId { get; set; }

@@ -36,9 +36,6 @@ namespace SlimFormaturas.Domain.Validators
                 .Length(3, 100).WithMessage("O campo nome do pai deve ter entre 3 e 100 caracteres");
             RuleFor(c => c.MotherName)
                 .Length(3, 100).WithMessage("O campo nome da mãe deve ter entre 3 e 100 caracteres");
-            RuleFor(c => c.Committee)
-                .NotEmpty().WithMessage("É necessário informar se é comissão de formatura.")
-                .NotNull();
             RuleFor(c => c.Photo)
                 .Length(1,255).WithMessage("O campo foto deve conter no maximo 255 caracteres");
             RuleFor(c => c.Bank)

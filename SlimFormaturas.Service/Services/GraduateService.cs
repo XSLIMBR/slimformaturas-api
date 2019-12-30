@@ -99,7 +99,6 @@ namespace SlimFormaturas.Service.Services
                 graduate.BirthDate = obj.BirthDate;
                 graduate.DadName = obj.DadName;
                 graduate.MotherName = obj.MotherName;
-                graduate.Committee = obj.Committee;
                 graduate.Email = obj.Email;
                 graduate.Photo = obj.Photo;
                 graduate.Bank = obj.Bank;
