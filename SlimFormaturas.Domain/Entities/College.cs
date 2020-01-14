@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using SlimFormaturas.Domain.Validators;
 
 namespace SlimFormaturas.Domain.Entities {
     public class College : Entity {
@@ -18,6 +19,7 @@ namespace SlimFormaturas.Domain.Entities {
             Site = site;
             Address = new List<Address>();
             Phone = new List<Phone>();
+            Validate(this, new CollegeValidator());
         }
         public string CollegeId { get; set; }
         public string CorporateName { get; set; }

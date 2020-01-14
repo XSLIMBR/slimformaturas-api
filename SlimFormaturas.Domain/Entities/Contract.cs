@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using SlimFormaturas.Domain.Validators;
 
 namespace SlimFormaturas.Domain.Entities {
     public class Contract : Entity {
@@ -13,6 +14,7 @@ namespace SlimFormaturas.Domain.Entities {
             Year = year;
             Note = note;
             ContractCourses = new List<ContractCourse>();
+            Validate(this, new ContractValidator());
         }
         public string ContractId { get; set; }
         public string Code { get; set; }

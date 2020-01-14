@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using SlimFormaturas.Domain.Validators;
 
 namespace SlimFormaturas.Domain.Entities {
     public class Course : Entity {
@@ -10,6 +11,7 @@ namespace SlimFormaturas.Domain.Entities {
         public Course(string courseId, string name) {
             CourseId = courseId;
             Name = name;
+            Validate(this, new CourseValidator());
         }
         public string CourseId { get; set; }
         public string Name { get; set; }
