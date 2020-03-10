@@ -1,6 +1,4 @@
-﻿using MediatR;
-
-namespace SlimFormaturas.Domain.Notifications {
+﻿namespace SlimFormaturas.Domain.Notifications {
     public class Notification {
         public string ErrorCode { get; set; }
         public string PropertyName { get; set; }

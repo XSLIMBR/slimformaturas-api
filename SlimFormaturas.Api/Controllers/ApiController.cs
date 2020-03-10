@@ -1,5 +1,4 @@
 ﻿using FluentValidation.Results;
-using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SlimFormaturas.Domain.Notifications;

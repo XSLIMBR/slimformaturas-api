@@ -38,9 +38,6 @@ namespace SlimFormaturas.Infra.Data.Mapping {
             builder.Property(c => c.MotherName)
                 .HasColumnType("varchar(100)")
                 .HasMaxLength(100);
-            
-            builder.Property(c => c.Committee)
-                .IsRequired();
 
             builder.Property(c => c.Email)
                 .HasColumnType("varchar(100)")

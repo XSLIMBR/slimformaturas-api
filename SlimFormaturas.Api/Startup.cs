@@ -135,7 +135,7 @@ namespace SlimFormaturas.Api
             }
 
             app.UseRouting();
-            //app.UseCors();
+            app.UseCors();
 
             app.UseAuthentication();
             app.UseAuthorization();
