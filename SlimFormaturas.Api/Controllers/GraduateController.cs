@@ -5,7 +5,6 @@ using SlimFormaturas.Domain.Notifications;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using SlimFormaturas.Infra.CrossCutting.Identity.Authorization;
-using SlimFormaturas.Domain.Dto;
 
 namespace SlimFormaturas.Api.Controllers
 {
@@ -38,10 +37,9 @@ namespace SlimFormaturas.Api.Controllers
         /// <returns>O id do novo formando inserido</returns>
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Incluir")]
         [HttpPost]
-        public async Task<ActionResult<string>> Post(GraduateDto graduate) {
-            Graduate graduate1 = new Graduate(graduate.Name, graduate.Cpf, graduate.Rg, graduate.Sex, graduate.BirthDate, graduate.DadName, graduate.MotherName, graduate.Email, graduate.Photo, graduate.Bank, graduate.Agency, graduate.CheckingAccount);
-            _ = await _graduateService.Insert(graduate1);
-            return Response(graduate1.GraduateId);
+        public async Task<ActionResult<string>> Post(Graduate graduate) {
+            _ = await _graduateService.Insert(graduate);
+            return Response(graduate.GraduateId);
         }
 
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Editar")]
