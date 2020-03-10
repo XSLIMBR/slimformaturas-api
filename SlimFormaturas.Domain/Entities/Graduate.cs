@@ -9,11 +9,11 @@ namespace SlimFormaturas.Domain.Entities {
 
         //Limpo para o entityframework
         public Graduate() {
-            GraduateId = Guid.NewGuid().ToString();
+            //GraduateId = 
         }
 
-        public Graduate(string graduateId, string name, string cpf, string rg, string sex, DateTime birthDate, string dadName, string motherName, string email, string photo, string bank, string agency, string checkingAccount) {
-            GraduateId = graduateId;
+        public Graduate(string name, string cpf, string rg, string sex, DateTime birthDate, string dadName, string motherName, string email, string photo, string bank, string agency, string checkingAccount) {
+            GraduateId = Guid.NewGuid().ToString();
             Name = name;
             Cpf = cpf;
             Rg = rg;

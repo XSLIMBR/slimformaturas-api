@@ -39,7 +39,7 @@ namespace SlimFormaturas.Api.Controllers
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Incluir")]
         [HttpPost]
         public async Task<ActionResult<string>> Post(GraduateDto graduate) {
-            Graduate graduate1 = new Graduate("", graduate.Name, graduate.Cpf, graduate.Rg, graduate.Sex, graduate.BirthDate, graduate.DadName, graduate.MotherName, graduate.Email, graduate.Photo, graduate.Bank, graduate.Agency, graduate.CheckingAccount);
+            Graduate graduate1 = new Graduate(graduate.Name, graduate.Cpf, graduate.Rg, graduate.Sex, graduate.BirthDate, graduate.DadName, graduate.MotherName, graduate.Email, graduate.Photo, graduate.Bank, graduate.Agency, graduate.CheckingAccount);
             _ = await _graduateService.Insert(graduate1);
             return Response(graduate1.GraduateId);
         }
