@@ -19,7 +19,6 @@
     },
     "SlimFormaturas.Api": {
       "commandName": "Project",
-      "launchBrowser": true,
       "launchUrl": "api/graduate",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

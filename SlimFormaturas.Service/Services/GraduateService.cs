@@ -50,7 +50,7 @@ namespace SlimFormaturas.Service.Services
 
             if (obj.Address != null) {
                 foreach (var address in obj.Address) {
-                    var addressValid = new Address(address.AddressId, address.Cep, address.Street, address.Number, address.Complement, address.Neighborhood, address.City, address.Uf, await _typeGenericRepository.GetById(address.TypeGenericId));
+                    var addressValid = new Address(address.Cep, address.Street, address.Number, address.Complement, address.Neighborhood, address.City, address.Uf, await _typeGenericRepository.GetById(address.TypeGenericId));
                     if (addressValid.Invalid) {
                         _notifications.AddNotifications(addressValid.ValidationResult);
                     } else {
@@ -61,7 +61,7 @@ namespace SlimFormaturas.Service.Services
 
             if (obj.Phone != null) {
                 foreach (var phone in obj.Phone) {
-                    var PhoneValid = new Phone(phone.PhoneId, phone.Ddd, phone.PhoneNumber, await _typeGenericRepository.GetById(phone.TypeGenericId));
+                    var PhoneValid = new Phone(phone.Ddd, phone.PhoneNumber, await _typeGenericRepository.GetById(phone.TypeGenericId));
                     if (PhoneValid.Invalid) {
                         _notifications.AddNotifications(PhoneValid.ValidationResult);
                     } else {

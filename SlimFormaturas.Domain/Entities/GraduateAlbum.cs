@@ -5,11 +5,10 @@ using System.Text;
 namespace SlimFormaturas.Domain.Entities  {
     public class GraduateAlbum : Entity{
         public GraduateAlbum() {
-            GraduateAlbumId = Guid.NewGuid().ToString();
         }
 
         public GraduateAlbum(string graduateAlbumId, string albumCode, int amountPhotosAvailable, int amountPhotosScraps, int amountPhotosSold) {
-            GraduateAlbumId = graduateAlbumId;
+            GraduateAlbumId = Guid.NewGuid().ToString();
             AlbumCode = albumCode;
             AmountPhotosAvailable = amountPhotosAvailable;
             AmountPhotosScraps = amountPhotosScraps;

@@ -10,14 +10,14 @@ using SlimFormaturas.Infra.Data.Context;
 namespace SlimFormaturas.Infra.Data.Migrations
 {
     [DbContext(typeof(MssqlContext))]
-    [Migration("20191018130203_2")]
-    partial class _2
+    [Migration("20200311141409_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.0.0")
+                .HasAnnotation("ProductVersion", "3.1.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -37,10 +37,15 @@ namespace SlimFormaturas.Infra.Data.Migrations
                         .HasColumnType("varchar(50)")
                         .HasMaxLength(50);
 
+                    b.Property<string>("CollegeId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Complement")
-                        .IsRequired()
                         .HasColumnType("varchar(50)")
                         .HasMaxLength(50);
+
+                    b.Property<string>("EmployeeId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("GraduateId")
                         .HasColumnType("nvarchar(450)");
@@ -55,12 +60,19 @@ namespace SlimFormaturas.Infra.Data.Migrations
                         .HasColumnType("varchar(8)")
                         .HasMaxLength(8);
 
+                    b.Property<string>("SellerId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ShippingCompanyId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Street")
                         .IsRequired()
                         .HasColumnType("varchar(50)")
                         .HasMaxLength(50);
 
                     b.Property<string>("TypeGenericId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Uf")
@@ -84,7 +96,6 @@ namespace SlimFormaturas.Infra.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Agency")
-                        .IsRequired()
                         .HasColumnType("varchar(50)")
                         .HasMaxLength(50);
 
@@ -97,12 +108,8 @@ namespace SlimFormaturas.Infra.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CheckingAccount")
-                        .IsRequired()
                         .HasColumnType("varchar(50)")
                         .HasMaxLength(50);
-
-                    b.Property<bool>("Committee")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Cpf")
                         .IsRequired()
@@ -110,7 +117,6 @@ namespace SlimFormaturas.Infra.Data.Migrations
                         .HasMaxLength(11);
 
                     b.Property<string>("DadName")
-                        .IsRequired()
                         .HasColumnType("varchar(100)")
                         .HasMaxLength(100);
 
@@ -123,7 +129,6 @@ namespace SlimFormaturas.Infra.Data.Migrations
                         .HasMaxLength(100);
 
                     b.Property<string>("MotherName")
-                        .IsRequired()
                         .HasColumnType("varchar(100)")
                         .HasMaxLength(100);
 
@@ -133,7 +138,6 @@ namespace SlimFormaturas.Infra.Data.Migrations
                         .HasMaxLength(100);
 
                     b.Property<string>("Photo")
-                        .IsRequired()
                         .HasColumnType("varchar")
                         .HasMaxLength(255);
 
@@ -141,8 +145,10 @@ namespace SlimFormaturas.Infra.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Sex")
-                        .HasColumnType("bit");
+                    b.Property<string>("Sex")
+                        .IsRequired()
+                        .HasColumnType("varchar(1)")
+                        .HasMaxLength(1);
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -162,11 +168,17 @@ namespace SlimFormaturas.Infra.Data.Migrations
                         .HasColumnName("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("CollegeId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Ddd")
                         .IsRequired()
                         .HasColumnName("DDD")
                         .HasColumnType("varchar(3)")
                         .HasMaxLength(3);
+
+                    b.Property<string>("EmployeeId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("GraduateId")
                         .HasColumnType("nvarchar(450)");
@@ -177,9 +189,21 @@ namespace SlimFormaturas.Infra.Data.Migrations
                         .HasColumnType("varchar(9)")
                         .HasMaxLength(9);
 
+                    b.Property<string>("SellerId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ShippingCompanyId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TypeGenericId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("PhoneId");
 
                     b.HasIndex("GraduateId");
+
+                    b.HasIndex("TypeGenericId");
 
                     b.ToTable("Phone");
                 });
@@ -193,14 +217,14 @@ namespace SlimFormaturas.Infra.Data.Migrations
                     b.Property<DateTime>("DateRegister")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("Localization")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnName("Name")
                         .HasColumnType("varchar(50)")
                         .HasMaxLength(50);
-
-                    b.Property<int>("localization")
-                        .HasColumnType("int");
 
                     b.HasKey("TypeGenericId");
 
@@ -216,9 +240,6 @@ namespace SlimFormaturas.Infra.Data.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(256)")
@@ -230,7 +251,7 @@ namespace SlimFormaturas.Infra.Data.Migrations
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("LockoutEndDateUtc")
+                    b.Property<DateTime?>("LockoutEnd")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("PasswordHash")
@@ -262,11 +283,14 @@ namespace SlimFormaturas.Infra.Data.Migrations
                 {
                     b.HasOne("SlimFormaturas.Domain.Entities.Graduate", "Graduate")
                         .WithMany("Address")
-                        .HasForeignKey("GraduateId");
+                        .HasForeignKey("GraduateId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("SlimFormaturas.Domain.Entities.TypeGeneric", "TypeGeneric")
                         .WithMany()
-                        .HasForeignKey("TypeGenericId");
+                        .HasForeignKey("TypeGenericId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("SlimFormaturas.Domain.Entities.Graduate", b =>
@@ -282,7 +306,14 @@ namespace SlimFormaturas.Infra.Data.Migrations
                 {
                     b.HasOne("SlimFormaturas.Domain.Entities.Graduate", "Graduate")
                         .WithMany("Phone")
-                        .HasForeignKey("GraduateId");
+                        .HasForeignKey("GraduateId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("SlimFormaturas.Domain.Entities.TypeGeneric", "TypeGeneric")
+                        .WithMany()
+                        .HasForeignKey("TypeGenericId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

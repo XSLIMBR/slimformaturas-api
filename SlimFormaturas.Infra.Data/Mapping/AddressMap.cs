@@ -47,6 +47,8 @@ namespace SlimFormaturas.Infra.Data.Mapping {
             builder.Property(u => u.TypeGenericId)
                 .IsRequired();
 
+            builder.HasOne(u => u.TypeGeneric);
+
             builder.HasOne(c => c.Graduate)
                 .WithMany(p => p.Address)
                 .HasForeignKey(y => y.GraduateId);

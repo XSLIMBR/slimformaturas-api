@@ -4,11 +4,10 @@ using System;
 namespace SlimFormaturas.Domain.Entities {
     public class TypeGeneric : Entity{
         public TypeGeneric() {
-            TypeGenericId = Guid.NewGuid().ToString();
         }
 
         public TypeGeneric(string typeGenericId, string name, Locate localization) {
-            TypeGenericId = typeGenericId;
+            TypeGenericId = Guid.NewGuid().ToString();
             Name = name;
             Localization = localization;
             Validate(this, new TypeGenericValidator());

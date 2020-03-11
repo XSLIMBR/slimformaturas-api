@@ -15,7 +15,7 @@ namespace SlimFormaturas.Infra.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.0")
+                .HasAnnotation("ProductVersion", "3.1.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -35,9 +35,15 @@ namespace SlimFormaturas.Infra.Data.Migrations
                         .HasColumnType("varchar(50)")
                         .HasMaxLength(50);
 
+                    b.Property<string>("CollegeId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Complement")
                         .HasColumnType("varchar(50)")
                         .HasMaxLength(50);
+
+                    b.Property<string>("EmployeeId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("GraduateId")
                         .HasColumnType("nvarchar(450)");
@@ -51,6 +57,12 @@ namespace SlimFormaturas.Infra.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(8)")
                         .HasMaxLength(8);
+
+                    b.Property<string>("SellerId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ShippingCompanyId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Street")
                         .IsRequired()
@@ -96,9 +108,6 @@ namespace SlimFormaturas.Infra.Data.Migrations
                     b.Property<string>("CheckingAccount")
                         .HasColumnType("varchar(50)")
                         .HasMaxLength(50);
-
-                    b.Property<bool>("Committee")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Cpf")
                         .IsRequired()
@@ -157,11 +166,17 @@ namespace SlimFormaturas.Infra.Data.Migrations
                         .HasColumnName("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("CollegeId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Ddd")
                         .IsRequired()
                         .HasColumnName("DDD")
                         .HasColumnType("varchar(3)")
                         .HasMaxLength(3);
+
+                    b.Property<string>("EmployeeId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("GraduateId")
                         .HasColumnType("nvarchar(450)");
@@ -171,6 +186,12 @@ namespace SlimFormaturas.Infra.Data.Migrations
                         .HasColumnName("PhoneNumber")
                         .HasColumnType("varchar(9)")
                         .HasMaxLength(9);
+
+                    b.Property<string>("SellerId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ShippingCompanyId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TypeGenericId")
                         .IsRequired()

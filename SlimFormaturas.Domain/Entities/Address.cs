@@ -4,11 +4,10 @@ using SlimFormaturas.Domain.Validators;
 namespace SlimFormaturas.Domain.Entities {
     public class Address : Entity {
         public Address() {
-            AddressId = Guid.NewGuid().ToString();
         }
 
-        public Address(string addressId, string cep, string street, string number, string complement, string neighborhood, string city, string uf, TypeGeneric typeGeneric) {
-            AddressId = addressId;
+        public Address(string cep, string street, string number, string complement, string neighborhood, string city, string uf, TypeGeneric typeGeneric) {
+            AddressId = Guid.NewGuid().ToString();
             Cep = cep;
             Street = street;
             Number = number;

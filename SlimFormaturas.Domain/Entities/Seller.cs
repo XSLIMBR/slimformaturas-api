@@ -5,11 +5,10 @@ using System.Text;
 namespace SlimFormaturas.Domain.Entities {
     public class Seller : Entity {
         public Seller() {
-            SellerId = Guid.NewGuid().ToString();
         }
 
         public Seller(string sellerId, string name, string cpf, string rg,string sex, DateTime birthDate,string email, string photo,string bank,string agency,string checkingAccount) {
-            SellerId = sellerId;
+            SellerId = Guid.NewGuid().ToString();
             Name = name;
             Cpf = cpf;
             Rg = rg;

@@ -6,10 +6,9 @@ using SlimFormaturas.Domain.Validators;
 namespace SlimFormaturas.Domain.Entities {
     public class Course : Entity {
         public Course() {
-            CourseId = Guid.NewGuid().ToString();
         }
         public Course(string courseId, string name) {
-            CourseId = courseId;
+            CourseId = Guid.NewGuid().ToString();
             Name = name;
             Validate(this, new CourseValidator());
         }

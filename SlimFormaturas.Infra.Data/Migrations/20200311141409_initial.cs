@@ -9,6 +9,20 @@ namespace SlimFormaturas.Infra.Data.Migrations
         {
 
             migrationBuilder.CreateTable(
+                name: "TypeGeneric",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
+                    Localization = table.Column<int>(nullable: false),
+                    DateRegister = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TypeGeneric", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Graduate",
                 columns: table => new
                 {
@@ -16,16 +30,15 @@ namespace SlimFormaturas.Infra.Data.Migrations
                     Name = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
                     Cpf = table.Column<string>(type: "varchar(11)", maxLength: 11, nullable: false),
                     Rg = table.Column<string>(nullable: false),
-                    Sex = table.Column<bool>(nullable: false),
+                    Sex = table.Column<string>(type: "varchar(1)", maxLength: 1, nullable: false),
                     BirthDate = table.Column<DateTime>(nullable: false),
-                    DadName = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
-                    MotherName = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
-                    Committee = table.Column<bool>(nullable: false),
+                    DadName = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true),
+                    MotherName = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true),
                     Email = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
-                    Photo = table.Column<string>(type: "varchar", maxLength: 255, nullable: false),
+                    Photo = table.Column<string>(type: "varchar", maxLength: 255, nullable: true),
                     Bank = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
-                    Agency = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
-                    CheckingAccount = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
+                    Agency = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true),
+                    CheckingAccount = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: false),
                     DateRegister = table.Column<DateTime>(nullable: false)
                 },
@@ -48,11 +61,16 @@ namespace SlimFormaturas.Infra.Data.Migrations
                     Cep = table.Column<string>(type: "varchar(8)", maxLength: 8, nullable: false),
                     Street = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
                     Number = table.Column<string>(type: "varchar(8)", maxLength: 8, nullable: false),
-                    Complement = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
+                    Complement = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true),
                     Neighborhood = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
                     City = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
                     Uf = table.Column<string>(type: "varchar(2)", maxLength: 2, nullable: false),
-                    GraduateId = table.Column<string>(nullable: true)
+                    TypeGenericId = table.Column<string>(nullable: false),
+                    GraduateId = table.Column<string>(nullable: true),
+                    CollegeId = table.Column<string>(nullable: true),
+                    EmployeeId = table.Column<string>(nullable: true),
+                    SellerId = table.Column<string>(nullable: true),
+                    ShippingCompanyId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -62,7 +80,13 @@ namespace SlimFormaturas.Infra.Data.Migrations
                         column: x => x.GraduateId,
                         principalTable: "Graduate",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Address_TypeGeneric_TypeGenericId",
+                        column: x => x.TypeGenericId,
+                        principalTable: "TypeGeneric",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -72,7 +96,12 @@ namespace SlimFormaturas.Infra.Data.Migrations
                     Id = table.Column<string>(nullable: false),
                     DDD = table.Column<string>(type: "varchar(3)", maxLength: 3, nullable: false),
                     PhoneNumber = table.Column<string>(type: "varchar(9)", maxLength: 9, nullable: false),
-                    GraduateId = table.Column<string>(nullable: true)
+                    TypeGenericId = table.Column<string>(nullable: false),
+                    GraduateId = table.Column<string>(nullable: true),
+                    CollegeId = table.Column<string>(nullable: true),
+                    EmployeeId = table.Column<string>(nullable: true),
+                    SellerId = table.Column<string>(nullable: true),
+                    ShippingCompanyId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -82,13 +111,24 @@ namespace SlimFormaturas.Infra.Data.Migrations
                         column: x => x.GraduateId,
                         principalTable: "Graduate",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Phone_TypeGeneric_TypeGenericId",
+                        column: x => x.TypeGenericId,
+                        principalTable: "TypeGeneric",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Address_GraduateId",
                 table: "Address",
                 column: "GraduateId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Address_TypeGenericId",
+                table: "Address",
+                column: "TypeGenericId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Graduate_UserId",
@@ -99,6 +139,11 @@ namespace SlimFormaturas.Infra.Data.Migrations
                 name: "IX_Phone_GraduateId",
                 table: "Phone",
                 column: "GraduateId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Phone_TypeGenericId",
+                table: "Phone",
+                column: "TypeGenericId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -112,6 +157,11 @@ namespace SlimFormaturas.Infra.Data.Migrations
             migrationBuilder.DropTable(
                 name: "Graduate");
 
+            migrationBuilder.DropTable(
+                name: "TypeGeneric");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
         }
     }
 }

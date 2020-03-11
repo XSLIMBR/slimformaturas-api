@@ -6,11 +6,10 @@ namespace SlimFormaturas.Domain.Entities
 {
     public class Employee : Entity{
         public Employee() {
-            EmployeeId = Guid.NewGuid().ToString();
         }
 
-        public Employee(string employeeId, string name, string cpf, string rg,string sex, DateTime birthDate,string dadName,string motherName,string email, string photo,string bank,string agency,string checkingAccount) {
-            EmployeeId = employeeId;
+        public Employee(string name, string cpf, string rg,string sex, DateTime birthDate,string dadName,string motherName,string email, string photo,string bank,string agency,string checkingAccount) {
+            EmployeeId = Guid.NewGuid().ToString();
             Name = name;
             Cpf = cpf;
             Rg = rg;

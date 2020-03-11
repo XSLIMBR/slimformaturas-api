@@ -37,21 +37,21 @@ namespace SlimFormaturas.Api.Controllers
         /// <returns>O id do novo formando inserido</returns>
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Incluir")]
         [HttpPost]
-        public async Task<ActionResult<string>> Post(Graduate graduate) {
+        public async Task<IActionResult> Post(Graduate graduate) {
             _ = await _graduateService.Insert(graduate);
             return Response(graduate.GraduateId);
         }
 
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Editar")]
         [HttpPut]
-        public async Task<ActionResult<string>> Put(Graduate graduate) {
+        public async Task<IActionResult> Put(Graduate graduate) {
             _ = await _graduateService.Update(graduate);
             return Response(graduate.GraduateId);
         }
 
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Excluir")]
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(string id) {
+        public async Task<IActionResult> Delete(string id) {
             await _graduateService.Delete(id);
             return Response();
         }
@@ -64,13 +64,13 @@ namespace SlimFormaturas.Api.Controllers
         /// 
        // [CustomAuthorize.ClaimsAuthorizeAttribute("Graduate", "Consultar")]
         [HttpGet]
-        public async Task<ActionResult> Get() {
+        public async Task<IActionResult> Get() {
             return Response(await _graduateService.Get());
         }
 
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Consultar")]
         [HttpGet("{id}")]
-        public async Task<ActionResult> Get(string id) {
+        public async Task<IActionResult> Get(string id) {
             return Response(await _graduateService.Get(id));
         }
     }

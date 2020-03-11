@@ -28,7 +28,7 @@ namespace SlimFormaturas.Service.Services
         }
 
         public async Task<Phone> Insert(Phone obj) {
-            Phone phone = new Phone(obj.PhoneId, obj.Ddd, obj.PhoneNumber, await _typeGenericRepository.GetById(obj.TypeGenericId));
+            Phone phone = new Phone(obj.Ddd, obj.PhoneNumber, await _typeGenericRepository.GetById(obj.TypeGenericId));
 
             if (obj.GraduateId != null) {
                 phone.Graduate = await _graduateRepository.GetById(obj.GraduateId);

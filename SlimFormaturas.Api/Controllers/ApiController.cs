@@ -20,18 +20,9 @@ namespace SlimFormaturas.Api.Controllers {
 
         protected new ActionResult Response(object result = null) {
             if (IsValidOperation()) {
-                return Ok(new
-                {
-                    success = true,
-                    data = result
-                });
+                return Ok(result);
             }
-
-            return BadRequest(new
-            {
-                success = false,
-                errors = Notifications.Notifications.GroupBy(m => m.PropertyName).Select(a => a.ToArray())
-            });
+            return BadRequest(Notifications.Notifications.GroupBy(m => m.PropertyName).Select(a => a.ToArray()));
         }
     }
 }

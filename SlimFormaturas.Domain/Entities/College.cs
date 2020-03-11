@@ -5,10 +5,9 @@ using SlimFormaturas.Domain.Validators;
 namespace SlimFormaturas.Domain.Entities {
     public class College : Entity {
         public College() {
-            CollegeId = Guid.NewGuid().ToString();
         }
         public College(string collegeId,string corporateName, string fantasyName, string cnpj,string bank, string agency, string checkingAccount, string email, string site) {
-            CollegeId = collegeId;
+            CollegeId = Guid.NewGuid().ToString();
             CorporateName = corporateName;
             FantasyName = fantasyName;
             CNPJ = cnpj;

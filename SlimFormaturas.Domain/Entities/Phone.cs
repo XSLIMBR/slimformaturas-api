@@ -5,11 +5,10 @@ using SlimFormaturas.Domain.Validators;
 namespace SlimFormaturas.Domain.Entities {
     public class Phone : Entity{
         public Phone() {
-            PhoneId = Guid.NewGuid().ToString();
         }
 
-        public Phone(string phoneId, string ddd, string phoneNumber, TypeGeneric typeGeneric) {
-            PhoneId = phoneId;
+        public Phone(string ddd, string phoneNumber, TypeGeneric typeGeneric) {
+            PhoneId = Guid.NewGuid().ToString();
             Ddd = ddd;
             PhoneNumber = phoneNumber;
             TypeGeneric = typeGeneric;
