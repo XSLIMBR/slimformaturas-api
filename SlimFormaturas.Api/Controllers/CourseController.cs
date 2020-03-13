@@ -26,7 +26,7 @@ namespace SlimFormaturas.Api.Controllers
         public async Task<IActionResult> Post(Course course)
         {
             _ = await _courseService.Insert(course);
-            return Ok(course); //Response(course.CourseId);
+            return Response(course);
         }
     }
 }
