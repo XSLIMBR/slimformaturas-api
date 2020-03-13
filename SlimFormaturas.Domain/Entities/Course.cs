@@ -7,7 +7,7 @@ namespace SlimFormaturas.Domain.Entities {
     public class Course : Entity {
         public Course() {
         }
-        public Course(string courseId, string name) {
+        public Course(string name) {
             CourseId = Guid.NewGuid().ToString();
             Name = name;
             Validate(this, new CourseValidator());
@@ -15,7 +15,7 @@ namespace SlimFormaturas.Domain.Entities {
         public string CourseId { get; set; }
         public string Name { get; set; }
 
-        public IList<ContractCourse> ContractCourses { get; set; }
-        public IList<GraduateCeremonial> GraduateCeremonial { get; set; }
+        //public IList<ContractCourse> ContractCourses { get; set; }
+       // public IList<GraduateCeremonial> GraduateCeremonial { get; set; }
     }
 }

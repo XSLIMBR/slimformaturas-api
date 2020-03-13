@@ -9,9 +9,10 @@ namespace SlimFormaturas.Infra.Data.Mapping {
             builder.HasOne(c => c.Contract)
                 .WithMany(b => b.ContractCourses)
                 .HasForeignKey(c => c.ContractId);
-            builder.HasOne(c => c.Course)
-                .WithMany(b => b.ContractCourses)
-                .HasForeignKey(c => c.CourseId);
+
+         //   builder.HasOne(c => c.Course)
+         //       .WithMany(b => b.ContractCourses)
+         //       .HasForeignKey(c => c.CourseId);
         }
     }
 }

@@ -9,9 +9,9 @@ namespace SlimFormaturas.Domain.Validators {
                 .NotNull()
                 .OnAnyFailure(x => throw new ArgumentNullException("O objeto não foi encontrado!"));
             RuleFor(c => c.Name)
-                .NotEmpty()
+                .NotEmpty().WithMessage(" É necessário informar o nome do Curso ")
                 .NotNull()
-                .Length(1, 50);
+                .Length(1, 50).WithMessage("O campo deve ter entre 1 e 50 caracteres ");
         }
     }
 }

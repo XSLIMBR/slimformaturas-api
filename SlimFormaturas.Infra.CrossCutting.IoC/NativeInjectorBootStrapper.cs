@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using SlimFormaturas.Domain.Interfaces.Repository;
 using SlimFormaturas.Domain.Interfaces.Service;
@@ -20,12 +19,14 @@ namespace SlimFormaturas.Infra.CrossCutting.IoC {
             services.AddScoped<ITypeGenericService, TypeGenericService>();
             services.AddScoped<IAddressService, AddressService>();
             services.AddScoped<IPhoneService, PhoneService>();
+            services.AddScoped<ICourseService, CourseService>();
             //Infra - Data
             services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
             services.AddScoped<IGraduateRepository,GraduateRepository>();
             services.AddScoped<ITypeGenericRepository, TypeGenericRepository>();
             services.AddScoped<IAddressRepository, AddressRepository>();
             services.AddScoped<IPhoneRepository, PhoneRepository>();
+            services.AddScoped<ICourseRepository, CourseRepository>();
             //Context
             services.AddDbContext<MssqlContext>();
             services.AddDbContext<ApplicationDbContext>();
