@@ -9,7 +9,6 @@ namespace SlimFormaturas.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
     public class CourseController : ApiController
     {
         readonly ICourseService _courseService;
@@ -25,8 +24,15 @@ namespace SlimFormaturas.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(Course course)
         {
-            _ = await _courseService.Insert(course);
+            course = await _courseService.Insert(course);
             return Response(course);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Put(Course course) 
+        {
+           course = await _courseService.Update(course);
+            return Response(course.CourseId);
         }
     }
 }

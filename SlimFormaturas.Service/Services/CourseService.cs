@@ -37,5 +37,32 @@ namespace SlimFormaturas.Service.Services
             }
             return obj;
         }
+
+        public async Task<Course> Update(Course obj) 
+        {
+            Course course = await _courseRepository.GetById(obj.CourseId);
+            if (course != null) 
+            {
+                course.Name = obj.Name;
+               // course.GraduateCeremonial = obj.GraduateCeremonial;
+               // course.ContractCourses = obj.ContractCourses;
+
+                course.Validate(course, new CourseValidator());
+
+                if (course.Valid)
+                {
+                    await Put(course);
+                }
+                else 
+                {
+                    _notifications.AddNotifications(course.ValidationResult);
+                }
+            }
+            else 
+                {
+                    _notifications.AddNotification("404", "Curso", " Curso com id = " + obj.CourseId + "não foi encontrado");
+                }
+            return course;
+        }
     }
 }

@@ -15,7 +15,7 @@ namespace SlimFormaturas.Domain.Entities {
         public string CourseId { get; set; }
         public string Name { get; set; }
 
-        //public IList<ContractCourse> ContractCourses { get; set; }
+       // public IList<ContractCourse> ContractCourses { get; set; }
        // public IList<GraduateCeremonial> GraduateCeremonial { get; set; }
     }
 }

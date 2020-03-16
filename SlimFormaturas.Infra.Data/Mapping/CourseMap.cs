@@ -18,6 +18,21 @@ namespace SlimFormaturas.Infra.Data.Mapping
                     .HasColumnType("varchar(100)")
                     .HasMaxLength(100)
                     .IsRequired();
+
+            /*
+             //Um curso pode ter vários contratos.. Um contrato pode ter diveros cursos.
+              builder.HasMany(c => c.ContractCourses)
+                  .WithOne(e => e.Course)
+                  .HasForeignKey(y => y.CourseId)
+                  .OnDelete(DeleteBehavior.Cascade);
+
+            //Um curso pode ter vários formandos.. Um formando pode ter apenas um curso.
+              builder.HasMany(c => c.GraduateCeremonial)
+                  .WithOne(e => e.Course)
+                  .HasForeignKey(y => y.CourseId)
+                  .OnDelete(DeleteBehavior.Cascade);
+           */       
+            builder.ToTable("Course");
         }
     }
 }
