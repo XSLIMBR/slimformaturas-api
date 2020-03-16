@@ -20,7 +20,7 @@ namespace SlimFormaturas.Infra.Data.Mapping
                     .IsRequired();
 
             /*
-             //Um curso pode ter vários contratos.. Um contrato pode ter diveros cursos.
+             //Um curso pode ter vários contratos.. 
               builder.HasMany(c => c.ContractCourses)
                   .WithOne(e => e.Course)
                   .HasForeignKey(y => y.CourseId)
