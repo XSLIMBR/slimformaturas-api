@@ -22,24 +22,38 @@ namespace SlimFormaturas.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(Course course)
+        public async Task<IActionResult> Post(Course course) // Inseri um Curso
         {
             course = await _courseService.Insert(course);
             return Response(course);
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put(Course course) 
+        public async Task<IActionResult> Put(Course course)  // Atualiza um Curso
         {
            course = await _courseService.Update(course);
             return Response(course.CourseId);
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(string id) //Deleta um curso espera receber um identificador
         {
             await _courseService.Delete(id);
             return Response();
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> Get()  //Retorna todos os cursos
+        {
+            return Response(await _courseService.Get());
+        }
+
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(string id)  //Retorna um determinado curso
+        {
+            return Response(await _courseService.Get(id));
         }
     }
 }
