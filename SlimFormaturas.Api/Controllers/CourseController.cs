@@ -34,5 +34,12 @@ namespace SlimFormaturas.Api.Controllers
            course = await _courseService.Update(course);
             return Response(course.CourseId);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            await _courseService.Delete(id);
+            return Response();
+        }
     }
 }

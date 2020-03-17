@@ -10,3 +10,4 @@ namespace SlimFormaturas.Domain.Interfaces.Service
         Task<Course> Update(Course obj);
     }
 }
+
