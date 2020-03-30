@@ -9,6 +9,9 @@
     
      steps:
        - checkout
-     - run: |         
-         dotnet restore
-         dotnet build
+     - run:
+         name: Restore the packages
+         command: dotnet restore
+     - run:
+         name: Build the program
+         command: dotnet build
