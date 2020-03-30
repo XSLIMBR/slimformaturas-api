@@ -9,4 +9,6 @@
     
      steps:
        - checkout
-       - run: Docker build -t aspnetapp -f Dockerfile .
+     - run: |         
+         dotnet restore
+         dotnet build
