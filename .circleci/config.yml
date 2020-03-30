@@ -2,7 +2,7 @@
 
  jobs:
    build:
-     machine: true
+     executor: win/default   
      steps:
      - checkout
      - run:
