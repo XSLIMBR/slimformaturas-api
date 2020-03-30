@@ -1,22 +1,24 @@
 version: 2
 jobs:
-  build:
-    docker:
-      - image: mcr.microsoft.com/dotnet/core/sdk:3.1-buster
-    steps:
-      - checkout
-      - run:
-      name: Restore
-      command: dotnet restore
-      working_directory: SlimFormaturas.Api
-      - run:
-      name: Build
-      command: dotnet build -c Release
-      working_directory: SlimFormaturas.Api
-      - run:
-      name: Build and push Docker image
-      command: |
-        docker build -t SlimFormaturas .
-        echo $DOCKER_PWD | docker login -u $DOCKER_LOGIN --password-stdin
-        docker tag boku jcslimshady/slimformaturasapi
-        docker push jcslimshady/slimformaturasapi
+   build:
+     docker:
+     - image: mcr.microsoft.com/dotnet/core/sdk:3.1-buster
+     steps:
+     - checkout
+     - run:
+         name: Restore
+         command: 
+            dotnet restore
+         working_directory: SlimFormaturas.Api
+     - run:
+         name: Build
+         command: 
+            dotnet build -c Release
+         working_directory: SlimFormaturas.Api
+     - run:
+         name: Build and push Docker image
+         command: |
+            docker build -t SlimFormaturas .
+            echo $DOCKER_PWD | docker login -u $DOCKER_LOGIN --password-stdin
+            docker tag boku jcslimshady/slimformaturasapi
+            docker push jcslimshady/slimformaturasapi
