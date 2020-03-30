@@ -1,14 +1,11 @@
- version: 2.1
+version: 2
+jobs:
+ build:
+   machine: true
+   steps:
+     - checkout 
 
- orbs:
-  win: circleci/windows@2.2.0
-
- jobs:
-   build:
-     executor: win/default     
-    
-     steps:
-       - checkout
-       - run: |         
+     # build image
+     - run: |         
          docker info
          docker build -t aspnetapp -f Dockerfile .
