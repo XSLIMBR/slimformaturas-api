@@ -1,17 +1,14 @@
- version: 2.1
-
- orbs:
-  win: circleci/windows@2.2.0
+ version: 2
 
  jobs:
    build:
-     executor: win/default     
-    
      steps:
-       - checkout
+     - checkout
      - run:
-         name: Restore the packages
+         name: Restore
          command: dotnet restore
+         working_directory: SlimFormaturas.Api
      - run:
-         name: Build the program
-         command: dotnet build
+         name: Build
+         command: dotnet build -c Release
+         working_directory: SlimFormaturas.Api
