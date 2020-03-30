@@ -1,12 +1,13 @@
 version: 2
 jobs:
    build:
-     services:
-     - docker
+     machine: true
      docker:
      - image: mcr.microsoft.com/dotnet/core/sdk:3.1-buster
      steps:
      - checkout
+     - setup_remote_docker:
+         docker_layer_caching: false
      - run:
          name: Restore
          command: 
