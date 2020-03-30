@@ -2,13 +2,16 @@
 
  jobs:
    build:
+     machine: true
      steps:
      - checkout
      - run:
          name: Restore
-         command: dotnet restore
+         command:
+            dotnet restore
          working_directory: SlimFormaturas.Api
      - run:
          name: Build
-         command: dotnet build -c Release
+         command:
+            dotnet build -c Release
          working_directory: SlimFormaturas.Api
