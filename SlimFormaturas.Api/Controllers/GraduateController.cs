@@ -21,14 +21,14 @@ namespace SlimFormaturas.Api.Controllers
         }
 
         /// <summary>
-        /// Inserir um novo formando na base
+        /// Inserir um novo formando na base teste
         /// </summary>
         /// <remarks>
         /// Exemplo:
         ///
         ///     POST /Todo
         ///     {
-        ///        "id": 1,
+        ///        "id": julinho,
         ///        "name": "Item1",
         ///        "isComplete": true
         ///     }
@@ -50,6 +50,7 @@ namespace SlimFormaturas.Api.Controllers
         }
 
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Excluir")]
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id) {
             await _graduateService.Delete(id);

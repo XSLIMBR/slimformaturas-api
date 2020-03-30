@@ -8,12 +8,15 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>bin\Debug\netcoreapp3.0\SlimFormaturas.Api.xml</DocumentationFile>
     <OutputPath>bin\Debug\netcoreapp3.0\</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
 
   <PropertyGroup>
+    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);1591</NoWarn>
-    <UserSecretsId>4ffb38f6-16d0-4cf8-8c45-306fbe97594c</UserSecretsId>
+    <StartupObject></StartupObject>
+    <UserSecretsId>6307fb14-7e2a-4642-a72b-d23eb8e7c897</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
@@ -39,6 +42,12 @@
     <ProjectReference Include="..\SlimFormaturas.Domain\SlimFormaturas.Domain.csproj" />
     <ProjectReference Include="..\SlimFormaturas.Infra.CrossCutting.IoC\SlimFormaturas.Infra.CrossCutting.IoC.csproj" />
     <ProjectReference Include="..\SlimFormaturas.Service\SlimFormaturas.Service.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Dockerfile">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>

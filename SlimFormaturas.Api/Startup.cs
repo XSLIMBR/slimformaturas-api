@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
@@ -30,6 +32,7 @@ namespace SlimFormaturas.Api
                 .AddJsonFile($"appsettings.{environment.EnvironmentName}.json", true);
 
             builder.AddEnvironmentVariables();
+            
             Configuration = builder.Build();
         }
 
@@ -130,9 +133,9 @@ namespace SlimFormaturas.Api
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
-            if (env.IsDevelopment()){
-                app.UseDeveloperExceptionPage();
-            }
+
+            app.UseDeveloperExceptionPage();
+            app.UseHsts();
 
             app.UseRouting();
             app.UseCors();
@@ -141,7 +144,6 @@ namespace SlimFormaturas.Api
             app.UseAuthorization();
 
             app.UseHttpsRedirection();
-            app.UseHsts();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
