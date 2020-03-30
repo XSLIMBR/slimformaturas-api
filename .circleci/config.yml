@@ -9,4 +9,4 @@
     
      steps:
        - checkout
-       - run: ocker build -t aspnetapp -f Dockerfile .
+       - run: Docker build -t aspnetapp -f Dockerfile .
