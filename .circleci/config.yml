@@ -17,8 +17,14 @@ jobs:
            command: 
               dotnet build -c Release
            working_directory: SlimFormaturas.Api
-       - run: |
-           docker build -t jcslimshady/slimformaturasapi .
-           echo $DOCKER_PWD | docker login -u $DOCKER_LOGIN --password-stdin
-           docker tag boku jcslimshady/slimformaturasapi
-           docker push jcslimshady/slimformaturasapi
+       - run:
+           name: Test Docker
+           command: |
+              docker info
+              docker build -t slimformaturasapi -f Dockerfile .
+       - run:
+           name: Build and public on docker
+           command: |
+              echo $DOCKER_PWD | docker login -u $DOCKER_LOGIN --password-stdin
+              docker tag boku jcslimshady/slimformaturasapi
+              docker push jcslimshady/slimformaturasapi
