@@ -1,4 +1,4 @@
-[![julio-rodrigues](https://circleci.com/gh/julio-rodrigues/SlimFormaturas-api.svg?style=shield)](https://circleci.com/gh/julio-rodrigues/SlimFormaturas-api)
+https://github.com/julio-rodrigues/SlimFormaturas-api/workflows/CI/badge.svg
 
 # SlimFormaturas-api
 Esse projeto visa implementar o backend do sistema SlimFormaturas
