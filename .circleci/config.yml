@@ -7,7 +7,7 @@ jobs:
        - run:
            name: Build and public on docker
            command: |
-              docker build -t slimformaturasapi -f SlimFormaturas-api/Dockerfile .
+              docker build -t slimformaturasapi -f
               echo $DOCKER_PWD | docker login -u $DOCKER_LOGIN --password-stdin
               docker tag boku jcslimshady/slimformaturasapi
               docker push jcslimshady/slimformaturasapi
