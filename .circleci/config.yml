@@ -20,8 +20,9 @@ jobs:
        - run:
            name: Test Docker
            command: |
-              Docker info
-              Docker build -t slimformaturasapi -f Dockerfile .
+              docker --version
+              docker info
+              docker build -t slimformaturasapi -f Dockerfile .
        - run:
            name: Build and public on docker
            command: |
