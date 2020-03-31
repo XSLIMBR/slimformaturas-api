@@ -21,6 +21,10 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release --no-restore
+    - name: listar
+      env: 
+        working-directory: ./SlimFormaturas-api
+      run: ls
     - name: Build and deploy the Docker image
       env: 
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
