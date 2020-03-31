@@ -8,6 +8,6 @@ jobs:
            name: Build and public on docker
            command: |
               docker build .
-              docker login --username=_ --password-stdin=$HEROKU_API_KEY registry.heroku.com
+              docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
               heroku container:push web -app $APP_NAME
               heroku container:release web -app $APP_NAME
