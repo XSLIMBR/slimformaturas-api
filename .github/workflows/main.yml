@@ -31,7 +31,7 @@ jobs:
         APP_NAME: ${{ 'slimformaturas' }}
         working-directory: ./SlimFormaturas-api/SlimFormaturas.Api/SlimFormaturas.Api
       run: |
-        docker build .
+        docker build -f ./SlimFormaturas-api/SlimFormaturas.Api -t slimformaturasapi .
         docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
         heroku container:push web -a $APP_NAME
         heroku container:release web -a $APP_NAME
