@@ -5,23 +5,9 @@ jobs:
      steps:
        - checkout
        - run:
-           name: Restore
-           command: 
-              dotnet restore
-           working_directory: SlimFormaturas.Api
-       - run:
-           name: Build
-           command: 
-              dotnet build -c Release
-           working_directory: SlimFormaturas.Api
-       - run:
-           name: Test Docker
-           command: |
-              docker info
-              docker build -t slimformaturasapi -f Dockerfile .
-       - run:
            name: Build and public on docker
            command: |
+              docker build -t slimformaturasapi -f Dockerfile .
               echo $DOCKER_PWD | docker login -u $DOCKER_LOGIN --password-stdin
               docker tag boku jcslimshady/slimformaturasapi
               docker push jcslimshady/slimformaturasapi
