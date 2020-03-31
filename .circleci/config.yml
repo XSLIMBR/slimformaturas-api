@@ -24,3 +24,4 @@ jobs:
               echo $DOCKER_PWD | docker login -u $DOCKER_LOGIN --password-stdin
               docker tag boku jcslimshady/slimformaturasapi
               docker push jcslimshady/slimformaturasapi
+           working_directory: SlimFormaturas.Api
