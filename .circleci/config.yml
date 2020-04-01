@@ -1,26 +1,16 @@
 version: 2.1
 jobs:
    build:
-     docker:
-       - image: mcr.microsoft.com/dotnet/core/sdk:3.1-buster
+     machine: true
      steps:
        - checkout
-       - setup_remote_docker:
-           docker_layer_caching: false
-       - run:
-           name: Restore
-           command: 
-              dotnet restore
-           working_directory: SlimFormaturas.Api
        - run:
            name: Build
-           command: 
-              dotnet build -c Release
-           working_directory: SlimFormaturas.Api
-       - run:
-           name: Build and public on docker
            command: |
-              docker build -t jcslimshady/slimformaturasapi .
-              echo $DOCKER_PWD | docker login -u $DOCKER_LOGIN --password-stdin
-              docker tag boku jcslimshady/slimformaturasapi
-              docker push jcslimshady/slimformaturasapi
+              docker build .
+       - run:
+           name: public on heroku
+           command: |
+              docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
+              heroku container:push web -app $APP_NAME
+              heroku container:release web -app $APP_NAME
