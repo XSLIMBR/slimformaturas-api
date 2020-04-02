@@ -22,6 +22,7 @@ namespace SlimFormaturas.Infra.Data.Context {
         public DbSet<User> User { get; set; }
         public DbSet<TypeGeneric> TypeGeneric { get; set; }
         public DbSet<Course> Course { get; set; }
+         public DbSet<University> University { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             modelBuilder.ApplyConfiguration(new GraduateMap());
@@ -30,6 +31,7 @@ namespace SlimFormaturas.Infra.Data.Context {
             modelBuilder.ApplyConfiguration(new UserMap());
             modelBuilder.ApplyConfiguration(new TypeGenericMap());
             modelBuilder.ApplyConfiguration(new CourseMap());
+             modelBuilder.ApplyConfiguration(new UniversityMap());
             base.OnModelCreating(modelBuilder);
         }
 

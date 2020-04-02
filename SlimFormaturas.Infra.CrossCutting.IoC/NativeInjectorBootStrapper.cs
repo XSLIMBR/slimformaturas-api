@@ -20,6 +20,7 @@ namespace SlimFormaturas.Infra.CrossCutting.IoC {
             services.AddScoped<IAddressService, AddressService>();
             services.AddScoped<IPhoneService, PhoneService>();
             services.AddScoped<ICourseService, CourseService>();
+            services.AddScoped<IUniversityService, UniversityService>();
             //Infra - Data
             services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
             services.AddScoped<IGraduateRepository,GraduateRepository>();
@@ -27,6 +28,7 @@ namespace SlimFormaturas.Infra.CrossCutting.IoC {
             services.AddScoped<IAddressRepository, AddressRepository>();
             services.AddScoped<IPhoneRepository, PhoneRepository>();
             services.AddScoped<ICourseRepository, CourseRepository>();
+            services.AddScoped<IUniversityRepository, UniversityRepository>();
             //Context
             services.AddDbContext<MssqlContext>();
             services.AddDbContext<ApplicationDbContext>();
