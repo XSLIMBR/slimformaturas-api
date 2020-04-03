@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
@@ -11,13 +12,19 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using SlimFormaturas.Api.Mapper;
+using SlimFormaturas.Domain.Interfaces.Repository;
+using SlimFormaturas.Domain.Interfaces.Service;
 using SlimFormaturas.Infra.CrossCutting.Identity.Context;
 using SlimFormaturas.Infra.CrossCutting.IoC;
+using SlimFormaturas.Infra.Data.Mapping;
+using SlimFormaturas.Service.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using SlimFormaturas.Api.Mapper;
 
 namespace SlimFormaturas.Api
 {
@@ -39,11 +46,25 @@ namespace SlimFormaturas.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
 
+
+            // Auto Mapper Configurations
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingUniversity());
+            });
+
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
+
+            services.AddMvc();
+
             //identity
             services.AddDefaultIdentity<IdentityUser>()
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
+
 
             // Configure Identity
             services.Configure<IdentityOptions>(options => 
