@@ -8,6 +8,5 @@ namespace SlimFormaturas.Api.Dto
     public class UniversityDto
     {
         public string Name { get; set; }
-        public Guid UniversityId { get; set; }
     }
 }
