@@ -5,9 +5,6 @@ using SlimFormaturas.Domain.Interfaces.Service;
 using SlimFormaturas.Domain.Notifications;
 using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using SlimFormaturas.Domain.Entities;
 
 namespace SlimFormaturas.Api.Controllers
 {
@@ -33,14 +30,14 @@ namespace SlimFormaturas.Api.Controllers
         public async Task<ActionResult> Post(UniversityDto universityDto)
         {
             var university = _mapper.Map<University>(universityDto);
-            return Ok(await _universityService.Insert(university)); 
+            return Response(await _universityService.Insert(university)); 
         }
 
         [HttpPut]
-        public async Task<ActionResult> Put(University university) 
+        public async Task<ActionResult> Put(UniversityDto universityDto)
         {
-            university = await _universityService.Update(university);
-            return Response(university);
+            var university = _mapper.Map<University>(universityDto);
+            return Response(await _universityService.Insert(university));
         }
     }
 }
