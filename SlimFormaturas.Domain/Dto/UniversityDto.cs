@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace SlimFormaturas.Api.Dto
+﻿namespace SlimFormaturas.Domain.Dto
 {
     public class UniversityDto
     {

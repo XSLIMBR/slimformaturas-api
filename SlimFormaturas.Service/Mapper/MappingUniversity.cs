@@ -1,8 +1,8 @@
 ﻿using SlimFormaturas.Domain.Entities;
+using SlimFormaturas.Domain.Dto;
 using AutoMapper;
-using SlimFormaturas.Api.Dto;
 
-namespace SlimFormaturas.Api.Mapper
+namespace SlimFormaturas.Service.Mapper
 {
     public class MappingUniversity : Profile
     {
