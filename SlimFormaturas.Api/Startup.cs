@@ -1,30 +1,21 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using SlimFormaturas.Api.Mapper;
-using SlimFormaturas.Domain.Interfaces.Repository;
-using SlimFormaturas.Domain.Interfaces.Service;
 using SlimFormaturas.Infra.CrossCutting.Identity.Context;
 using SlimFormaturas.Infra.CrossCutting.IoC;
-using SlimFormaturas.Infra.Data.Mapping;
-using SlimFormaturas.Service.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
-using SlimFormaturas.Api.Mapper;
+using SlimFormaturas.Api.Configurations;
 
 namespace SlimFormaturas.Api
 {
@@ -46,16 +37,7 @@ namespace SlimFormaturas.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
 
-
-            // Auto Mapper Configurations
-            var mappingConfig = new MapperConfiguration(mc =>
-            {
-                mc.AddProfile(new MappingUniversity());
-            });
-
-            IMapper mapper = mappingConfig.CreateMapper();
-            services.AddSingleton(mapper);
-
+            // WebAPI Config
             services.AddMvc();
 
             //identity
@@ -78,7 +60,6 @@ namespace SlimFormaturas.Api
             });
 
             // JWT
-
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
 
@@ -148,6 +129,9 @@ namespace SlimFormaturas.Api
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
             });
+
+            // AutoMapper Settings
+            services.AddAutoMapperSetup();
 
             RegisterServices(services);
         }
