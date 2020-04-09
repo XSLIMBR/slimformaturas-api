@@ -6,6 +6,7 @@ namespace SlimFormaturas.Service.Mapper {
     public class DomainToViewModelMappingProfile : Profile{
         public DomainToViewModelMappingProfile () {
             CreateMap<University, UniversityDto>();
+            CreateMap<Graduate, GraduateDto>();
         }
     }
 }

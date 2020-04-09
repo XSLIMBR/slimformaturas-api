@@ -4,7 +4,8 @@ using SlimFormaturas.Domain.Interfaces.Service;
 using SlimFormaturas.Domain.Notifications;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using SlimFormaturas.Infra.CrossCutting.Identity.Authorization;
+using SlimFormaturas.Domain.Dto;
+using AutoMapper;
 
 namespace SlimFormaturas.Api.Controllers
 {
@@ -13,11 +14,16 @@ namespace SlimFormaturas.Api.Controllers
     //[Authorize]
     public class GraduateController : ApiController {
          readonly IGraduateService _graduateService;
+         readonly IMapper _mapper;
 
         public GraduateController(
             IGraduateService graduateService,
-            NotificationHandler notifications) : base (notifications) {
+            NotificationHandler notifications,
+            IMapper mapper
+            ) : base (notifications)
+        {
             _graduateService = graduateService;
+            _mapper = mapper;
         }
 
         /// <summary>
@@ -37,16 +43,16 @@ namespace SlimFormaturas.Api.Controllers
         /// <returns>O id do novo formando inserido</returns>
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Incluir")]
         [HttpPost]
-        public async Task<IActionResult> Post(Graduate graduate) {
-            _ = await _graduateService.Insert(graduate);
-            return Response(graduate.GraduateId);
+        public async Task<IActionResult> Post(GraduateDto graduateDto) {
+            var graduate = _mapper.Map<Graduate>(graduateDto);
+            return Response(await _graduateService.Insert(graduate));
         }
 
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Editar")]
         [HttpPut]
-        public async Task<IActionResult> Put(Graduate graduate) {
-            _ = await _graduateService.Update(graduate);
-            return Response(graduate.GraduateId);
+        public async Task<IActionResult> Put(GraduateDto graduateDto) {
+            var graduate = _mapper.Map<Graduate>(graduateDto);
+            return Response(await _graduateService.Update(graduate));
         }
 
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Excluir")]

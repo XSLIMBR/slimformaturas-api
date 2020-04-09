@@ -27,14 +27,14 @@ namespace SlimFormaturas.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post(UniversityDto universityDto)
+        public async Task<IActionResult> Post(UniversityDto universityDto)
         {
             var university = _mapper.Map<University>(universityDto);
             return Response(await _universityService.Insert(university)); 
         }
 
         [HttpPut]
-        public async Task<ActionResult> Put(UniversityDto universityDto)
+        public async Task<IActionResult> Put(UniversityDto universityDto)
         {
             var university = _mapper.Map<University>(universityDto);
             return Response(await _universityService.Insert(university));
