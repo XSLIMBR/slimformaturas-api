@@ -16,6 +16,7 @@ namespace SlimFormaturas.Domain.Entities {
         }
 
         public string PhoneId { get; private set; }
+        public bool Default { get; set; }
         public string Ddd { get; set; }
         public string PhoneNumber { get; set; }
 
