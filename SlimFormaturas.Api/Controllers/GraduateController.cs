@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using SlimFormaturas.Domain.Dto;
 using AutoMapper;
+using System.Collections.Generic;
 
 namespace SlimFormaturas.Api.Controllers
 {

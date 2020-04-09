@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using SlimFormaturas.Domain.Dto;
 
 namespace SlimFormaturas.Domain.Dto {
     public class GraduateDto {
-        public string GraduateId { get; set; }
         public string Name { get; set; }
         public string Cpf { get; set; }
         public string Rg { get; set; }
@@ -17,5 +16,8 @@ namespace SlimFormaturas.Domain.Dto {
         public string Bank { get; set; }
         public string Agency { get; set; }
         public string CheckingAccount { get; set; }
+
+        public IList<AddressDto> Address { get; set; }
+        public IList<PhoneDto> Phone { get; set; }
     }
 }

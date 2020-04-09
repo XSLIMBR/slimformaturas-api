@@ -40,6 +40,7 @@ namespace SlimFormaturas.Infra.Data.Context {
             var config = new ConfigurationBuilder()
                 .SetBasePath(_environment.ContentRootPath)
                 .AddJsonFile("appsettings.json")
+                .AddJsonFile($"appsettings.{_environment.EnvironmentName}.json", true)
                 .Build();
             // define the database to use
             optionsBuilder.UseSqlServer(config.GetConnectionString("DefaultConnection"));

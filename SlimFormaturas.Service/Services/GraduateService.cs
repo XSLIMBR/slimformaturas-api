@@ -76,7 +76,7 @@ namespace SlimFormaturas.Service.Services
 
 
             if (!_notifications.HasNotifications) {
-                graduate.AddUser(await CreateUser(graduate.Cpf, graduate.Email));
+                //graduate.AddUser(await CreateUser(graduate.Cpf, graduate.Email));
             }
 
             if (!_notifications.HasNotifications) {
