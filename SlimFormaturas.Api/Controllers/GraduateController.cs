@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using SlimFormaturas.Domain.Dto;
 using AutoMapper;
 using System.Collections.Generic;
+using SlimFormaturas.Domain.Dto.Graduate;
 
 namespace SlimFormaturas.Api.Controllers
 {
@@ -44,14 +45,14 @@ namespace SlimFormaturas.Api.Controllers
         /// <returns>O id do novo formando inserido</returns>
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Incluir")]
         [HttpPost]
-        public async Task<IActionResult> Post(GraduateDto graduateDto) {
+        public async Task<IActionResult> Post([FromBody]GraduateForCreationDto graduateDto) {
             var graduate = _mapper.Map<Graduate>(graduateDto);
             return Response(await _graduateService.Insert(graduate));
         }
 
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Editar")]
         [HttpPut]
-        public async Task<IActionResult> Put(GraduateDto graduateDto) {
+        public async Task<IActionResult> Put([FromBody]GraduateForCreationDto graduateDto) {
             var graduate = _mapper.Map<Graduate>(graduateDto);
             return Response(await _graduateService.Update(graduate));
         }
@@ -72,8 +73,9 @@ namespace SlimFormaturas.Api.Controllers
         /// 
        // [CustomAuthorize.ClaimsAuthorizeAttribute("Graduate", "Consultar")]
         [HttpGet]
-        public async Task<IActionResult> Get() {
-            return Response(await _graduateService.Get());
+        public async Task<ActionResult<GraduateDto>> Get() {
+            var graduate = _mapper.Map<GraduateDto>(await _graduateService.Get());
+            return Response(graduate);
         }
 
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Consultar")]

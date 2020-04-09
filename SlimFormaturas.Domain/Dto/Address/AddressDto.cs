@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using SlimFormaturas.Domain.Dto;
 
-namespace SlimFormaturas.Domain.Dto {
+namespace SlimFormaturas.Domain.Dto.Address {
     public class AddressDto {
         public bool Default { get; set; }
         public string Cep { get; set; }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SlimFormaturas.Domain.Dto {
+namespace SlimFormaturas.Domain.Dto.Phone {
     public class PhoneDto {
         public bool Default { get; set; }
         public string Ddd { get; set; }

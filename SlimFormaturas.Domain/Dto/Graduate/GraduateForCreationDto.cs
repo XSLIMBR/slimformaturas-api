@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using SlimFormaturas.Domain.Dto;
+using SlimFormaturas.Domain.Dto.Address;
+using SlimFormaturas.Domain.Dto.Phone;
 
-namespace SlimFormaturas.Domain.Dto {
-    public class GraduateDto {
+namespace SlimFormaturas.Domain.Dto.Graduate {
+    public class GraduateForCreationDto {
         public string Name { get; set; }
         public string Cpf { get; set; }
         public string Rg { get; set; }
