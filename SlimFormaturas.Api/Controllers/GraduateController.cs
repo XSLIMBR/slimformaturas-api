@@ -4,7 +4,6 @@ using SlimFormaturas.Domain.Interfaces.Service;
 using SlimFormaturas.Domain.Notifications;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using SlimFormaturas.Domain.Dto;
 using AutoMapper;
 using System.Collections.Generic;
 using SlimFormaturas.Domain.Dto.Graduate;
@@ -31,17 +30,6 @@ namespace SlimFormaturas.Api.Controllers
         /// <summary>
         /// Inserir um novo formando na base teste
         /// </summary>
-        /// <remarks>
-        /// Exemplo:
-        ///
-        ///     POST /Todo
-        ///     {
-        ///        "id": julinho,
-        ///        "name": "Item1",
-        ///        "isComplete": true
-        ///     }
-        ///
-        /// </remarks>
         /// <returns>O id do novo formando inserido</returns>
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Incluir")]
         [HttpPost]
@@ -74,14 +62,16 @@ namespace SlimFormaturas.Api.Controllers
        // [CustomAuthorize.ClaimsAuthorizeAttribute("Graduate", "Consultar")]
         [HttpGet]
         public async Task<ActionResult<GraduateDto>> Get() {
-            var graduate = _mapper.Map<GraduateDto>(await _graduateService.Get());
+            var graduate = _mapper.Map<IList<GraduateDto>>(await _graduateService.Get());
             return Response(graduate);
+
         }
 
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Consultar")]
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(string id) {
-            return Response(await _graduateService.Get(id));
+        public async Task<ActionResult<GraduateDto>> Get(string id) {
+            var graduate = _mapper.Map<GraduateDto>(await _graduateService.Get(id));
+            return Response(graduate);
         }
     }
 }

@@ -17,7 +17,7 @@ namespace SlimFormaturas.Domain.Validators {
                 .NotEmpty().WithMessage("É necessário informar o numero de telefone.")
                 .NotNull()
                 .Length(8,9).WithMessage("O campo nome deve ter no meximo 9 caracteres");
-            RuleFor(c => c.TypeGeneric)
+            RuleFor(c => c.TypeGenericId)
                 .NotEmpty().WithMessage("É necessário informar a Tipo.")
                 .NotNull();
         }

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using SlimFormaturas.Domain.Dto;
 
 namespace SlimFormaturas.Domain.Dto.Address {
-    public class AddressDto {
-        public string AddressId { get; private set; }
+    public class AddressForCreationDto {
         public bool Default { get; set; }
         public string Cep { get; set; }
         public string Street { get; set; }
@@ -13,8 +13,6 @@ namespace SlimFormaturas.Domain.Dto.Address {
         public string Neighborhood { get; set; }
         public string City { get; set; }
         public string Uf { get; set; }
-
         public string TypeGenericId { get; set; }
-        public string GraduateId { get; set; }
     }
 }

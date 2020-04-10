@@ -6,7 +6,7 @@ namespace SlimFormaturas.Domain.Entities {
         public TypeGeneric() {
         }
 
-        public TypeGeneric(string typeGenericId, string name, Locate localization) {
+        public TypeGeneric(string name, Locate localization) {
             TypeGenericId = Guid.NewGuid().ToString();
             Name = name;
             Localization = localization;

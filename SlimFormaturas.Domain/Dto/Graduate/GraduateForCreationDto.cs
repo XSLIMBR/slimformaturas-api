@@ -18,7 +18,7 @@ namespace SlimFormaturas.Domain.Dto.Graduate {
         public string Agency { get; set; }
         public string CheckingAccount { get; set; }
 
-        public IList<AddressDto> Address { get; set; }
-        public IList<PhoneDto> Phone { get; set; }
+        public IList<AddressForCreationDto> Address { get; set; }
+        public IList<PhoneForCreationDto> Phone { get; set; }
     }
 }
