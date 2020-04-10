@@ -4,6 +4,7 @@ using SlimFormaturas.Domain.Validators;
 namespace SlimFormaturas.Domain.Entities {
     public class Address : Entity {
         public Address() {
+            Validate(this, new AddressValidator());
         }
 
         public Address(string cep, string street, string number, string complement, string neighborhood, string city, string uf, TypeGeneric typeGeneric) {

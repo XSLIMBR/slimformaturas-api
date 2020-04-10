@@ -44,6 +44,8 @@ namespace SlimFormaturas.Domain.Validators
                 .Length(1,50).WithMessage("O campo foto deve conter no maximo 50 caracteres");
             RuleFor(c => c.CheckingAccount)
                 .Length(1,50).WithMessage("O campo foto deve conter no maximo 50 caracteres");
+            RuleFor(c => c.Address).NotEmpty().WithMessage("É necessário inserir ao menos 1 endereço").NotNull();
+            RuleFor(c => c.Phone).NotEmpty().WithMessage("É necessário inserir ao menos 1 telefone").NotNull();
         }
     }
 }

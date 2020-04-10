@@ -35,6 +35,9 @@ namespace SlimFormaturas.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]GraduateForCreationDto graduateDto) {
             var graduate = _mapper.Map<Graduate>(graduateDto);
+
+
+
             return Response(await _graduateService.Insert(graduate));
         }
 

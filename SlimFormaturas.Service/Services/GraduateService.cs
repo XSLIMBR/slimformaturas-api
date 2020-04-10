@@ -46,6 +46,7 @@ namespace SlimFormaturas.Service.Services
         }
 
         public async Task<Graduate> Insert(Graduate obj) {
+
             Graduate graduate = new Graduate(obj.Name, obj.Cpf, obj.Rg, obj.Sex, obj.BirthDate, obj.DadName, obj.MotherName, obj.Email, obj.Photo, obj.Bank, obj.Agency, obj.CheckingAccount);
 
             if (obj.Address != null) {
