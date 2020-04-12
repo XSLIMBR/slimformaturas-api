@@ -38,7 +38,8 @@ namespace SlimFormaturas.Api
         public void ConfigureServices(IServiceCollection services) {
 
             // WebAPI Config
-            services.AddMvc();
+            services.AddMvc(option => option.EnableEndpointRouting = false)
+                .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore) ;
 
             //identity
             services.AddDefaultIdentity<IdentityUser>()
@@ -99,9 +100,11 @@ namespace SlimFormaturas.Api
                 //options.SlidingExpiration = true;
             });
 
-            services.AddControllers(options => {
-                options.OutputFormatters.Remove(new XmlDataContractSerializerOutputFormatter());
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                //options.OutputFormatters.Remove(new XmlDataContractSerializerOutputFormatter());
+            );
+                //.SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             services.AddSwaggerGen(c =>
             {
@@ -143,6 +146,7 @@ namespace SlimFormaturas.Api
             app.UseHsts();
 
             app.UseRouting();
+
             app.UseCors();
 
             app.UseAuthentication();

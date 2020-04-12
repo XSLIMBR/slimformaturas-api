@@ -64,6 +64,7 @@ namespace SlimFormaturas.Service.Services
                 }
             }
             */
+            
 
             foreach (var item in obj.Address) {
                 item.Validate(item, new AddressValidator());
@@ -95,7 +96,7 @@ namespace SlimFormaturas.Service.Services
 
 
             if (!_notifications.HasNotifications) {
-                //graduate.AddUser(await CreateUser(graduate.Cpf, graduate.Email));
+                obj.AddUser(await CreateUser(obj.Cpf, obj.Email));
             }
 
 
