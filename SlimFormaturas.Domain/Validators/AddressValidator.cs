@@ -34,9 +34,9 @@ namespace SlimFormaturas.Domain.Validators {
                 .NotEmpty().WithMessage("É necessário informar a UF.")
                 .NotNull()
                 .Length(2).WithMessage("O campo UF deve ter no maximo 2 caracteres");
-            //RuleFor(c => c.TypeGenericId)
-            //    .NotEmpty().WithMessage("É necessário informar a Tipo.")
-             //   .NotNull();
+            RuleFor(c => c.TypeGenericId)
+                .NotEmpty().WithMessage("É necessário informar a Tipo.")
+                .NotNull();
         }
     }
 }
