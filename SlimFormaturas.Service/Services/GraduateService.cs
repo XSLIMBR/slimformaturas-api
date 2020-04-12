@@ -47,41 +47,61 @@ namespace SlimFormaturas.Service.Services
 
         public async Task<Graduate> Insert(Graduate obj) {
 
-            Graduate graduate = new Graduate(obj.Name, obj.Cpf, obj.Rg, obj.Sex, obj.BirthDate, obj.DadName, obj.MotherName, obj.Email, obj.Photo, obj.Bank, obj.Agency, obj.CheckingAccount);
+            //Graduate graduate = new Graduate(obj.Name, obj.Cpf, obj.Rg, obj.Sex, obj.BirthDate, obj.DadName, obj.MotherName, obj.Email, obj.Photo, obj.Bank, obj.Agency, obj.CheckingAccount);
 
+            obj.Validate(obj, new GraduateValidator());
+            _notifications.AddNotifications(obj.ValidationResult);
+
+            /*
             if (obj.Address != null) {
                 foreach (var address in obj.Address) {
                     var addressValid = new Address(address.Cep, address.Street, address.Number, address.Complement, address.Neighborhood, address.City, address.Uf, await _typeGenericRepository.GetById(address.TypeGenericId));
                     if (addressValid.Invalid) {
                         _notifications.AddNotifications(addressValid.ValidationResult);
                     } else {
-                        graduate.Address.Add(addressValid);
+                        obj.Address.Add(addressValid);
                     }
                 }
             }
+            */
 
+            foreach (var item in obj.Address) {
+                item.Validate(item, new AddressValidator());
+                _notifications.AddNotifications(item.ValidationResult);
+            }
+
+            /*
             if (obj.Phone != null) {
                 foreach (var phone in obj.Phone) {
                     var PhoneValid = new Phone(phone.Ddd, phone.PhoneNumber, await _typeGenericRepository.GetById(phone.TypeGenericId));
                     if (PhoneValid.Invalid) {
                         _notifications.AddNotifications(PhoneValid.ValidationResult);
                     } else {
-                        graduate.Phone.Add(PhoneValid);
+                        obj.Phone.Add(PhoneValid);
                     }
                 }
             }
+            */
 
-            if (graduate.Invalid) {
-                _notifications.AddNotifications(graduate.ValidationResult);
+            foreach (var item in obj.Phone) {
+                item.Validate(item, new PhoneValidator());
+                _notifications.AddNotifications(item.ValidationResult);
             }
+
+
+            //if (obj.Invalid) {
+            //    _notifications.AddNotifications(obj.ValidationResult);
+            //}
 
 
             if (!_notifications.HasNotifications) {
                 //graduate.AddUser(await CreateUser(graduate.Cpf, graduate.Email));
             }
 
+
+            //NOTA# adicionar uma condição para se caso der errado para adiconar um novo usuario
             if (!_notifications.HasNotifications) {
-                await Post(graduate);
+                await Post(obj);
             }
 
             return obj;

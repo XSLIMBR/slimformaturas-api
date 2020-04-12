@@ -8,7 +8,9 @@ namespace SlimFormaturas.Domain.Entities {
     public class Graduate : Entity {
 
         //Limpo para o entityframework
-        public Graduate() {}
+        public Graduate() {
+            GraduateId = Guid.NewGuid().ToString();
+        }
 
         public Graduate(string name, string cpf, string rg, string sex, DateTime birthDate, string dadName, string motherName, string email, string photo, string bank, string agency, string checkingAccount) {
             GraduateId = Guid.NewGuid().ToString();

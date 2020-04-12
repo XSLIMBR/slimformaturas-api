@@ -5,6 +5,7 @@ using SlimFormaturas.Domain.Validators;
 namespace SlimFormaturas.Domain.Entities {
     public class Phone : Entity{
         public Phone() {
+            PhoneId = Guid.NewGuid().ToString();
         }
 
         public Phone(string ddd, string phoneNumber, TypeGeneric typeGeneric) {
