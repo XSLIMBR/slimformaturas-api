@@ -10,5 +10,6 @@ namespace SlimFormaturas.Domain.Interfaces.Service {
         Task<string> CreateUser(string cpf, string email);
         Task<Graduate> Insert(Graduate obj);
         Task<Graduate> Update(GraduateDto graduateDto);
+        Task<Graduate> GetAllById (string id);
     }
 }

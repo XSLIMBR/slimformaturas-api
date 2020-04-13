@@ -169,5 +169,9 @@ namespace SlimFormaturas.Service.Services
 
             return graduate;
         }
+
+        public async Task<Graduate> GetAllById (string id) {
+            return await _graduateRepository.GetAllById(id);
+        }
     }
 }

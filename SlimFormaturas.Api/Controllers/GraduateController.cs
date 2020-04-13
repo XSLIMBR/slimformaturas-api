@@ -47,11 +47,10 @@ namespace SlimFormaturas.Api.Controllers
         }
 
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Excluir")]
-        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id) {
             await _graduateService.Delete(id);
-            return Response();
+            return Response("Success");
         }
 
         // GET api/Graduate
@@ -71,7 +70,7 @@ namespace SlimFormaturas.Api.Controllers
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Consultar")]
         [HttpGet("{id}")]
         public async Task<ActionResult<GraduateDto>> Get(string id) {
-            var graduate = _mapper.Map<GraduateDto>(await _graduateService.Get(id));
+            var graduate = _mapper.Map<GraduateDto>(await _graduateService.GetAllById(id));
             return Response(graduate);
         }
     }
