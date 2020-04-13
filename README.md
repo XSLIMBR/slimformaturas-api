@@ -2,3 +2,7 @@
 
 # SlimFormaturas-api
 Esse projeto visa implementar o backend do sistema SlimFormaturas 
+
+## 🤓 Author(s)
+  - Julio Rodrigues
+  - Fábio Said

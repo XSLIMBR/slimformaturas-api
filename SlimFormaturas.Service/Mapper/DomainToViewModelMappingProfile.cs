@@ -4,12 +4,15 @@ using SlimFormaturas.Domain.Dto.Address;
 using SlimFormaturas.Domain.Dto.Graduate;
 using SlimFormaturas.Domain.Dto.Phone;
 using SlimFormaturas.Domain.Dto.TypeGeneric;
+using SlimFormaturas.Domain.Dto.University;
 using SlimFormaturas.Domain.Entities;
 
 namespace SlimFormaturas.Service.Mapper {
     public class DomainToViewModelMappingProfile : Profile{
         public DomainToViewModelMappingProfile () {
             CreateMap<University, UniversityDto>();
+            CreateMap<University, UniversityForCreationDto>();
+
             #region Formando
             CreateMap<Graduate, GraduateDto>();
             CreateMap<Graduate, GraduateForCreationDto>();
