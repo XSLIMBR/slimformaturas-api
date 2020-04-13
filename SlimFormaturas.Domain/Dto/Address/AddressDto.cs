@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SlimFormaturas.Domain.Dto.Address {
     public class AddressDto {
-        public string AddressId { get; private set; }
+        public string AddressId { get; set; }
         public bool Default { get; set; }
         public string Cep { get; set; }
         public string Street { get; set; }

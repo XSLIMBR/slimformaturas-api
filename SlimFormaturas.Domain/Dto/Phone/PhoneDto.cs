@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SlimFormaturas.Domain.Dto.Phone {
     public class PhoneDto {
-        public string PhoneId { get; private set; }
+        public string PhoneId { get; set; }
         public bool Default { get; set; }
         public string Ddd { get; set; }
         public string PhoneNumber { get; set; }

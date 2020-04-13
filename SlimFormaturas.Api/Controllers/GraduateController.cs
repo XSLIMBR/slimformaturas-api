@@ -41,9 +41,9 @@ namespace SlimFormaturas.Api.Controllers
 
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Editar")]
         [HttpPut]
-        public async Task<IActionResult> Put([FromBody]GraduateForCreationDto graduateDto) {
-            var graduate = _mapper.Map<Graduate>(graduateDto);
-            return Response(await _graduateService.Update(graduate));
+        public async Task<IActionResult> Put([FromBody]GraduateDto graduateDto) {
+            _ = await _graduateService.Update(graduateDto);
+            return Response(graduateDto.GraduateId);
         }
 
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Excluir")]

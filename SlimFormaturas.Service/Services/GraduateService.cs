@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using SlimFormaturas.Domain.Dto.Graduate;
 using SlimFormaturas.Domain.Entities;
 using SlimFormaturas.Domain.Interfaces.Repository;
 using SlimFormaturas.Domain.Interfaces.Service;
 using SlimFormaturas.Domain.Notifications;
 using SlimFormaturas.Domain.Validators;
 using SlimFormaturas.Infra.Data.Repository;
+using AutoMapper;
 
 namespace SlimFormaturas.Service.Services
 {
@@ -16,16 +18,19 @@ namespace SlimFormaturas.Service.Services
         private readonly IGraduateRepository _graduateRepository;
         protected readonly NotificationHandler _notifications;
         protected readonly ITypeGenericRepository _typeGenericRepository;
+        readonly IMapper _mapper;
 
         public GraduateService(
             IGraduateRepository graduateRepository,
             UserManager<IdentityUser> userManager,
             NotificationHandler notifications,
+             IMapper mapper,
             ITypeGenericRepository typeGenericRepository) : base(graduateRepository) {
             _graduateRepository = graduateRepository;
             _userManager = userManager;
             _notifications = notifications;
             _typeGenericRepository = typeGenericRepository;
+            _mapper = mapper;
         }
 
         public async Task<string> CreateUser(string cpf, string email) {
@@ -108,10 +113,30 @@ namespace SlimFormaturas.Service.Services
             return obj;
         }
 
-        public async Task<Graduate> Update(Graduate obj) {
+        public async Task<Graduate> Update(GraduateDto graduateDto) {
 
-            Graduate graduate = await _graduateRepository.GetById(obj.GraduateId);
+            Graduate graduate = await _graduateRepository.GetAllById(graduateDto.GraduateId);
 
+            _mapper.Map(graduateDto, graduate);
+
+            graduate.Validate(graduate, new GraduateValidator());
+            _notifications.AddNotifications(graduate.ValidationResult);
+
+            foreach (var item in graduate.Address) {
+                item.Validate(item, new AddressValidator());
+                _notifications.AddNotifications(item.ValidationResult);
+            }
+          
+            foreach (var item in graduate.Phone) {
+                item.Validate(item, new PhoneValidator());
+                _notifications.AddNotifications(item.ValidationResult);
+            }
+
+            if (!_notifications.HasNotifications) {
+                await Put(graduate);
+            }
+
+            /*
             if (graduate != null) {
 
                 graduate.Name = obj.Name;
@@ -137,6 +162,10 @@ namespace SlimFormaturas.Service.Services
             } else {
                 _notifications.AddNotification("404", "GraduateId", "Graduate with id = " + obj.GraduateId + " not found");
             }
+            */
+
+
+
 
             return graduate;
         }
