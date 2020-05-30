@@ -9,13 +9,14 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using SlimFormaturas.Domain.Notifications;
 using SlimFormaturas.Infra.CrossCutting.Identity.Models;
 
 namespace SlimFormaturas.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthController : ControllerBase
+    public class AuthController : ApiController
     {
 
          readonly SignInManager<IdentityUser> _signInManager;
@@ -24,7 +25,8 @@ namespace SlimFormaturas.Api.Controllers
 
         public AuthController(SignInManager<IdentityUser> signInManager, 
             UserManager<IdentityUser> userManager,
-            IOptions<AppSettings> appSettings)
+            IOptions<AppSettings> appSettings,
+            NotificationHandler notifications) : base (notifications)
         {
             _signInManager = signInManager;
             _userManager = userManager;
@@ -47,7 +49,7 @@ namespace SlimFormaturas.Api.Controllers
 
             await _signInManager.SignInAsync(user, false);
 
-            return Ok(await GerarJwt(registerUser.Email));
+            return Ok(await GetJWT(registerUser.Email));
         }
 
         [HttpPost("Login")]
@@ -59,14 +61,14 @@ namespace SlimFormaturas.Api.Controllers
 
             if (result.Succeeded)
             {
-                return Ok(await GerarJwt(loginUser.Email));
+                return Ok(await GetJWT(loginUser.Email));
             }
 
             return BadRequest("Usuário ou senha inválidos");
         }
 
-         async Task<string> GerarJwt(string email)
-        {
+        async Task<string> GetJWT(string email) {
+
             var user = await _userManager.FindByEmailAsync(email);
 
             var identityClaims = new ClaimsIdentity();
@@ -75,14 +77,9 @@ namespace SlimFormaturas.Api.Controllers
             // authentication successful so generate jwt token
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = identityClaims,
+            var tokenDescriptor = new SecurityTokenDescriptor {
 
-                //Subject = new ClaimsIdentity(new[]
-                //{
-                //    new Claim(ClaimTypes.Name, user.Id)
-                //}),
+                Subject = identityClaims,
                 Issuer = _appSettings.Emissor,
                 Audience = _appSettings.ValidoEm,
                 Expires = DateTime.UtcNow.AddHours(_appSettings.ExpiracaoHoras),

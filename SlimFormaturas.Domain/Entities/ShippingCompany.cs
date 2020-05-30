@@ -5,19 +5,9 @@ using System.Text;
 namespace SlimFormaturas.Domain.Entities {
     public class ShippingCompany : Entity {
         public ShippingCompany() {
+            ShippingCompanyId = Guid.NewGuid().ToString();
         }
 
-        public ShippingCompany(string shippingCompanyId, string name,string email,string site,string bank,string agency,string checkingAccount) {
-            ShippingCompanyId = Guid.NewGuid().ToString();
-            Name = name;
-            Email = email;
-            Site = site;
-            Bank = bank;
-            Agency = agency;
-            CheckingAccount = checkingAccount;
-            Address = new List<Address>();
-            Phone = new List<Phone>();
-        }
         public string ShippingCompanyId { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }

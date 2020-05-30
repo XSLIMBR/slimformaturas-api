@@ -8,14 +8,6 @@ namespace SlimFormaturas.Domain.Entities {
             PhoneId = Guid.NewGuid().ToString();
         }
 
-        public Phone(string ddd, string phoneNumber, TypeGeneric typeGeneric) {
-            PhoneId = Guid.NewGuid().ToString();
-            Ddd = ddd;
-            PhoneNumber = phoneNumber;
-            TypeGeneric = typeGeneric;
-            Validate(this, new PhoneValidator());
-        }
-
         public string PhoneId { get; private set; }
         public bool Default { get; set; }
         public string Ddd { get; set; }

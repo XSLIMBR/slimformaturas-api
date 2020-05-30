@@ -5,14 +5,10 @@ using System.Text;
 namespace SlimFormaturas.Domain.Entities {
     public class GraduateCeremonial : Entity{
         public GraduateCeremonial() {
-
-        }
-
-        public GraduateCeremonial(string graduateCeremonialId, bool committee, string courseId) {
             GraduateCeremonialId = Guid.NewGuid().ToString();
-            Committee = committee;
-            CourseId = courseId;
+
         }
+
 
         public string GraduateCeremonialId { get; set;}
         public bool Committee { get; set; }

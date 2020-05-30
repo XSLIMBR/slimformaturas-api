@@ -5,21 +5,9 @@ using SlimFormaturas.Domain.Validators;
 namespace SlimFormaturas.Domain.Entities {
     public class College : Entity {
         public College() {
-        }
-        public College(string collegeId,string corporateName, string fantasyName, string cnpj,string bank, string agency, string checkingAccount, string email, string site) {
             CollegeId = Guid.NewGuid().ToString();
-            CorporateName = corporateName;
-            FantasyName = fantasyName;
-            CNPJ = cnpj;
-            Bank = bank;
-            Agency = agency;
-            CheckingAccount = checkingAccount;
-            Email = email;
-            Site = site;
-            Address = new List<Address>();
-            Phone = new List<Phone>();
-            Validate(this, new CollegeValidator());
         }
+
         public string CollegeId { get; set; }
         public string CorporateName { get; set; }
         public string FantasyName { get; set; }

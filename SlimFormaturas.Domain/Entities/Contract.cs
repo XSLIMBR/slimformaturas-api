@@ -5,16 +5,9 @@ using SlimFormaturas.Domain.Validators;
 namespace SlimFormaturas.Domain.Entities {
     public class Contract : Entity {
         public Contract() {
-        }
-        public Contract(string code, int semester, int year, string note) {
             ContractId = Guid.NewGuid().ToString();
-            Code = code;
-            Semester = semester;
-            Year = year;
-            Note = note;
-            ContractCourses = new List<ContractCourse>();
-            Validate(this, new ContractValidator());
         }
+
         public string ContractId { get; set; }
         public string Code { get; set; }
         public int Semester { get; set; }

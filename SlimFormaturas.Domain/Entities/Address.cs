@@ -7,19 +7,6 @@ namespace SlimFormaturas.Domain.Entities {
             AddressId = Guid.NewGuid().ToString();
         }
 
-        public Address(string cep, string street, string number, string complement, string neighborhood, string city, string uf, TypeGeneric typeGeneric) {
-            AddressId = Guid.NewGuid().ToString();
-            Cep = cep;
-            Street = street;
-            Number = number;
-            Complement = complement;
-            Neighborhood = neighborhood;
-            City = city;
-            Uf = uf;
-            TypeGeneric = typeGeneric;
-            Validate(this, new AddressValidator());
-        }
-
         public string AddressId { get; private set; }
         public bool Default { get; set; }
         public string Cep { get; set; }

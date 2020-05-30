@@ -7,28 +7,8 @@ using SlimFormaturas.Domain.Validators;
 namespace SlimFormaturas.Domain.Entities {
     public class Graduate : Entity {
 
-        //Limpo para o entityframework
         public Graduate() {
             GraduateId = Guid.NewGuid().ToString();
-        }
-
-        public Graduate(string name, string cpf, string rg, string sex, DateTime birthDate, string dadName, string motherName, string email, string photo, string bank, string agency, string checkingAccount) {
-            GraduateId = Guid.NewGuid().ToString();
-            Name = name;
-            Cpf = cpf;
-            Rg = rg;
-            Sex = sex;
-            BirthDate = birthDate;
-            DadName = dadName;
-            MotherName = motherName;
-            Email = email;
-            Photo = photo;
-            Bank = bank;
-            Agency = agency;
-            CheckingAccount = checkingAccount;
-            Address = new List<Address>();
-            Phone = new List<Phone>();
-            Validate(this, new GraduateValidator());
         }
 
         public string GraduateId { get; set; }
