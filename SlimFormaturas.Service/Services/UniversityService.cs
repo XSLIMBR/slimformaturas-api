@@ -22,7 +22,10 @@ namespace SlimFormaturas.Service.Services
 
         public async Task<University> Insert(University obj)
         {
-            University university = new University(obj.Name);
+            //University university = new University(obj.Name);
+
+            University university = null;
+
             if (university.Invalid)
             {
                 _notifications.AddNotifications(university.ValidationResult);

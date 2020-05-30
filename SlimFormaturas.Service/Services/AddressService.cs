@@ -28,7 +28,9 @@ namespace SlimFormaturas.Service.Services
         }
 
         public async Task<Address> Insert(Address obj) {
-            Address address = new Address(obj.Cep, obj.Street, obj.Number, obj.Complement, obj.Neighborhood, obj.City, obj.Uf, await _typeGenericRepository.GetById(obj.TypeGenericId));
+            //Address address = new Address(obj.Cep, obj.Street, obj.Number, obj.Complement, obj.Neighborhood, obj.City, obj.Uf, await _typeGenericRepository.GetById(obj.TypeGenericId));
+
+            Address address = null;
 
             if (obj.GraduateId != null) {
                 address.Graduate = await _graduateRepository.GetById(obj.GraduateId);

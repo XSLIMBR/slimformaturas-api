@@ -22,7 +22,8 @@ namespace SlimFormaturas.Service.Services {
         }
 
         public async Task<TypeGeneric> Insert(TypeGeneric obj) {
-            TypeGeneric typeGeneric = new TypeGeneric(obj.Name, obj.Localization);
+            //TypeGeneric typeGeneric = new TypeGeneric(obj.Name, obj.Localization);
+            TypeGeneric typeGeneric = null;
             if (typeGeneric.Valid) {
                 await Post(typeGeneric);
             } else {

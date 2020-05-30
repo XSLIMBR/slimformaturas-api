@@ -24,7 +24,9 @@ namespace SlimFormaturas.Service.Services
 
         public async Task<Course> Insert(Course obj)
         {
-            Course course = new Course(obj.Name);
+            //Course course = new Course(obj.Name);
+
+            Course course = null;
 
             if (course.Invalid)
             {
