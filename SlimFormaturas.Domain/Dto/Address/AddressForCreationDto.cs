@@ -14,5 +14,6 @@ namespace SlimFormaturas.Domain.Dto.Address {
         public string City { get; set; }
         public string Uf { get; set; }
         public string TypeGenericId { get; set; }
+        public string GraduateId { get; set; }
     }
 }

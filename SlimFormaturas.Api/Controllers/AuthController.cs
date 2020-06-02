@@ -67,9 +67,9 @@ namespace SlimFormaturas.Api.Controllers
             return BadRequest("Usuário ou senha inválidos");
         }
 
-        async Task<string> GetJWT(string email) {
+        async Task<string> GetJWT(string username) {
 
-            var user = await _userManager.FindByEmailAsync(email);
+            var user = await _userManager.FindByNameAsync(username);
 
             var identityClaims = new ClaimsIdentity();
             identityClaims.AddClaims(await _userManager.GetClaimsAsync(user));

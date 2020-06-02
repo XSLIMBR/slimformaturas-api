@@ -22,9 +22,5 @@ namespace SlimFormaturas.Api.Controllers {
             _mapper = mapper;
         }
 
-
-        public async Task<IActionResult>Post () {
-            return Response();
-        }
     }
 }
