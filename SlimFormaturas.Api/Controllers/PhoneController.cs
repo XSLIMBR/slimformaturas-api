@@ -5,6 +5,9 @@ using SlimFormaturas.Domain.Interfaces.Service;
 using SlimFormaturas.Domain.Notifications;
 using SlimFormaturas.Infra.CrossCutting.Identity.Authorization;
 using System.Threading.Tasks;
+using AutoMapper;
+using System.Collections.Generic;
+using SlimFormaturas.Domain.Dto.Phone;
 
 namespace SlimFormaturas.Api.Controllers
 {
@@ -12,51 +15,63 @@ namespace SlimFormaturas.Api.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class PhoneController : ApiController {
-         readonly IPhoneService _phoneService;
+        readonly IPhoneService _phoneService;
+        readonly IMapper _mapper;
 
-        public PhoneController(
+        public PhoneController (
             IPhoneService phoneService,
-            NotificationHandler notifications) : base (notifications) {
+            IMapper mapper,
+            NotificationHandler notifications) : base(notifications) {
             _phoneService = phoneService;
+            _mapper = mapper;
         }
 
-        [CustomAuthorize.ClaimsAuthorize("Phone", "Incluir")]
+        //[CustomAuthorize.ClaimsAuthorize("Phone", "Incluir")]
         [HttpPost]
-        public async Task<ActionResult<string>> Post(Phone phone) {
+        public async Task<ActionResult> Post ([FromBody]PhoneForCreationDto phoneForCreationDto) {
+            var phone = _mapper.Map<Phone>(phoneForCreationDto);
             _ = await _phoneService.Insert(phone);
             return Response(phone.PhoneId);
         }
 
-        [CustomAuthorize.ClaimsAuthorize("Phone", "Editar")]
+        //[CustomAuthorize.ClaimsAuthorize("Phone", "Editar")]
         [HttpPut]
-        public async Task<ActionResult<string>> Put(Phone phone) {
-            _ = await _phoneService.Update(phone);
-            return Response(phone.PhoneId);
+        public async Task<ActionResult<string>> Put(PhoneDto phoneDto) {
+            _ = await _phoneService.Update(phoneDto);
+            return Response(phoneDto.PhoneId);
         }
 
-        [CustomAuthorize.ClaimsAuthorize("Phone", "Excluir")]
+        //[CustomAuthorize.ClaimsAuthorize("Phone", "Excluir")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(string id) {
             await _phoneService.Delete(id);
             return Response();
         }
 
-        // GET api/Graduate
+        // GET api/Phone
         /// <summary>
-        /// Get all graduates
+        /// Get all phones
         /// </summary>
         /// <remarks>This API will get the values.</remarks>
         /// 
-        [CustomAuthorize.ClaimsAuthorize("Phone", "Consultar")]
+        //[CustomAuthorize.ClaimsAuthorize("Phone", "Consultar")]
         [HttpGet]
         public async Task<ActionResult> Get() {
-            return Response(await _phoneService.Get());
+            var phone = _mapper.Map<IList<PhoneDto>>(await _phoneService.Get());
+            return Response(phone);
         }
 
-        [CustomAuthorize.ClaimsAuthorize("Phone", "Consultar")]
+        // GET api/Phone/GetGraduate
+        /// <summary>
+        /// Pega todos os telefones associados a um ID
+        /// </summary>
+        /// <remarks>This API will get the values.</remarks>
+        /// 
+        //[CustomAuthorize.ClaimsAuthorize("Phone", "Consultar")]
         [HttpGet("{id}")]
         public async Task<ActionResult> GetGraduate(string id) {
-            return Response(await _phoneService.GetWhere(c => c.GraduateId == id));
+            var phone = _mapper.Map<IList<PhoneDto>>(await _phoneService.GetWhere(c => c.GraduateId == id));
+            return Response(phone);
         }
     }
 }

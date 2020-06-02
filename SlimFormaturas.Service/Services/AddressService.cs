@@ -67,7 +67,7 @@ namespace SlimFormaturas.Service.Services
                     await Put(address);
                 }
             } else {
-                _notifications.AddNotification("404", "AddressId", "Graduate with id = " + addressDto.AddressId + " not found");
+                _notifications.AddNotification("404", "AddressId", "Address with id = " + addressDto.AddressId + " not found");
             }
 
 

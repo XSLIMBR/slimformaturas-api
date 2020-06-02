@@ -6,6 +6,8 @@ using SlimFormaturas.Domain.Interfaces.Service;
 using SlimFormaturas.Domain.Notifications;
 using SlimFormaturas.Domain.Validators;
 using SlimFormaturas.Infra.Data.Repository;
+using AutoMapper;
+using SlimFormaturas.Domain.Dto.Phone;
 
 namespace SlimFormaturas.Service.Services
 {
@@ -15,25 +17,29 @@ namespace SlimFormaturas.Service.Services
         protected readonly NotificationHandler _notifications;
         protected readonly ITypeGenericRepository _typeGenericRepository;
         protected readonly IGraduateRepository _graduateRepository;
+        readonly IMapper _mapper;
 
         public PhoneService(
             IGraduateRepository graduateRepository,
             IPhoneRepository phoneRepository,
             NotificationHandler notifications,
+            IMapper mapper,
             ITypeGenericRepository typeGenericRepository) : base(phoneRepository) {
             _phoneRepository = phoneRepository;
             _notifications = notifications;
             _typeGenericRepository = typeGenericRepository;
+            _mapper = mapper;
             _graduateRepository = graduateRepository;
         }
 
-        public async Task<Phone> Insert(Phone obj) {
+        public async Task<Phone> Insert(Phone phone) {
             //Phone phone = new Phone(obj.Ddd, obj.PhoneNumber, await _typeGenericRepository.GetById(obj.TypeGenericId));
 
-            Phone phone = null;
+            phone.Validate(phone, new PhoneValidator());
+            _notifications.AddNotifications(phone.ValidationResult);
 
-            if (obj.GraduateId != null) {
-                phone.Graduate = await _graduateRepository.GetById(obj.GraduateId);
+            if (phone.GraduateId != null) {
+                phone.Graduate = await _graduateRepository.GetById(phone.GraduateId);
             }
 
             if (phone.Invalid) {
@@ -44,28 +50,26 @@ namespace SlimFormaturas.Service.Services
                 await Post(phone);
             }
 
-            return obj;
+            return phone;
         }
 
-        public async Task<Phone> Update(Phone obj) {
+        public async Task<Phone> Update(PhoneDto phoneDto) {
 
-            Phone phone = await _phoneRepository.GetById(obj.PhoneId);
+            Phone phone = await _phoneRepository.GetById(phoneDto.PhoneId);
 
             if (phone != null) {
 
-                phone.Ddd = obj.Ddd;
-                phone.PhoneNumber = obj.PhoneNumber;
-                phone.TypeGeneric = await _typeGenericRepository.GetById(obj.TypeGenericId);
+                _mapper.Map(phoneDto, phone);
 
                 phone.Validate(phone, new PhoneValidator());
+                _notifications.AddNotifications(phone.ValidationResult);
 
-                if (phone.Valid) {
+                if (!_notifications.HasNotifications) {
                     await Put(phone);
-                } else {
-                    _notifications.AddNotifications(phone.ValidationResult);
                 }
+
             } else {
-                _notifications.AddNotification("404", "PhoneId", "Graduate with id = " + obj.PhoneId + " not found");
+                _notifications.AddNotification("404", "PhoneId", "Phone with id = " + phoneDto.PhoneId + " not found");
             }
 
             return phone;

@@ -62,7 +62,7 @@ namespace SlimFormaturas.Api.Controllers
         }
 
 
-        // GET api/GetGraduate
+        // GET api/Address/GetGraduate
         /// <summary>
         /// Pega todos os enderecos associados a um ID
         /// </summary>
