@@ -11,6 +11,7 @@ using SlimFormaturas.Service.Services;
 namespace SlimFormaturas.Infra.CrossCutting.IoC {
     public class NativeInjectorBootStrapper {
         public static void RegisterServices(IServiceCollection services) {
+
             // ASP.NET HttpContext dependency
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             //Services

@@ -19,12 +19,12 @@ namespace SlimFormaturas.Api.Controllers
     public class AuthController : ApiController
     {
 
-         readonly SignInManager<IdentityUser> _signInManager;
-         readonly UserManager<IdentityUser> _userManager;
+         readonly SignInManager<ApplicationUser> _signInManager;
+         readonly UserManager<ApplicationUser> _userManager;
          readonly AppSettings _appSettings;
 
-        public AuthController(SignInManager<IdentityUser> signInManager, 
-            UserManager<IdentityUser> userManager,
+        public AuthController(SignInManager<ApplicationUser> signInManager, 
+            UserManager<ApplicationUser> userManager,
             IOptions<AppSettings> appSettings,
             NotificationHandler notifications) : base (notifications)
         {
@@ -37,7 +37,7 @@ namespace SlimFormaturas.Api.Controllers
         public async Task<ActionResult> Register(Register registerUser) {
             if (!ModelState.IsValid) return BadRequest(ModelState.Values.SelectMany(e => e.Errors));
 
-            var user = new IdentityUser {
+            var user = new ApplicationUser {
                 UserName = registerUser.Email,
                 Email = registerUser.Email,
                 EmailConfirmed = true

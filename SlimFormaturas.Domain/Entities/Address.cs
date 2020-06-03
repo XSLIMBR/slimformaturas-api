@@ -3,6 +3,7 @@ using SlimFormaturas.Domain.Validators;
 
 namespace SlimFormaturas.Domain.Entities {
     public class Address : Entity {
+
         public Address() {
             AddressId = Guid.NewGuid().ToString();
         }

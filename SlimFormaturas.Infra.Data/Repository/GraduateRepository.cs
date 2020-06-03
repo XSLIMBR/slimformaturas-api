@@ -5,12 +5,13 @@ using SlimFormaturas.Infra.Data.Context;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using SlimFormaturas.Infra.CrossCutting.Identity.Models;
 
 namespace SlimFormaturas.Infra.Data.Repository {
     public class GraduateRepository : BaseRepository<Graduate>, IGraduateRepository {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         public GraduateRepository(MssqlContext context,
-            UserManager<IdentityUser> userManager) : base(context) {
+            UserManager<ApplicationUser> userManager) : base(context) {
             _userManager = userManager;
         }
 

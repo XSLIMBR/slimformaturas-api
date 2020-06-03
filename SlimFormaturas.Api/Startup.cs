@@ -16,6 +16,7 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using SlimFormaturas.Api.Configurations;
+using SlimFormaturas.Infra.CrossCutting.Identity.Models;
 
 namespace SlimFormaturas.Api
 {
@@ -42,8 +43,7 @@ namespace SlimFormaturas.Api
                 .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore) ;
 
             //identity
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddRoles<IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 

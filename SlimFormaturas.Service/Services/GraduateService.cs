@@ -9,12 +9,13 @@ using SlimFormaturas.Domain.Notifications;
 using SlimFormaturas.Domain.Validators;
 using SlimFormaturas.Infra.Data.Repository;
 using AutoMapper;
+using SlimFormaturas.Infra.CrossCutting.Identity.Models;
 
 namespace SlimFormaturas.Service.Services
 {
     public class GraduateService : BaseService<Graduate>, IGraduateService
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IGraduateRepository _graduateRepository;
         protected readonly NotificationHandler _notifications;
         protected readonly ITypeGenericRepository _typeGenericRepository;
@@ -22,7 +23,7 @@ namespace SlimFormaturas.Service.Services
 
         public GraduateService(
             IGraduateRepository graduateRepository,
-            UserManager<IdentityUser> userManager,
+            UserManager<ApplicationUser> userManager,
             NotificationHandler notifications,
              IMapper mapper,
             ITypeGenericRepository typeGenericRepository) : base(graduateRepository) {
@@ -34,10 +35,11 @@ namespace SlimFormaturas.Service.Services
         }
 
         public async Task<string> CreateUser(string cpf, string email) {
-            var user = new IdentityUser {
+            var user = new ApplicationUser {
                 UserName = cpf,
                 Email = email,
-                EmailConfirmed = true
+                EmailConfirmed = true,
+                User_Type = user_type.Formando
             };
 
             var result = await _userManager.CreateAsync(user, cpf);

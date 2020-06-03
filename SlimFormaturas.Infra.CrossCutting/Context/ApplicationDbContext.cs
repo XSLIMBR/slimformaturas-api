@@ -3,9 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
+using SlimFormaturas.Infra.CrossCutting.Identity.Models;
 
 namespace SlimFormaturas.Infra.CrossCutting.Identity.Context {
-    public class ApplicationDbContext : IdentityDbContext<IdentityUser> {
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser> {
         private readonly IWebHostEnvironment _environment;
 
         public ApplicationDbContext(

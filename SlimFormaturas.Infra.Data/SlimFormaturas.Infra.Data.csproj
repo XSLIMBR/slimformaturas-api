@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SlimFormaturas.Domain\SlimFormaturas.Domain.csproj" />
+    <ProjectReference Include="..\SlimFormaturas.Infra.CrossCutting\SlimFormaturas.Infra.CrossCutting.Identity.csproj" />
   </ItemGroup>
 
 </Project>
