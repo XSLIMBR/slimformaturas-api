@@ -3,6 +3,7 @@ using SlimFormaturas.Domain.Dto;
 using SlimFormaturas.Domain.Dto.Address;
 using SlimFormaturas.Domain.Dto.Graduate;
 using SlimFormaturas.Domain.Dto.Phone;
+using SlimFormaturas.Domain.Dto.Seller;
 using SlimFormaturas.Domain.Dto.TypeGeneric;
 using SlimFormaturas.Domain.Dto.University;
 using SlimFormaturas.Domain.Entities;
@@ -20,6 +21,9 @@ namespace SlimFormaturas.Service.Mapper {
 
             CreateMap<AddressForCreationDto, Address>();
             CreateMap<AddressDto, Address>();
+
+            CreateMap<SellerForCreationDto, Seller>();
+            CreateMap<SellerDto, Seller>();
 
             CreateMap<PhoneForCreationDto, Phone>();
             CreateMap<PhoneDto, Phone>();

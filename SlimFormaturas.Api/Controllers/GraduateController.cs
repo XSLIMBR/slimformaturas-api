@@ -8,8 +8,7 @@ using AutoMapper;
 using System.Collections.Generic;
 using SlimFormaturas.Domain.Dto.Graduate;
 
-namespace SlimFormaturas.Api.Controllers
-{
+namespace SlimFormaturas.Api.Controllers {
     [Route("api/[controller]")]
     [ApiController]
     //[Authorize]

@@ -1,14 +1,11 @@
-﻿using System;
+﻿using SlimFormaturas.Domain.Dto.Address;
+using SlimFormaturas.Domain.Dto.Phone;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SlimFormaturas.Domain.Entities {
-    public class Seller : Entity {
-        public Seller() {
-            SellerId = Guid.NewGuid().ToString();
-        }
-
-
+namespace SlimFormaturas.Domain.Dto.Seller {
+    public class SellerDto {
         public string SellerId { get; set; }
         public string Name { get; set; }
         public string Cpf { get; set; }
@@ -23,16 +20,7 @@ namespace SlimFormaturas.Domain.Entities {
         public string CheckingAccount { get; set; }
         #endregion
 
-        public DateTime DateRegister { get; protected set; }
-
-        public string UserId { get; private set; }
-
-        public User User { get; private set; }
-        public IList<Address> Address { get; set; }
-        public IList<Phone> Phone { get; set; }
-
-        public void AddUser(string user) {
-            UserId = user;
-        }
+        public IList<AddressDto> Address { get; set; }
+        public IList<PhoneDto> Phone { get; set; }
     }
 }

@@ -53,6 +53,10 @@ namespace SlimFormaturas.Infra.Data.Mapping {
                 .WithMany(p => p.Address)
                 .HasForeignKey(y => y.GraduateId);
 
+            builder.HasOne(c => c.Seller)
+                .WithMany(p => p.Address)
+                .HasForeignKey(y => y.SellerId);
+
             builder.ToTable("Address");
         }
     }
