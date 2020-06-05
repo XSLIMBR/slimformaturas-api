@@ -41,7 +41,7 @@ namespace SlimFormaturas.Infra.Data.Context {
             // get the configuration from the app settings
             var config = new ConfigurationBuilder()
                 .SetBasePath(_environment.ContentRootPath)
-                //.AddJsonFile("appsettings.json")
+                .AddJsonFile("appsettings.json")
                 .AddJsonFile($"appsettings.{_environment.EnvironmentName}.json", true)
                 .Build();
             // define the database to use

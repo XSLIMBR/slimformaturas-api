@@ -26,12 +26,12 @@ namespace SlimFormaturas.Domain.Entities {
         public string ShippingCompanyId { get; set; }
 
 
-        public TypeGeneric TypeGeneric { get; set; }
-        public Graduate Graduate { get; set; }
-        public College College { get; set; }
-        public Employee Employee { get; set; }
-        public Seller Seller { get; set; }
-        public ShippingCompany ShippingCompany { get; set; }
+        public virtual TypeGeneric TypeGeneric { get; set; }
+        public virtual Graduate Graduate { get; set; }
+        public virtual College College { get; set; }
+        public virtual Employee Employee { get; set; }
+        public virtual Seller Seller { get; set; }
+        public virtual ShippingCompany ShippingCompany { get; set; }
 
     }
 }

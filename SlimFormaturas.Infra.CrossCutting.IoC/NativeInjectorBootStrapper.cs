@@ -17,6 +17,7 @@ namespace SlimFormaturas.Infra.CrossCutting.IoC {
             //Services
             services.AddScoped(typeof(IService<>), typeof(BaseService<>));
             services.AddScoped<IGraduateService, GraduateService>();
+            services.AddScoped<ISellerService, SellerService>();
             services.AddScoped<ITypeGenericService, TypeGenericService>();
             services.AddScoped<IAddressService, AddressService>();
             services.AddScoped<IPhoneService, PhoneService>();
@@ -24,6 +25,7 @@ namespace SlimFormaturas.Infra.CrossCutting.IoC {
             services.AddScoped<IUniversityService, UniversityService>();
             //Infra - Data
             services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
+            services.AddScoped<ISellerRepository, SellerRepository>();
             services.AddScoped<IGraduateRepository,GraduateRepository>();
             services.AddScoped<ITypeGenericRepository, TypeGenericRepository>();
             services.AddScoped<IAddressRepository, AddressRepository>();

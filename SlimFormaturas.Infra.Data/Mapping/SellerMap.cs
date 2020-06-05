@@ -64,15 +64,6 @@ namespace SlimFormaturas.Infra.Data.Mapping {
             builder.Property(c => c.DateRegister)
                 .IsRequired();
 
-            builder.HasMany(c => c.Address)
-                .WithOne(e => e.Seller)
-                .HasForeignKey(y => y.AddressId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            builder.HasMany(c => c.Phone)
-                .WithOne(e => e.Seller)
-                .HasForeignKey(y => y.PhoneId)
-                .OnDelete(DeleteBehavior.Cascade);
 
             builder.ToTable("Seller");
         }

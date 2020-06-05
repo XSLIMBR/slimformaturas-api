@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SlimFormaturas.Domain.Entities;
 
@@ -51,11 +52,13 @@ namespace SlimFormaturas.Infra.Data.Mapping {
 
             builder.HasOne(c => c.Graduate)
                 .WithMany(p => p.Address)
-                .HasForeignKey(y => y.GraduateId);
+                .HasForeignKey(y => y.GraduateId)
+                .OnDelete(DeleteBehavior.ClientCascade);
 
             builder.HasOne(c => c.Seller)
                 .WithMany(p => p.Address)
-                .HasForeignKey(y => y.SellerId);
+                .HasForeignKey(y => y.SellerId)
+                .OnDelete(DeleteBehavior.ClientCascade);
 
             builder.ToTable("Address");
         }

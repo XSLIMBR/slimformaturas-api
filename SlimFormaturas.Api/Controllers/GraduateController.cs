@@ -46,11 +46,11 @@ namespace SlimFormaturas.Api.Controllers {
         }
 
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Excluir")]
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(string id) {
-            await _graduateService.Delete(id);
-            return Response("Success");
-        }
+        //[HttpDelete("{id}")]
+        //public async Task<IActionResult> Delete(string id) {
+            //await _graduateService.Delete(id);
+            //return Response("Success");
+        //}
 
         // GET api/Graduate
         /// <summary>

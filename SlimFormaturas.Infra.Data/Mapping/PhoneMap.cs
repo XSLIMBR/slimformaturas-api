@@ -29,11 +29,13 @@ namespace SlimFormaturas.Infra.Data.Mapping  {
 
             builder.HasOne(c => c.Graduate)
                 .WithMany(p => p.Phone)
-                .HasForeignKey(e => e.GraduateId);
+                .HasForeignKey(e => e.GraduateId)
+                .OnDelete(DeleteBehavior.ClientCascade);
 
             builder.HasOne(c => c.Seller)
                 .WithMany(p => p.Phone)
-                .HasForeignKey(e => e.SellerId);
+                .HasForeignKey(e => e.SellerId)
+                .OnDelete(DeleteBehavior.ClientCascade);
 
             builder.ToTable("Phone");
         }

@@ -34,13 +34,16 @@ namespace SlimFormaturas.Infra.Data.Repository {
             return graduate;
         }
 
-        public new async Task<int> Remove(string id) {
+        /*
+        public async Task<int> RemoveAll(string id) {
+
+            Context.Remove(GetAllById(id));
 
             var removeuser = await GetById(id);
-
             _ = await _userManager.DeleteAsync(_ = await _userManager.FindByIdAsync(removeuser.UserId));
 
             return await Context.SaveChangesAsync();
         }
+        */
     }
 }

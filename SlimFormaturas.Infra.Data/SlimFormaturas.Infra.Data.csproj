@@ -9,6 +9,32 @@
     <Compile Remove="Migrations\20200604023430_seller.Designer.cs" />
     <Compile Remove="Migrations\20200604025016_seller.cs" />
     <Compile Remove="Migrations\20200604025016_seller.Designer.cs" />
+    <Compile Remove="Migrations\20200604131308_seller.cs" />
+    <Compile Remove="Migrations\20200604131308_seller.Designer.cs" />
+    <Compile Remove="Migrations\20200604142411_seller.cs" />
+    <Compile Remove="Migrations\20200604142411_seller.Designer.cs" />
+    <Compile Remove="Migrations\20200604142840_initial.cs" />
+    <Compile Remove="Migrations\20200604142840_initial.Designer.cs" />
+    <Compile Remove="Migrations\20200604152420_3.cs" />
+    <Compile Remove="Migrations\20200604152420_3.Designer.cs" />
+    <Compile Remove="Migrations\20200604160735_3.cs" />
+    <Compile Remove="Migrations\20200604160735_3.Designer.cs" />
+    <Compile Remove="Migrations\20200604161407_3.cs" />
+    <Compile Remove="Migrations\20200604161407_3.Designer.cs" />
+    <Compile Remove="Migrations\20200604161508_3.cs" />
+    <Compile Remove="Migrations\20200604161508_3.Designer.cs" />
+    <Compile Remove="Migrations\20200604162829_3.cs" />
+    <Compile Remove="Migrations\20200604162829_3.Designer.cs" />
+    <Compile Remove="Migrations\20200604181555_3.cs" />
+    <Compile Remove="Migrations\20200604181555_3.Designer.cs" />
+    <Compile Remove="Migrations\20200604181843_3.cs" />
+    <Compile Remove="Migrations\20200604181843_3.Designer.cs" />
+    <Compile Remove="Migrations\20200604182013_3.cs" />
+    <Compile Remove="Migrations\20200604182013_3.Designer.cs" />
+    <Compile Remove="Migrations\20200604182040_3.cs" />
+    <Compile Remove="Migrations\20200604182040_3.Designer.cs" />
+    <Compile Remove="Migrations\20200604185156_3.cs" />
+    <Compile Remove="Migrations\20200604185156_3.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

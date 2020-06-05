@@ -32,10 +32,10 @@ namespace SlimFormaturas.Domain.Entities {
         public DateTime DateRegister { get; protected set; }
 
         public User User { get; private set; }
-        public IList<Address> Address { get; set; }
-        public IList<Phone> Phone { get; set; }
-        public IList<GraduateAlbum>  GraduateAlbum { get;set; }
-        public IList<GraduateCeremonial> GraduateCeremonial { get; set; }
+        public virtual IList<Address> Address { get; set; }
+        public virtual IList<Phone> Phone { get; set; }
+        public virtual IList<GraduateAlbum>  GraduateAlbum { get;set; }
+        public virtual IList<GraduateCeremonial> GraduateCeremonial { get; set; }
 
         public void AddUser(string user) {
             UserId = user;

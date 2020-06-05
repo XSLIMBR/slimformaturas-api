@@ -11,7 +11,7 @@ using SlimFormaturas.Domain.Dto.Address;
 
 namespace SlimFormaturas.Api.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class AddressController : ApiController {
