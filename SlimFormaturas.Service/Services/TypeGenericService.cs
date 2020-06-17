@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
+using SlimFormaturas.Domain.Dto.TypeGeneric;
 using SlimFormaturas.Domain.Entities;
 using SlimFormaturas.Domain.Interfaces.Repository;
 using SlimFormaturas.Domain.Interfaces.Service;
@@ -11,47 +13,43 @@ using SlimFormaturas.Domain.Validators;
 namespace SlimFormaturas.Service.Services {
     public class TypeGenericService : BaseService<TypeGeneric>, ITypeGenericService {
          readonly ITypeGenericRepository _typeGenericRepository;
-        protected readonly NotificationHandler Notifications;
+        protected readonly NotificationHandler _notifications;
+
+        readonly IMapper _mapper;
 
         public TypeGenericService(
             ITypeGenericRepository typeGenericRepository,
-             NotificationHandler notifications
+             NotificationHandler notifications,
+             IMapper mapper
             ) : base(typeGenericRepository) {
             _typeGenericRepository = typeGenericRepository;
-            Notifications = notifications;
+            _notifications = notifications;
+             _mapper = mapper;
         }
 
         public async Task<TypeGeneric> Insert(TypeGeneric obj) {
-            //TypeGeneric typeGeneric = new TypeGeneric(obj.Name, obj.Localization);
-            TypeGeneric typeGeneric = null;
-            if (typeGeneric.Valid) {
-                await Post(typeGeneric);
-            } else {
-                Notifications.AddNotifications(typeGeneric.ValidationResult);
+            
+            obj.Validate(obj, new TypeGenericValidator());
+            _notifications.AddNotifications(obj.ValidationResult);
+            
+            if (!_notifications.HasNotifications) {
+                await Post(obj);
             }
 
-            return typeGeneric;
+            return obj;
         }
 
-        public async Task<TypeGeneric> Update(TypeGeneric obj) {
+        public async Task<TypeGeneric> Update(TypeGenericDto obj) {
 
             TypeGeneric typeGeneric = await _typeGenericRepository.GetById(obj.TypeGenericId);
 
-            if (typeGeneric != null) {
+            _mapper.Map(obj, typeGeneric);
 
-                typeGeneric.Name = obj.Name;
-                typeGeneric.Localization = obj.Localization;
+            typeGeneric.Validate(typeGeneric, new TypeGenericValidator());
+            _notifications.AddNotifications(typeGeneric.ValidationResult);
 
-                typeGeneric.Validate(typeGeneric, new TypeGenericValidator());
-
-                if (typeGeneric.Valid) {
-                    await Put(typeGeneric);
-                } else {
-                    Notifications.AddNotifications(typeGeneric.ValidationResult);
-                }
-
-            } else {
-                Notifications.AddNotification("404", "TypeGenericId", "Graduate with id = " + obj.TypeGenericId + " not found");
+            if (!_notifications.HasNotifications) {
+                await Put(typeGeneric);
             }
 
             return typeGeneric;
