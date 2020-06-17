@@ -4,6 +4,7 @@ using SlimFormaturas.Domain.Dto.Address;
 using SlimFormaturas.Domain.Dto.Graduate;
 using SlimFormaturas.Domain.Dto.Phone;
 using SlimFormaturas.Domain.Dto.Seller;
+using SlimFormaturas.Domain.Dto.ShippingCompany;
 using SlimFormaturas.Domain.Dto.TypeGeneric;
 using SlimFormaturas.Domain.Dto.University;
 using SlimFormaturas.Domain.Entities;
@@ -11,6 +12,9 @@ using SlimFormaturas.Domain.Entities;
 namespace SlimFormaturas.Service.Mapper {
     public class ViewModelToDomainMappingProfile : Profile {
         public ViewModelToDomainMappingProfile () {
+            CreateMap<ShippingCompanyDto, ShippingCompany>();
+            CreateMap<ShippingCompanyForCreationDto, ShippingCompany>();
+
             CreateMap<UniversityDto, University>();
             CreateMap<UniversityForCreationDto, University>();
 
