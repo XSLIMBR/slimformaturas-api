@@ -14,11 +14,11 @@ namespace SlimFormaturas.Api.Controllers
     //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class TypeController : ApiController {
+    public class TypeGenericController : ApiController {
         readonly ITypeGenericService _typeGenericService;
         readonly IMapper _mapper;
 
-        public TypeController(
+        public TypeGenericController(
             ITypeGenericService typeGenericService,
             IMapper mapper,
             NotificationHandler notifications) : base (notifications) {
@@ -36,17 +36,9 @@ namespace SlimFormaturas.Api.Controllers
 
         //[CustomAuthorize.ClaimsAuthorize("Type", "Editar")]
         [HttpPut]
-        public async Task<ActionResult<string>> Put([FromBody] TypeGenericForCreationDto typeGenericForCreationDto) {
-            var typeGeneric = _mapper.Map<TypeGeneric>(typeGenericForCreationDto);
-            _ = await _typeGenericService.Update(typeGeneric);
-            return Response(typeGeneric.TypeGenericId);
-        }
-
-        //[CustomAuthorize.ClaimsAuthorize("Type", "Excluir")]
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(string id) {
-            await _typeGenericService.Delete(id);
-            return Response();
+        public async Task<ActionResult<string>> Put([FromBody] TypeGenericDto typeGenericDto) {
+            _ = await _typeGenericService.Update(typeGenericDto);
+            return Response(typeGenericDto.TypeGenericId);
         }
 
         // GET api/Graduate
@@ -60,13 +52,6 @@ namespace SlimFormaturas.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<TypeGenericDto>> Get() {
             var typeGeneric = _mapper.Map<IList<TypeGenericDto>>(await _typeGenericService.Get());
-            return Response(typeGeneric);
-        }
-
-        //[CustomAuthorize.ClaimsAuthorize("Type", "Consultar")]
-        [HttpGet("{id}")]
-        public async Task<ActionResult<TypeGenericDto>> Get(string id) {
-            var typeGeneric = _mapper.Map<TypeGenericDto>(await _typeGenericService.Get(id));
             return Response(typeGeneric);
         }
 
