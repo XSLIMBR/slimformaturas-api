@@ -20,26 +20,6 @@ namespace SlimFormaturas.Domain.Validators {
                 .NotEmpty()
                 .NotNull()
                 .Length(14);
-            RuleFor(c => c.Bank)
-                .NotEmpty()
-                .NotNull()
-                .Length(1, 50);
-            RuleFor(c => c.Agency)
-                .NotEmpty()
-                .NotNull()
-                .Length(1, 50);
-            RuleFor(c => c.CheckingAccount)
-                .NotEmpty()
-                .NotNull()
-                .Length(1, 50);
-            RuleFor(c => c.Email)
-                .NotEmpty()
-                .NotNull()
-                .Length(1, 50);
-            RuleFor(c => c.Site)
-                .NotEmpty()
-                .NotNull()
-                .Length(1, 50);
         }
     }
 }

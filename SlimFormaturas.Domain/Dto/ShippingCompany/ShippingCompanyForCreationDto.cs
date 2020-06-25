@@ -14,7 +14,6 @@ namespace SlimFormaturas.Domain.Dto.ShippingCompany {
         public string Agency { get; set; }
         public string CheckingAccount { get; set; }
         #endregion
-        public DateTime DateRegister { get; set; }
         public virtual IList<AddressForCreationDto> Address { get; set; }
         public virtual IList<PhoneForCreationDto> Phone { get; set; }
     }

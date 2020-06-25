@@ -20,7 +20,6 @@ namespace SlimFormaturas.Domain.Dto.Employee {
         public string Agency { get; set; }
         public string CheckingAccount { get; set; }
         #endregion
-        public DateTime DateRegister { get; protected set; }
 
         public IList<AddressForCreationDto> Address { get; set; }
         public IList<PhoneForCreationDto> Phone { get; set; }

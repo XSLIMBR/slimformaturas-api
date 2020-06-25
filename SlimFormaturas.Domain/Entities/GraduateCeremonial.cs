@@ -9,7 +9,6 @@ namespace SlimFormaturas.Domain.Entities {
 
         }
 
-
         public string GraduateCeremonialId { get; set;}
         public bool Committee { get; set; }
 
