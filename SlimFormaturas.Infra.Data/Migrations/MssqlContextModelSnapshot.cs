@@ -15,7 +15,7 @@ namespace SlimFormaturas.Infra.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.1")
+                .HasAnnotation("ProductVersion", "3.1.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -46,7 +46,7 @@ namespace SlimFormaturas.Infra.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("EmployeeId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("GraduateId")
                         .HasColumnType("nvarchar(450)");
@@ -65,7 +65,7 @@ namespace SlimFormaturas.Infra.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ShippingCompanyId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Street")
                         .IsRequired()
@@ -83,9 +83,13 @@ namespace SlimFormaturas.Infra.Data.Migrations
 
                     b.HasKey("AddressId");
 
+                    b.HasIndex("EmployeeId");
+
                     b.HasIndex("GraduateId");
 
                     b.HasIndex("SellerId");
+
+                    b.HasIndex("ShippingCompanyId");
 
                     b.HasIndex("TypeGenericId");
 
@@ -106,6 +110,79 @@ namespace SlimFormaturas.Infra.Data.Migrations
                     b.HasKey("CourseId");
 
                     b.ToTable("Course");
+                });
+
+            modelBuilder.Entity("SlimFormaturas.Domain.Entities.Employee", b =>
+                {
+                    b.Property<string>("EmployeeId")
+                        .HasColumnName("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Agency")
+                        .HasColumnType("varchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Bank")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CheckingAccount")
+                        .HasColumnType("varchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Cpf")
+                        .IsRequired()
+                        .HasColumnType("varchar(11)")
+                        .HasMaxLength(11);
+
+                    b.Property<string>("DadName")
+                        .HasColumnType("varchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<DateTime>("DateRegister")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("MotherName")
+                        .HasColumnType("varchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("Photo")
+                        .HasColumnType("varchar")
+                        .HasMaxLength(255);
+
+                    b.Property<string>("Rg")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Sex")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)")
+                        .HasMaxLength(450);
+
+                    b.HasKey("EmployeeId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Employee");
                 });
 
             modelBuilder.Entity("SlimFormaturas.Domain.Entities.Graduate", b =>
@@ -200,7 +277,7 @@ namespace SlimFormaturas.Infra.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("EmployeeId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("GraduateId")
                         .HasColumnType("nvarchar(450)");
@@ -215,7 +292,7 @@ namespace SlimFormaturas.Infra.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ShippingCompanyId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("TypeGenericId")
                         .IsRequired()
@@ -223,9 +300,13 @@ namespace SlimFormaturas.Infra.Data.Migrations
 
                     b.HasKey("PhoneId");
 
+                    b.HasIndex("EmployeeId");
+
                     b.HasIndex("GraduateId");
 
                     b.HasIndex("SellerId");
+
+                    b.HasIndex("ShippingCompanyId");
 
                     b.HasIndex("TypeGenericId");
 
@@ -295,6 +376,45 @@ namespace SlimFormaturas.Infra.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Seller");
+                });
+
+            modelBuilder.Entity("SlimFormaturas.Domain.Entities.ShippingCompany", b =>
+                {
+                    b.Property<string>("ShippingCompanyId")
+                        .HasColumnName("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Agency")
+                        .HasColumnType("varchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Bank")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("CheckingAccount")
+                        .HasColumnType("varchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("DateRegister")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Site")
+                        .HasColumnType("varchar(100)")
+                        .HasMaxLength(100);
+
+                    b.HasKey("ShippingCompanyId");
+
+                    b.ToTable("ShippingCompany");
                 });
 
             modelBuilder.Entity("SlimFormaturas.Domain.Entities.TypeGeneric", b =>
@@ -389,17 +509,36 @@ namespace SlimFormaturas.Infra.Data.Migrations
 
             modelBuilder.Entity("SlimFormaturas.Domain.Entities.Address", b =>
                 {
+                    b.HasOne("SlimFormaturas.Domain.Entities.Employee", "Employee")
+                        .WithMany("Address")
+                        .HasForeignKey("EmployeeId");
+
                     b.HasOne("SlimFormaturas.Domain.Entities.Graduate", "Graduate")
                         .WithMany("Address")
-                        .HasForeignKey("GraduateId");
+                        .HasForeignKey("GraduateId")
+                        .OnDelete(DeleteBehavior.ClientCascade);
 
                     b.HasOne("SlimFormaturas.Domain.Entities.Seller", "Seller")
                         .WithMany("Address")
-                        .HasForeignKey("SellerId");
+                        .HasForeignKey("SellerId")
+                        .OnDelete(DeleteBehavior.ClientCascade);
+
+                    b.HasOne("SlimFormaturas.Domain.Entities.ShippingCompany", "ShippingCompany")
+                        .WithMany("Address")
+                        .HasForeignKey("ShippingCompanyId");
 
                     b.HasOne("SlimFormaturas.Domain.Entities.TypeGeneric", "TypeGeneric")
                         .WithMany()
                         .HasForeignKey("TypeGenericId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("SlimFormaturas.Domain.Entities.Employee", b =>
+                {
+                    b.HasOne("SlimFormaturas.Domain.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -415,13 +554,23 @@ namespace SlimFormaturas.Infra.Data.Migrations
 
             modelBuilder.Entity("SlimFormaturas.Domain.Entities.Phone", b =>
                 {
+                    b.HasOne("SlimFormaturas.Domain.Entities.Employee", "Employee")
+                        .WithMany("Phone")
+                        .HasForeignKey("EmployeeId");
+
                     b.HasOne("SlimFormaturas.Domain.Entities.Graduate", "Graduate")
                         .WithMany("Phone")
-                        .HasForeignKey("GraduateId");
+                        .HasForeignKey("GraduateId")
+                        .OnDelete(DeleteBehavior.ClientCascade);
 
                     b.HasOne("SlimFormaturas.Domain.Entities.Seller", "Seller")
                         .WithMany("Phone")
-                        .HasForeignKey("SellerId");
+                        .HasForeignKey("SellerId")
+                        .OnDelete(DeleteBehavior.ClientCascade);
+
+                    b.HasOne("SlimFormaturas.Domain.Entities.ShippingCompany", "ShippingCompany")
+                        .WithMany("Phone")
+                        .HasForeignKey("ShippingCompanyId");
 
                     b.HasOne("SlimFormaturas.Domain.Entities.TypeGeneric", "TypeGeneric")
                         .WithMany()

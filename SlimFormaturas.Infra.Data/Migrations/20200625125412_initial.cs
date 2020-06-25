@@ -8,7 +8,6 @@ namespace SlimFormaturas.Infra.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
 
-
             migrationBuilder.CreateTable(
                 name: "Course",
                 columns: table => new
@@ -19,6 +18,24 @@ namespace SlimFormaturas.Infra.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Course", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ShippingCompany",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
+                    Site = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true),
+                    Bank = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
+                    Agency = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true),
+                    CheckingAccount = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true),
+                    DateRegister = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ShippingCompany", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -45,6 +62,37 @@ namespace SlimFormaturas.Infra.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_University", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Employee",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
+                    Cpf = table.Column<string>(type: "varchar(11)", maxLength: 11, nullable: false),
+                    Rg = table.Column<string>(nullable: false),
+                    Sex = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
+                    BirthDate = table.Column<DateTime>(nullable: false),
+                    DadName = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true),
+                    MotherName = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true),
+                    Email = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
+                    Photo = table.Column<string>(type: "varchar", maxLength: 255, nullable: true),
+                    Bank = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
+                    Agency = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true),
+                    CheckingAccount = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true),
+                    DateRegister = table.Column<DateTime>(nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Employee", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Employee_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -131,15 +179,27 @@ namespace SlimFormaturas.Infra.Data.Migrations
                 {
                     table.PrimaryKey("PK_Address", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Address_Seller_Id",
-                        column: x => x.Id,
-                        principalTable: "Seller",
+                        name: "FK_Address_Employee_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "Employee",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Address_Graduate_GraduateId",
                         column: x => x.GraduateId,
                         principalTable: "Graduate",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Address_Seller_SellerId",
+                        column: x => x.SellerId,
+                        principalTable: "Seller",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Address_ShippingCompany_ShippingCompanyId",
+                        column: x => x.ShippingCompanyId,
+                        principalTable: "ShippingCompany",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -169,17 +229,29 @@ namespace SlimFormaturas.Infra.Data.Migrations
                 {
                     table.PrimaryKey("PK_Phone", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_Phone_Employee_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "Employee",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_Phone_Graduate_GraduateId",
                         column: x => x.GraduateId,
                         principalTable: "Graduate",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Phone_Seller_Id",
-                        column: x => x.Id,
+                        name: "FK_Phone_Seller_SellerId",
+                        column: x => x.SellerId,
                         principalTable: "Seller",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Phone_ShippingCompany_ShippingCompanyId",
+                        column: x => x.ShippingCompanyId,
+                        principalTable: "ShippingCompany",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Phone_TypeGeneric_TypeGenericId",
                         column: x => x.TypeGenericId,
@@ -189,9 +261,24 @@ namespace SlimFormaturas.Infra.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Address_EmployeeId",
+                table: "Address",
+                column: "EmployeeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Address_GraduateId",
                 table: "Address",
                 column: "GraduateId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Address_SellerId",
+                table: "Address",
+                column: "SellerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Address_ShippingCompanyId",
+                table: "Address",
+                column: "ShippingCompanyId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Address_TypeGenericId",
@@ -199,14 +286,34 @@ namespace SlimFormaturas.Infra.Data.Migrations
                 column: "TypeGenericId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Employee_UserId",
+                table: "Employee",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Graduate_UserId",
                 table: "Graduate",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Phone_EmployeeId",
+                table: "Phone",
+                column: "EmployeeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Phone_GraduateId",
                 table: "Phone",
                 column: "GraduateId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Phone_SellerId",
+                table: "Phone",
+                column: "SellerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Phone_ShippingCompanyId",
+                table: "Phone",
+                column: "ShippingCompanyId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Phone_TypeGenericId",
@@ -234,15 +341,19 @@ namespace SlimFormaturas.Infra.Data.Migrations
                 name: "University");
 
             migrationBuilder.DropTable(
+                name: "Employee");
+
+            migrationBuilder.DropTable(
                 name: "Graduate");
 
             migrationBuilder.DropTable(
                 name: "Seller");
 
             migrationBuilder.DropTable(
+                name: "ShippingCompany");
+
+            migrationBuilder.DropTable(
                 name: "TypeGeneric");
-
-
         }
     }
 }

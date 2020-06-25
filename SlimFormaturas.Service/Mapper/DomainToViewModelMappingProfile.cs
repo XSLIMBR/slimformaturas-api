@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using SlimFormaturas.Domain.Dto;
 using SlimFormaturas.Domain.Dto.Address;
+using SlimFormaturas.Domain.Dto.Employee;
 using SlimFormaturas.Domain.Dto.Graduate;
 using SlimFormaturas.Domain.Dto.Phone;
 using SlimFormaturas.Domain.Dto.Seller;
@@ -15,6 +16,8 @@ namespace SlimFormaturas.Service.Mapper {
             CreateMap<ShippingCompany, ShippingCompanyDto>();
             CreateMap<ShippingCompany, ShippingCompanyForCreationDto>();
 
+            CreateMap<Employee, EmployeeDto>();
+            CreateMap<Employee, EmployeeForCreationDto>();
 
             CreateMap<University, UniversityDto>();
             CreateMap<University, UniversityForCreationDto>();

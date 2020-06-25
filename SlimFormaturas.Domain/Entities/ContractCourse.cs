@@ -2,8 +2,7 @@
 
 namespace SlimFormaturas.Domain.Entities {
     public class ContractCourse {
-        public ContractCourse() 
-        {
+        public ContractCourse() {
             ContractId = Guid.NewGuid().ToString();
         }
         public string ContractId { get; set; }
