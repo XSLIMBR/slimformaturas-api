@@ -20,14 +20,15 @@ namespace SlimFormaturas.Infra.Data.Context {
         public DbSet<Address> Address { get; set; }
         public DbSet<Phone> Phone { get; set; }
         public DbSet<User> User { get; set; }
+        public DbSet<College> College { get; set; }
         public DbSet<TypeGeneric> TypeGeneric { get; set; }
         public DbSet<Employee> Employee { get; set; }
         public DbSet<Course> Course { get; set; }
         public DbSet<ShippingCompany> ShippingCompany { get; set; }
         public DbSet<Seller> Seller { get; set; }
-        public DbSet<University> University { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
+            modelBuilder.ApplyConfiguration(new CollegeMap());
             modelBuilder.ApplyConfiguration(new EmployeeMap());
             modelBuilder.ApplyConfiguration(new GraduateMap());
             modelBuilder.ApplyConfiguration(new AddressMap());
@@ -37,7 +38,6 @@ namespace SlimFormaturas.Infra.Data.Context {
             modelBuilder.ApplyConfiguration(new TypeGenericMap());
             modelBuilder.ApplyConfiguration(new CourseMap());
             modelBuilder.ApplyConfiguration(new SellerMap());
-            modelBuilder.ApplyConfiguration(new UniversityMap());
             base.OnModelCreating(modelBuilder);
         }
 

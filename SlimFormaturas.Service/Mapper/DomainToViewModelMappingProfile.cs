@@ -7,7 +7,7 @@ using SlimFormaturas.Domain.Dto.Phone;
 using SlimFormaturas.Domain.Dto.Seller;
 using SlimFormaturas.Domain.Dto.ShippingCompany;
 using SlimFormaturas.Domain.Dto.TypeGeneric;
-using SlimFormaturas.Domain.Dto.University;
+using SlimFormaturas.Domain.Dto.College;
 using SlimFormaturas.Domain.Entities;
 
 namespace SlimFormaturas.Service.Mapper {
@@ -19,8 +19,8 @@ namespace SlimFormaturas.Service.Mapper {
             CreateMap<Employee, EmployeeDto>();
             CreateMap<Employee, EmployeeForCreationDto>();
 
-            CreateMap<University, UniversityDto>();
-            CreateMap<University, UniversityForCreationDto>();
+            CreateMap<College, CollegeDto>();
+            CreateMap<College, CollegeForCreationDto>();
 
             #region Formando
             CreateMap<Graduate, GraduateDto>();
