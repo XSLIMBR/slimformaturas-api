@@ -1,5 +1,5 @@
 ﻿using SlimFormaturas.Domain.Entities;
-
+using System.Threading.Tasks;
 
 namespace SlimFormaturas.Domain.Interfaces.Repository
 {

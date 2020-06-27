@@ -1,4 +1,6 @@
-﻿using SlimFormaturas.Domain.Entities;
+﻿using AutoMapper;
+using SlimFormaturas.Domain.Dto.Course;
+using SlimFormaturas.Domain.Entities;
 using SlimFormaturas.Domain.Interfaces.Repository;
 using SlimFormaturas.Domain.Interfaces.Service;
 using SlimFormaturas.Domain.Notifications;
@@ -11,60 +13,65 @@ namespace SlimFormaturas.Service.Services
     {
         private readonly ICourseRepository _courseRepository;
         protected readonly NotificationHandler _notifications;
+        readonly IMapper _mapper;
 
         public CourseService
             (
              ICourseRepository courseRepository,
-             NotificationHandler notifications
+             NotificationHandler notifications,
+              IMapper mapper
             ) : base(courseRepository)
         {
             _courseRepository = courseRepository;
             _notifications = notifications;
+            _mapper = mapper;
         }
 
-        public async Task<Course> Insert(Course obj)
+        public async Task<Course> Insert(Course course)
         {
-            //Course course = new Course(obj.Name);
-
-            Course course = null;
+            course.Validate(course, new CourseValidator());
+            _notifications.AddNotifications(course.ValidationResult);
 
             if (course.Invalid)
             {
                 _notifications.AddNotifications(course.ValidationResult);
             }
 
-             if (!_notifications.HasNotifications)
+            if (!_notifications.HasNotifications)
             {
                 await Post(course);
             }
-            return obj;
+
+            return course;
         }
 
-        public async Task<Course> Update(Course obj) 
+        public async Task<Course> Update(CourseDto courseDto)
         {
-            Course course = await _courseRepository.GetById(obj.CourseId);
-            if (course != null) 
+
+            Course course = await _courseRepository.GetById(courseDto.CourseId);
+
+            if (course != null)
             {
-                course.Name = obj.Name;
-               // course.GraduateCeremonial = obj.GraduateCeremonial;
-               // course.ContractCourses = obj.ContractCourses;
+
+                _mapper.Map(courseDto, course);
 
                 course.Validate(course, new CourseValidator());
+                _notifications.AddNotifications(course.ValidationResult);
 
-                if (course.Valid)
+                if (!_notifications.HasNotifications)
                 {
                     await Put(course);
                 }
-                else 
-                {
-                    _notifications.AddNotifications(course.ValidationResult);
-                }
+
             }
-            else 
-                {
-                    _notifications.AddNotification("404", "Curso", " Curso com id = " + obj.CourseId + "não foi encontrado");
-                }
+            else
+            {
+                _notifications.AddNotification("404", "CourseId", "Course with id = " + courseDto.CourseId + " not found");
+            }
+
             return course;
         }
+
+
     }
 }

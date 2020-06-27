@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using SlimFormaturas.Domain.Dto.Course;
 using SlimFormaturas.Domain.Entities;
 using SlimFormaturas.Domain.Interfaces.Service;
 using SlimFormaturas.Domain.Notifications;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace SlimFormaturas.Api.Controllers
@@ -12,48 +14,39 @@ namespace SlimFormaturas.Api.Controllers
     public class CourseController : ApiController
     {
         readonly ICourseService _courseService;
+        readonly IMapper _mapper;
         public CourseController
             (
              ICourseService courseService,
-             NotificationHandler notifications
+             NotificationHandler notifications,
+              IMapper mapper
             ) : base(notifications)
         {
             _courseService = courseService;
+            _mapper = mapper;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(Course course) // Inseri um Curso
+        public async Task<IActionResult> Post([FromBody]CourseForCreationDto courseDto)
         {
-            course = await _courseService.Insert(course);
-            return Response(course);
-        }
-
-        [HttpPut]
-        public async Task<IActionResult> Put(Course course)  // Atualiza um Curso
-        {
-           course = await _courseService.Update(course);
+            var course = _mapper.Map<Course>(courseDto);
+            _ = await _courseService.Insert(course);
             return Response(course.CourseId);
         }
 
+        [HttpPut]
+        public async Task<IActionResult> Put([FromBody]CourseDto CourseDto)
+        {
+            await _courseService.Update(CourseDto);
+            return Response(CourseDto.CourseId);
+        }
+
+
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(string id) //Deleta um curso espera receber um identificador
+        public async Task<ActionResult> Delete(string id)
         {
             await _courseService.Delete(id);
             return Response();
-        }
-
-
-        [HttpGet]
-        public async Task<IActionResult> Get()  //Retorna todos os cursos
-        {
-            return Response(await _courseService.Get());
-        }
-
-
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(string id)  //Retorna um determinado curso
-        {
-            return Response(await _courseService.Get(id));
         }
     }
 }

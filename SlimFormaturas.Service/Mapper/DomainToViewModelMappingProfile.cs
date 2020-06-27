@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using SlimFormaturas.Domain.Dto;
 using SlimFormaturas.Domain.Dto.Address;
+using SlimFormaturas.Domain.Dto.Course;
 using SlimFormaturas.Domain.Dto.Employee;
 using SlimFormaturas.Domain.Dto.Graduate;
 using SlimFormaturas.Domain.Dto.Phone;
@@ -38,6 +39,9 @@ namespace SlimFormaturas.Service.Mapper {
 
             CreateMap<TypeGeneric, TypeGenericDto>();
             CreateMap<TypeGeneric, TypeGenericForCreationDto>();
+
+            CreateMap<Course, CourseDto>();
+            CreateMap<Course, CourseForCreationDto>();
         }
     }
 }
