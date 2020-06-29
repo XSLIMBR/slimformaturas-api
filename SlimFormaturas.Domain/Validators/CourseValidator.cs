@@ -11,7 +11,7 @@ namespace SlimFormaturas.Domain.Validators {
             RuleFor(c => c.Name)
                 .NotEmpty().WithMessage(" É necessário informar o nome do Curso ")
                 .NotNull()
-                .Length(3, 50).WithMessage("O campo deve ter entre 1 e 50 caracteres ");
+                .Length(3, 50).WithMessage("O campo deve ter entre 3 e 50 caracteres ");
         }
     }
 }
