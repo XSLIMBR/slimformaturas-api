@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using SlimFormaturas.Domain.Validators;
 
@@ -11,7 +12,8 @@ namespace SlimFormaturas.Domain.Entities {
 
         public string CourseId { get; set; }
         public string Name { get; set; }
-        public  IList<ContractCourse> ContractCourse { get; set; }
-        public  IList<GraduateCeremonial> GraduateCeremonial { get; set; }
+
+        public   IList<ContractCourse> ContractCourse { get; set; }
+        public  virtual IList<GraduateCeremonial> GraduateCeremonial { get; set; }
     }
 }

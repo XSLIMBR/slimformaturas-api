@@ -18,7 +18,7 @@ namespace SlimFormaturas.Infra.Data.Mapping
                     .HasColumnType("varchar(100)")
                     .HasMaxLength(100)
                     .IsRequired();
-                  
+
             builder.ToTable("Course");
         }
     }
