@@ -17,26 +17,5 @@ namespace SlimFormaturas.Infra.Data.Repository
         {
             _userManager = userManager;
         }
-
-        public async Task<Course> GetAllById(string id)
-        {
-            var course = await Context.Course
-                .Include(c => c.ContractCourse)
-                .Include(c => c.GraduateCeremonial)
-                .FirstOrDefaultAsync(c => c.CourseId == id);
-
-            return course;
-        }
-
-
-        public new async Task<IList<Course>> GetAll()
-        {
-            var course = await Context.Course
-                .Include(c => c.ContractCourse)
-                .Include(c => c.GraduateCeremonial)
-                .ToListAsync();
-
-            return course;
-        }
     }      
 }
