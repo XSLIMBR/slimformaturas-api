@@ -10,13 +10,7 @@ namespace SlimFormaturas.Infra.Data.Mapping {
 
             builder.HasOne(c => c.Contract)
                 .WithMany(b => b.ContractCourses)
-                .HasForeignKey(c => c.ContractId);
-
-           
-           builder.HasOne(c => c.Course)
-                .WithMany(b => b.ContractCourse)
-                .HasForeignKey(c => c.CourseId);
-           
+                .HasForeignKey(c => c.ContractId);           
         }
     }
 }
