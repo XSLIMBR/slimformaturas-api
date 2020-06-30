@@ -19,19 +19,17 @@ namespace SlimFormaturas.Infra.Data.Mapping
                     .HasMaxLength(100)
                     .IsRequired();
 
-            /*
-             //Um curso pode ter vários contratos.. 
-              builder.HasMany(c => c.ContractCourses)
+            builder.HasMany(c => c.GraduateCeremonial)
+               .WithOne(e => e.Course)
+               .HasForeignKey(y => y.CourseId)
+               .OnDelete(DeleteBehavior.Cascade);
+               
+            builder.HasMany(c => c.ContractCourse)
                   .WithOne(e => e.Course)
                   .HasForeignKey(y => y.CourseId)
                   .OnDelete(DeleteBehavior.Cascade);
-
-            //Um curso pode ter vários formandos.. Um formando pode ter apenas um curso.
-              builder.HasMany(c => c.GraduateCeremonial)
-                  .WithOne(e => e.Course)
-                  .HasForeignKey(y => y.CourseId)
-                  .OnDelete(DeleteBehavior.Cascade);
-           */       
+ 
+                  
             builder.ToTable("Course");
         }
     }

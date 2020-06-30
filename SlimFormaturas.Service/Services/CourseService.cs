@@ -72,6 +72,11 @@ namespace SlimFormaturas.Service.Services
             return course;
         }
 
+        public async Task<Course> GetAllById(string id)
+        {
+            return await _courseRepository.GetAllById(id);
+        }
+
 
     }
 }
