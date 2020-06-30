@@ -7,7 +7,5 @@ namespace SlimFormaturas.Domain.Dto.Course
     {
         public string CourseId { get; set; }
         public string Name { get; set; }
-        public IList<ContractCourse> ContractCourse { get; set; }
-        public IList<GraduateCeremonial> GraduateCeremonial { get; set; }
     }
 }

@@ -18,17 +18,6 @@ namespace SlimFormaturas.Infra.Data.Mapping
                     .HasColumnType("varchar(100)")
                     .HasMaxLength(100)
                     .IsRequired();
-
-            builder.HasMany(c => c.GraduateCeremonial)
-               .WithOne(e => e.Course)
-               .HasForeignKey(y => y.CourseId)
-               .OnDelete(DeleteBehavior.Cascade);
-               
-            builder.HasMany(c => c.ContractCourse)
-                  .WithOne(e => e.Course)
-                  .HasForeignKey(y => y.CourseId)
-                  .OnDelete(DeleteBehavior.Cascade);
- 
                   
             builder.ToTable("Course");
         }
