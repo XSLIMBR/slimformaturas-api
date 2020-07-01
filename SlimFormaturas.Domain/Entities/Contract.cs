@@ -22,6 +22,7 @@ namespace SlimFormaturas.Domain.Entities {
         public string CollegeId { get; set; }
 
         public College College { get; set; }
+
         public IList<ContractCourse> ContractCourses { get; set; }
         public IList<GraduateAlbum> GraduateAlbum { get; set; }
         public IList<GraduateCeremonial> GraduateCeremonial { get; set; }

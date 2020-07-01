@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SlimFormaturas.Infra.Data.Context;
 
 namespace SlimFormaturas.Infra.Data.Migrations
 {
     [DbContext(typeof(MssqlContext))]
-    partial class MssqlContextModelSnapshot : ModelSnapshot
+    [Migration("20200701013634_atualizacao")]
+    partial class atualizacao
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -149,16 +151,18 @@ namespace SlimFormaturas.Infra.Data.Migrations
 
             modelBuilder.Entity("SlimFormaturas.Domain.Entities.ContractCourse", b =>
                 {
-                    b.Property<string>("CourseId")
+                    b.Property<string>("ContractCourseId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ContractId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ContractCourseId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CourseId", "ContractId");
+                    b.Property<string>("CourseId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("ContractCourseId");
+
+                    b.HasIndex("CourseId");
 
                     b.ToTable("ContractCourse");
                 });
@@ -323,30 +327,6 @@ namespace SlimFormaturas.Infra.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Graduate");
-                });
-
-            modelBuilder.Entity("SlimFormaturas.Domain.Entities.GraduateCeremonial", b =>
-                {
-                    b.Property<string>("GraduateId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("CourseId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("Committee")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("ContractId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("GraduateCeremonialId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("GraduateId", "CourseId");
-
-                    b.HasIndex("CourseId");
-
-                    b.ToTable("GraduateCeremonial");
                 });
 
             modelBuilder.Entity("SlimFormaturas.Domain.Entities.Phone", b =>
@@ -619,9 +599,7 @@ namespace SlimFormaturas.Infra.Data.Migrations
                 {
                     b.HasOne("SlimFormaturas.Domain.Entities.Course", "Course")
                         .WithMany("ContractCourses")
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CourseId");
                 });
 
             modelBuilder.Entity("SlimFormaturas.Domain.Entities.Employee", b =>
@@ -638,21 +616,6 @@ namespace SlimFormaturas.Infra.Data.Migrations
                     b.HasOne("SlimFormaturas.Domain.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("SlimFormaturas.Domain.Entities.GraduateCeremonial", b =>
-                {
-                    b.HasOne("SlimFormaturas.Domain.Entities.Course", "Course")
-                        .WithMany("GraduateCeremonial")
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SlimFormaturas.Domain.Entities.Graduate", "Graduate")
-                        .WithMany("GraduateCeremonial")
-                        .HasForeignKey("GraduateId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
