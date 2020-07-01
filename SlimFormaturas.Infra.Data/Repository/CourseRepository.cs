@@ -17,5 +17,13 @@ namespace SlimFormaturas.Infra.Data.Repository
         {
             _userManager = userManager;
         }
-    }      
+
+        public async Task<Course> GetAllById(string id)
+        {
+            var course = await Context.Course
+                .FirstOrDefaultAsync(c => c.CourseId == id);
+            return course;
+        }
+
+    }
 }

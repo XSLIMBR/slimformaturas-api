@@ -41,7 +41,7 @@ namespace SlimFormaturas.Api.Controllers
             return Response(CourseDto.CourseId);
         }
 
-        /*[HttpGet]
+        [HttpGet]
         public async Task<ActionResult<CourseDto>> Get()
         {
             var course = _mapper.Map<IList<CourseDto>>(await _courseService.Get());
@@ -53,15 +53,6 @@ namespace SlimFormaturas.Api.Controllers
         {
             var course = _mapper.Map<CourseDto>(await _courseService.GetAllById(id));
             return Response(course);
-        }*/
-        /*
-
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(string id)
-        {
-            await _courseService.Delete(id);
-            return Response();
         }
-        */
     }
 }

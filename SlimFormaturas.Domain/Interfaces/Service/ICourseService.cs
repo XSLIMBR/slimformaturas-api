@@ -8,6 +8,7 @@ namespace SlimFormaturas.Domain.Interfaces.Service
     {
         Task<Course> Insert(Course obj);
         Task<Course> Update(CourseDto courseDto);
+        Task<Course> GetAllById(string id);
     }
 }
 

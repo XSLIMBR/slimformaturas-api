@@ -72,9 +72,9 @@ namespace SlimFormaturas.Service.Services
             return course;
         }
 
-        public Task<Course> GetAllById(string id)
+        public async Task<Course> GetAllById(string id)
         {
-            throw new System.NotImplementedException();
+            return await _courseRepository.GetAllById(id);
         }
     }
 }
