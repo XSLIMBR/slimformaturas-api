@@ -7,64 +7,44 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using SlimFormaturas.Domain.Notifications;
 using SlimFormaturas.Infra.CrossCutting.Identity.Models;
 
-namespace SlimFormaturas.Api.Controllers
-{
+namespace SlimFormaturas.Api.Controllers {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthController : ApiController
-    {
+    public class AuthController : ApiController {
 
          readonly SignInManager<ApplicationUser> _signInManager;
          readonly UserManager<ApplicationUser> _userManager;
          readonly AppSettings _appSettings;
+        protected readonly NotificationHandler _notifications;
 
         public AuthController(SignInManager<ApplicationUser> signInManager, 
             UserManager<ApplicationUser> userManager,
-            IOptions<AppSettings> appSettings,
-            NotificationHandler notifications) : base (notifications)
-        {
+            NotificationHandler notifications,
+            IOptions<AppSettings> appSettings) : base(notifications){
             _signInManager = signInManager;
             _userManager = userManager;
+            _notifications = notifications;
             _appSettings = appSettings.Value;
         }
 
-        [HttpPost("Register")]
-        public async Task<ActionResult> Register(Register registerUser) {
-            if (!ModelState.IsValid) return BadRequest(ModelState.Values.SelectMany(e => e.Errors));
-
-            var user = new ApplicationUser {
-                UserName = registerUser.Email,
-                Email = registerUser.Email,
-                EmailConfirmed = true
-            };
-
-            var result = await _userManager.CreateAsync(user, registerUser.Password);
-
-            if (!result.Succeeded) return BadRequest(result.Errors);
-
-            await _signInManager.SignInAsync(user, false);
-
-            return Ok(await GetJWT(registerUser.Email));
-        }
-
         [HttpPost("Login")]
-        public async Task<ActionResult> Login(Login loginUser)
-        {
-            if (!ModelState.IsValid) return BadRequest(ModelState.Values.SelectMany(e => e.Errors));
-            
-            var result = await _signInManager.PasswordSignInAsync(loginUser.Email, loginUser.Password, false, true);
+        public async Task<ActionResult> Login(Login loginUser){
+            //if (!ModelState.IsValid) return BadRequest(ModelState.Values.SelectMany(e => e.Errors));
 
-            if (result.Succeeded)
-            {
-                return Ok(await GetJWT(loginUser.Email));
+            var result = await _signInManager.PasswordSignInAsync(loginUser.UserName, loginUser.Password, false, true);
+
+            if (result.Succeeded) {
+                return Response(await GetJWT(loginUser.UserName));
             }
 
-            return BadRequest("Usuário ou senha inválidos");
+            _notifications.AddNotification("UserName/PassWord","User", "Usuário ou senha inválidos");
+            return Response();
         }
 
         async Task<string> GetJWT(string username) {
