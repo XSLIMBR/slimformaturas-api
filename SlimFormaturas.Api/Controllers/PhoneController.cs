@@ -11,7 +11,7 @@ using SlimFormaturas.Domain.Dto.Phone;
 
 namespace SlimFormaturas.Api.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PhoneController : ApiController {
