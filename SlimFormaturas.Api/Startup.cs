@@ -37,6 +37,8 @@ namespace SlimFormaturas.Api {
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
 
+            services.AddCors();
+
             // WebAPI Config
             services.AddMvc(option => option.EnableEndpointRouting = false)
                 .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
@@ -129,6 +131,8 @@ namespace SlimFormaturas.Api {
 
             // AutoMapper Settings
             services.AddAutoMapperSetup();
+
+           
 
             RegisterServices(services);
         }
