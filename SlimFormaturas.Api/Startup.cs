@@ -37,7 +37,14 @@ namespace SlimFormaturas.Api {
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
 
-            services.AddCors();
+            services.AddCors(options => {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
+
 
             // WebAPI Config
             services.AddMvc(option => option.EnableEndpointRouting = false)
@@ -145,10 +152,7 @@ namespace SlimFormaturas.Api {
 
             app.UseRouting();
 
-            app.UseCors(option => option.AllowAnyOrigin()
-                            .AllowAnyMethod()
-                            .AllowAnyHeader()
-                            .AllowCredentials());
+            app.UseCors("CorsPolicy");
 
             app.UseAuthentication();
             app.UseAuthorization();
