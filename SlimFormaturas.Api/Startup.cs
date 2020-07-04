@@ -18,8 +18,7 @@ using System.Text;
 using SlimFormaturas.Api.Configurations;
 using SlimFormaturas.Infra.CrossCutting.Identity.Models;
 
-namespace SlimFormaturas.Api
-{
+namespace SlimFormaturas.Api {
     public class Startup {
 
         public IConfiguration Configuration { get; }
@@ -31,16 +30,22 @@ namespace SlimFormaturas.Api
                 .AddJsonFile($"appsettings.{environment.EnvironmentName}.json", true);
 
             builder.AddEnvironmentVariables();
-            
+
             Configuration = builder.Build();
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
 
+            services.AddCors(options => {
+                options.AddDefaultPolicy(builder => {
+                    builder.WithOrigins("http://localhost:8080");
+                });
+            });
+
             // WebAPI Config
             services.AddMvc(option => option.EnableEndpointRouting = false)
-                .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore) ;
+                .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             //identity
             services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -50,8 +55,7 @@ namespace SlimFormaturas.Api
 
 
             // Configure Identity
-            services.Configure<IdentityOptions>(options => 
-            {
+            services.Configure<IdentityOptions>(options => {
                 // Password settings
                 options.Password.RequireDigit = true;
                 options.Password.RequiredLength = 11;
@@ -71,12 +75,10 @@ namespace SlimFormaturas.Api
                 x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(x =>
-            {
+            }).AddJwtBearer(x => {
                 x.RequireHttpsMetadata = true;
                 x.SaveToken = true;
-                x.TokenValidationParameters = new TokenValidationParameters
-                {
+                x.TokenValidationParameters = new TokenValidationParameters {
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(key),
                     ValidateIssuer = true,
@@ -102,16 +104,14 @@ namespace SlimFormaturas.Api
 
             services.AddControllers().AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-                //options.OutputFormatters.Remove(new XmlDataContractSerializerOutputFormatter());
+            //options.OutputFormatters.Remove(new XmlDataContractSerializerOutputFormatter());
             );
-                //.SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            //.SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
-            services.AddSwaggerGen(c =>
-            {
+            services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new OpenApiInfo { Version = "v1", Title = "API" });
 
-                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                {
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme {
                     Description = "JWT Authorization header using the bearer scheme",
                     Name = "Authorization",
                     In = ParameterLocation.Header,
@@ -126,7 +126,7 @@ namespace SlimFormaturas.Api
                                 Type = ReferenceType.SecurityScheme
                             }}, new List<string>()
                     }
-                }); 
+                });
 
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
@@ -153,8 +153,7 @@ namespace SlimFormaturas.Api
             app.UseAuthorization();
 
             app.UseHttpsRedirection();
-            app.UseEndpoints(endpoints =>
-            {
+            app.UseEndpoints(endpoints => {
                 endpoints.MapControllers();
             });
             app.UseSwagger();
@@ -162,7 +161,7 @@ namespace SlimFormaturas.Api
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "SlimFormaturas");
             });
         }
-         static void RegisterServices(IServiceCollection services) {
+        static void RegisterServices(IServiceCollection services) {
             // Adding dependencies from another layers (isolated from Presentation)
             NativeInjectorBootStrapper.RegisterServices(services);
         }
