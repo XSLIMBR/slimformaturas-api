@@ -37,15 +37,6 @@ namespace SlimFormaturas.Api {
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
 
-            services.AddCors(options => {
-                options.AddDefaultPolicy(builder => {
-                    builder.WithOrigins("http://localhost:8080").AllowAnyOrigin()
-                            .AllowAnyMethod()
-                            .AllowAnyHeader()
-                            .AllowCredentials();
-                });
-            });
-
             // WebAPI Config
             services.AddMvc(option => option.EnableEndpointRouting = false)
                 .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
@@ -150,7 +141,10 @@ namespace SlimFormaturas.Api {
 
             app.UseRouting();
 
-            app.UseCors();
+            app.UseCors(option => option.AllowAnyOrigin()
+                            .AllowAnyMethod()
+                            .AllowAnyHeader()
+                            .AllowCredentials());
 
             app.UseAuthentication();
             app.UseAuthorization();
