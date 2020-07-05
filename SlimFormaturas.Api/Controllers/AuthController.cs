@@ -39,8 +39,18 @@ namespace SlimFormaturas.Api.Controllers {
 
             var result = await _signInManager.PasswordSignInAsync(loginUser.UserName, loginUser.Password, false, true);
 
+            var token = await GetJWT(loginUser.UserName);
+
             if (result.Succeeded) {
-                return Response(await GetJWT(loginUser.UserName));
+                var data = new {
+                    userData = new {
+                        displayName = "Julio Rodrigues",
+                        photoURL = @"/assets/images/portrait/small/avatar-s-11.jpg"
+                    },
+                    accessToken = token
+                };
+
+                return Response(data);
             }
 
             _notifications.AddNotification("UserName/PassWord","User", "Usuário ou senha inválidos");
