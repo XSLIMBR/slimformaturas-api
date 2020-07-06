@@ -47,13 +47,13 @@ namespace SlimFormaturas.Infra.Data.Context {
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
-            // get the configuration from the app settings
-            var config = new ConfigurationBuilder()
-                .SetBasePath(_environment.ContentRootPath)
-                .AddJsonFile("appsettings.json")
-                .AddJsonFile($"appsettings.{_environment.EnvironmentName}.json", true)
-                .Build();
-            // define the database to use
+           // get the configuration from the app settings
+           var config = new ConfigurationBuilder()
+               .SetBasePath(_environment.ContentRootPath)
+               .AddJsonFile("appsettings.json")
+               .AddJsonFile($"appsettings.{_environment.EnvironmentName}.json", true)
+               .Build();
+            //define the database to use
             optionsBuilder.UseSqlServer(config.GetConnectionString("DefaultConnection"));
         }
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default){
