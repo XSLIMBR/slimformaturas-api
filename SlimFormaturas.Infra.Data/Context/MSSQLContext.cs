@@ -40,6 +40,7 @@ namespace SlimFormaturas.Infra.Data.Context {
             modelBuilder.ApplyConfiguration(new SellerMap());
             modelBuilder.ApplyConfiguration(new ContractCourseMap());
             modelBuilder.ApplyConfiguration(new GraduateCeremonialMap());
+            modelBuilder.ApplyConfiguration(new ContractMap());
 
             
 
