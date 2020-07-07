@@ -13,10 +13,10 @@ namespace SlimFormaturas.Domain.Validators {
                 .NotNull()
                 .Length(1, 50);
             RuleFor(c => c.Semester)
-                .NotEmpty()
+                .NotEmpty().WithMessage(" É necessário informar o semestre ")
                 .NotNull();
             RuleFor(c => c.Year)
-                .NotEmpty()
+                .NotEmpty().WithMessage(" É necessário informar o ano que o aluno está cursando ")
                 .NotNull();
         }
     }
