@@ -10,6 +10,7 @@ using SlimFormaturas.Domain.Dto.ShippingCompany;
 using SlimFormaturas.Domain.Dto.TypeGeneric;
 using SlimFormaturas.Domain.Dto.College;
 using SlimFormaturas.Domain.Entities;
+using SlimFormaturas.Domain.Dto.Contract;
 
 namespace SlimFormaturas.Service.Mapper {
     public class DomainToViewModelMappingProfile : Profile{
@@ -42,6 +43,9 @@ namespace SlimFormaturas.Service.Mapper {
 
             CreateMap<Course, CourseDto>();
             CreateMap<Course, CourseForCreationDto>();
+
+            CreateMap<Contract, ContractDto>();
+            CreateMap<Contract, ContractForCreationDto>();
         }
     }
 }
