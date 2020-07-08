@@ -6,7 +6,6 @@ namespace SlimFormaturas.Domain.Entities {
     public class GraduateCeremonial : Entity{
         public GraduateCeremonial() {
             GraduateCeremonialId = Guid.NewGuid().ToString();
-
         }
 
         public string GraduateCeremonialId { get; set;}

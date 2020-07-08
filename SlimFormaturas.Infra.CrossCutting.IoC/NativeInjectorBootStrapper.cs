@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using SlimFormaturas.Domain.Entities;
 using SlimFormaturas.Domain.Interfaces.Repository;
 using SlimFormaturas.Domain.Interfaces.Service;
 using SlimFormaturas.Domain.Notifications;
@@ -26,6 +27,7 @@ namespace SlimFormaturas.Infra.CrossCutting.IoC {
             services.AddScoped<ICollegeService, CollegeService>();
             services.AddScoped<IShippingCompanyService, ShippingCompanyService>();
             services.AddScoped<IContractService, ContractService>();
+            services.AddScoped<IPermissionsService, PermissionsService>();
             //Infra - Data
             services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
@@ -38,6 +40,7 @@ namespace SlimFormaturas.Infra.CrossCutting.IoC {
             services.AddScoped<ICourseRepository, CourseRepository>();
             services.AddScoped<ICollegeRepository, CollegeRepository>();
             services.AddScoped<IContractRepository, ContractRepository>();
+            services.AddScoped<IPermissionsRepository, PermissionsRepository>();
             //Context
             services.AddDbContext<MssqlContext>();
             services.AddDbContext<ApplicationDbContext>();
