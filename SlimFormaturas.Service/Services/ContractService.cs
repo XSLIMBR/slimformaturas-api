@@ -26,11 +26,19 @@ namespace SlimFormaturas.Service.Services
             _mapper = mapper;
         }
 
-        public async Task<Contract> Insert(Contract obj)
+        public async Task<Contract> Insert(Contract contract)
         {
-            obj.Validate(obj, new ContractValidator());
-            _notifications.AddNotifications(obj.ValidationResult);
-            return obj;
+            contract.Validate(contract, new ContractValidator());
+            _notifications.AddNotifications(contract.ValidationResult);
+
+            if (contract.Invalid) {
+                _notifications.AddNotifications(contract.ValidationResult);
+            }
+            if (!_notifications.HasNotifications) {
+                await Post(contract);
+            }
+
+            return contract;
         }
     }
 }
