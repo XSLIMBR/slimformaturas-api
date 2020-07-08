@@ -18,6 +18,10 @@ namespace SlimFormaturas.Domain.Validators {
             RuleFor(c => c.Year)
                 .NotEmpty().WithMessage(" É necessário informar o ano que o aluno está cursando ")
                 .NotNull();
+
+            RuleFor(c => c.Note)
+                .NotEmpty().WithMessage(" É necessário informar a nota obtida pelo aluno no curso ")
+                .NotNull();
         }
     }
 }
