@@ -39,11 +39,11 @@ namespace SlimFormaturas.Domain.Validators
             RuleFor(c => c.Photo)
                 .Length(1,255).WithMessage("O campo foto deve conter no maximo 255 caracteres");
             RuleFor(c => c.Bank)
-                .Length(1,50).WithMessage("O campo foto deve conter no maximo 50 caracteres");
+                .Length(1,50).WithMessage("O campo banco deve conter no maximo 50 caracteres");
             RuleFor(c => c.Agency)
-                .Length(1,50).WithMessage("O campo foto deve conter no maximo 50 caracteres");
+                .Length(1,50).WithMessage("O campo agência deve conter no maximo 50 caracteres");
             RuleFor(c => c.CheckingAccount)
-                .Length(1,50).WithMessage("O campo foto deve conter no maximo 50 caracteres");
+                .Length(1,50).WithMessage("O campo conta corrente deve conter no maximo 50 caracteres");
             RuleFor(c => c.Address).NotEmpty().WithMessage("É necessário inserir ao menos 1 endereço").NotNull();
             RuleFor(c => c.Phone).NotEmpty().WithMessage("É necessário inserir ao menos 1 telefone").NotNull();
         }
