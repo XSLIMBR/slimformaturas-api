@@ -27,11 +27,20 @@ namespace SlimFormaturas.Api.Controllers {
         }
 
         /// <summary>
-        /// Inserir um novo formando na base teste
+        /// Buscar formando com filtros especificos
+        /// </summary>
+        /// <returns>Os formandos encontrados</returns>
+        [HttpPost("Search")]
+        public ActionResult<GraduateSearchResponse> Search(GraduateSearch data) {
+            return Response(_graduateService.Search(data));
+        }
+
+        /// <summary>
+        /// Inserir um novo formando na base
         /// </summary>
         /// <returns>O id do novo formando inserido</returns>
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Incluir")]
-        [HttpPost]
+        [HttpPost("InsertNew")]
         public async Task<IActionResult> Post([FromBody]GraduateForCreationDto graduateDto) {
             var graduate = _mapper.Map<Graduate>(graduateDto);
             _ = await _graduateService.Insert(graduate);

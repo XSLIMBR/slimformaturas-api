@@ -10,6 +10,7 @@ using SlimFormaturas.Domain.Validators;
 using SlimFormaturas.Infra.Data.Repository;
 using AutoMapper;
 using SlimFormaturas.Infra.CrossCutting.Identity.Models;
+using System.Collections.Generic;
 
 namespace SlimFormaturas.Service.Services
 {
@@ -108,6 +109,24 @@ namespace SlimFormaturas.Service.Services
 
         public async Task<Graduate> GetAllById (string id) {
             return await _graduateRepository.GetAllById(id);
+        }
+
+        public async Task<IList<GraduateSearchResponse>> Search(GraduateSearch search) {
+
+            var Graduates = await _graduateRepository.GetWhere(
+                c => c.Name.ToUpper().Contains(search.Name.ToUpper())           &&
+                c.Cpf.ToUpper().Contains(search.Cpf.ToUpper())                  &&
+                c.Rg.ToUpper().Contains(search.Rg.ToUpper())                    &&
+                c.DadName.ToUpper().Contains(search.DadName.ToUpper())          &&
+                c.MotherName.ToUpper().Contains(search.MotherName.ToUpper())    &&
+                c.Email.ToUpper().Contains(search.Email.ToUpper())
+                );
+
+            var GraduatesResponse = _mapper.Map<IList<GraduateSearchResponse>>(Graduates);
+
+            //public string PhoneNumber { get; set; }
+            
+            return GraduatesResponse;
         }
     }
 }

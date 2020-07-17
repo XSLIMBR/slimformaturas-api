@@ -27,6 +27,7 @@ namespace SlimFormaturas.Service.Mapper {
             #region Formando
             CreateMap<Graduate, GraduateDto>();
             CreateMap<Graduate, GraduateForCreationDto>();
+            CreateMap<Graduate, GraduateSearchResponse>();
             #endregion
 
             CreateMap<Seller, SellerForCreationDto>();
