@@ -11,6 +11,7 @@ using SlimFormaturas.Domain.Dto.TypeGeneric;
 using SlimFormaturas.Domain.Dto.College;
 using SlimFormaturas.Domain.Entities;
 using SlimFormaturas.Domain.Dto.Contract;
+using System.Linq;
 
 namespace SlimFormaturas.Service.Mapper {
     public class DomainToViewModelMappingProfile : Profile{
@@ -27,7 +28,8 @@ namespace SlimFormaturas.Service.Mapper {
             #region Formando
             CreateMap<Graduate, GraduateDto>();
             CreateMap<Graduate, GraduateForCreationDto>();
-            CreateMap<Graduate, GraduateSearchResponse>();
+            CreateMap<Graduate, GraduateSearchResponse>()
+                .ForMember(c => c.PhoneNumber, opt => opt.MapFrom(s => s.Phone.FirstOrDefault().PhoneNumber));
             #endregion
 
             CreateMap<Seller, SellerForCreationDto>();

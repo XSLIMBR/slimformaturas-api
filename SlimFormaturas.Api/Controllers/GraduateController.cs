@@ -31,8 +31,8 @@ namespace SlimFormaturas.Api.Controllers {
         /// </summary>
         /// <returns>Os formandos encontrados</returns>
         [HttpPost("Search")]
-        public ActionResult<GraduateSearchResponse> Search(GraduateSearch data) {
-            return Response(_graduateService.Search(data));
+        public async Task<ActionResult<GraduateSearchResponse>> Search(GraduateSearch data) {
+            return Response(await _graduateService.Search(data));
         }
 
         /// <summary>

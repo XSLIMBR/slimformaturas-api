@@ -20,16 +20,19 @@ namespace SlimFormaturas.Service.Services
         private readonly IGraduateRepository _graduateRepository;
         protected readonly NotificationHandler _notifications;
         protected readonly ITypeGenericRepository _typeGenericRepository;
+        protected readonly IPhoneRepository _phoneRepository;
         readonly IMapper _mapper;
 
         public GraduateService(
             IGraduateRepository graduateRepository,
             UserManager<ApplicationUser> userManager,
             NotificationHandler notifications,
-             IMapper mapper,
+            IPhoneRepository phoneRepository,
+            IMapper mapper,
             ITypeGenericRepository typeGenericRepository) : base(graduateRepository) {
             _graduateRepository = graduateRepository;
             _userManager = userManager;
+            _phoneRepository = phoneRepository;
             _notifications = notifications;
             _typeGenericRepository = typeGenericRepository;
             _mapper = mapper;
@@ -122,9 +125,11 @@ namespace SlimFormaturas.Service.Services
                 c.Email.ToUpper().Contains(search.Email.ToUpper())
                 );
 
+            foreach (var graduate in Graduates) {
+                graduate.Phone = await _phoneRepository.GetWhere(p => p.GraduateId == graduate.GraduateId && p.Default);
+            }
+           
             var GraduatesResponse = _mapper.Map<IList<GraduateSearchResponse>>(Graduates);
-
-            //public string PhoneNumber { get; set; }
             
             return GraduatesResponse;
         }
