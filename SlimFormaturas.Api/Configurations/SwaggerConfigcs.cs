@@ -36,7 +36,9 @@ namespace SlimFormaturas.Api.Configurations {
         }
 
         public static void UseSwaggerSetup(this IApplicationBuilder app) {
-            if (app == null) throw new ArgumentNullException(nameof(app));
+            if (app == null) {
+                throw new ArgumentNullException(nameof(app));
+            }
             app.UseSwagger();
             app.UseSwaggerUI(c => {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "SlimFormaturas");

@@ -27,14 +27,18 @@ namespace SlimFormaturas.Service.Services
         }
 
         public async Task Delete(string id) {
-            if (id == null)
+            if (id == null) {
                 throw new ArgumentException("O ID não pode ser vazio!");
+            }
+                
             await _repository.Remove(id);
         }
 
         public async Task<TEntity> Get(string id) {
-            if (id == null)
+            if (id == null) {
                 throw new ArgumentException("O ID não pode ser vazio!");
+            }
+                
             return await _repository.GetById(id);
         }
 

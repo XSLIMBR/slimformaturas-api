@@ -3,9 +3,9 @@
 namespace SlimFormaturas.Domain.Entities {
     public class Permission {
 
-        public string groupName;
-        public string name;
-        public string description;
+        private string groupName;
+        private string name;
+        private string description;
         //public Permissions permission;
 
         public Permission(string groupName, string name, string description) {
