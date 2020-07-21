@@ -31,9 +31,6 @@ namespace SlimFormaturas.Service.Services
             contract.Validate(contract, new ContractValidator());
             _notifications.AddNotifications(contract.ValidationResult);
 
-            if (contract.Invalid) {
-                _notifications.AddNotifications(contract.ValidationResult);
-            }
             if (!_notifications.HasNotifications) {
                 await Post(contract);
             }
