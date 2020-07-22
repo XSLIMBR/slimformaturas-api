@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
 using SlimFormaturas.Domain.Dto.Address;
 using SlimFormaturas.Domain.Dto.Phone;
 
@@ -13,7 +14,7 @@ namespace SlimFormaturas.Domain.Dto.Graduate {
         public string DadName { get; set; }
         public string MotherName { get; set; }
         public string Email { get; set; }
-        public string Photo { get; set; }
+        public IFormFile Photo { get; set; }
         public string Bank { get; set; }
         public string Agency { get; set; }
         public string CheckingAccount { get; set; }

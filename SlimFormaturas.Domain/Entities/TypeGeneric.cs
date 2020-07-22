@@ -1,5 +1,7 @@
 ﻿using SlimFormaturas.Domain.Validators;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace SlimFormaturas.Domain.Entities {
     public class TypeGeneric : Entity{

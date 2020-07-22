@@ -14,7 +14,7 @@ namespace SlimFormaturas.Domain.Entities {
         public int Year { get; set; }
         //RESPOSAVEL PELO CONTRATO
         //QUEM FECHOU O CONTRATO
-        //RESPONSÁVEL CERIMONIAL
+        //RESPONSÁVEL CERIMONIAL 
         public string Note { get; set; }
 
         public DateTime DateRegister { get; protected set; }

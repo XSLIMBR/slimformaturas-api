@@ -13,8 +13,9 @@ namespace SlimFormaturas.Api.Controllers {
     [ApiController]
     //[Authorize]
     public class GraduateController : ApiController {
-         readonly IGraduateService _graduateService;
-         readonly IMapper _mapper;
+        readonly IGraduateService _graduateService;
+        
+        readonly IMapper _mapper;
 
         public GraduateController(
             IGraduateService graduateService,
@@ -22,6 +23,7 @@ namespace SlimFormaturas.Api.Controllers {
             IMapper mapper
             ) : base (notifications)
         {
+            
             _graduateService = graduateService;
             _mapper = mapper;
         }
@@ -42,13 +44,11 @@ namespace SlimFormaturas.Api.Controllers {
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Incluir")]
         [HttpPost("InsertNew")]
         public async Task<IActionResult> Post([FromBody]GraduateForCreationDto graduateDto) {
-            var graduate = _mapper.Map<Graduate>(graduateDto);
-            _ = await _graduateService.Insert(graduate);
-            return Response(graduate.GraduateId);
+            return Response((await _graduateService.Insert(graduateDto)).GraduateId);
         }
 
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Editar")]
-        [HttpPut]
+        [HttpPut("Update")]
         public async Task<IActionResult> Put([FromBody]GraduateDto graduateDto) {
             _ = await _graduateService.Update(graduateDto);
             return Response(graduateDto.GraduateId);
@@ -68,7 +68,7 @@ namespace SlimFormaturas.Api.Controllers {
         /// <remarks>This API will get the values.</remarks>
         /// 
        // [CustomAuthorize.ClaimsAuthorizeAttribute("Graduate", "Consultar")]
-        [HttpGet]
+        [HttpGet("GetAll")]
         public async Task<ActionResult<GraduateDto>> Get() {
             var graduate = _mapper.Map<IList<GraduateDto>>(await _graduateService.Get());
             return Response(graduate);
@@ -76,7 +76,7 @@ namespace SlimFormaturas.Api.Controllers {
         }
 
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Consultar")]
-        [HttpGet("{id}")]
+        [HttpGet("GetById/{id}")]
         public async Task<ActionResult<GraduateDto>> Get(string id) {
             var graduate = _mapper.Map<GraduateDto>(await _graduateService.GetAllById(id));
             return Response(graduate);

@@ -21,6 +21,7 @@ namespace SlimFormaturas.Service.Services
         protected readonly NotificationHandler _notifications;
         protected readonly ITypeGenericRepository _typeGenericRepository;
         protected readonly IPhoneRepository _phoneRepository;
+        readonly IImageUploadService _imageUploadService;
         readonly IMapper _mapper;
 
         public GraduateService(
@@ -28,10 +29,12 @@ namespace SlimFormaturas.Service.Services
             UserManager<ApplicationUser> userManager,
             NotificationHandler notifications,
             IPhoneRepository phoneRepository,
+            IImageUploadService imageUploadService,
             IMapper mapper,
             ITypeGenericRepository typeGenericRepository) : base(graduateRepository) {
             _graduateRepository = graduateRepository;
             _userManager = userManager;
+            _imageUploadService = imageUploadService;
             _phoneRepository = phoneRepository;
             _notifications = notifications;
             _typeGenericRepository = typeGenericRepository;
@@ -56,32 +59,34 @@ namespace SlimFormaturas.Service.Services
             return user.Id;
         }
 
-        public async Task<Graduate> Insert(Graduate obj) {
+        public async Task<Graduate> Insert(GraduateForCreationDto graduateDto) {
 
-            obj.Validate(obj, new GraduateValidator());
-            _notifications.AddNotifications(obj.ValidationResult);
+            var graduate = _mapper.Map<Graduate>(graduateDto);
 
-            foreach (var item in obj.Address) {
+            graduate.Validate(graduate, new GraduateValidator());
+            _notifications.AddNotifications(graduate.ValidationResult);
+
+            foreach (var item in graduate.Address) {
                 item.Validate(item, new AddressValidator());
                 _notifications.AddNotifications(item.ValidationResult);
             }
 
-            foreach (var item in obj.Phone) {
+            foreach (var item in graduate.Phone) {
                 item.Validate(item, new PhoneValidator());
                 _notifications.AddNotifications(item.ValidationResult);
             }
 
             if (!_notifications.HasNotifications) {
-                obj.AddUser(await CreateUser(obj.Cpf, obj.Email));
+                graduate.AddUser(await CreateUser(graduate.Cpf, graduate.Email));
             }
-
 
             //NOTA# adicionar uma condição para se caso der errado para adiconar um novo usuario apagar o usuario criado
             if (!_notifications.HasNotifications) {
-                await Post(obj);
+                graduate.Photo = await _imageUploadService.SingleFile("Uploads/Images/Profile", graduateDto.Photo);
+                await Post(graduate);
             }
 
-            return obj;
+            return graduate;
         }
 
         public async Task<Graduate> Update(GraduateDto graduateDto) {

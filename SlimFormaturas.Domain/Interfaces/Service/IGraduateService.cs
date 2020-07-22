@@ -8,7 +8,7 @@ using SlimFormaturas.Domain.Entities;
 namespace SlimFormaturas.Domain.Interfaces.Service {
     public interface IGraduateService : IService<Graduate> {
         Task<string> CreateUser(string cpf, string email);
-        Task<Graduate> Insert(Graduate obj);
+        Task<Graduate> Insert(GraduateForCreationDto graduateDto);
         Task<Graduate> Update(GraduateDto graduateDto);
         Task<Graduate> GetAllById (string id);
         Task<IList<GraduateSearchResponse>> Search(GraduateSearch search);

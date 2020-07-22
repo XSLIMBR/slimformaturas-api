@@ -1,4 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Reflection;
 
 namespace SlimFormaturas.Domain.Entities {
     public class Permission {
@@ -21,5 +24,6 @@ namespace SlimFormaturas.Domain.Entities {
             [Display(GroupName = "Graduate", Name = "Editar", Description = "Editar formando")]
             GraduatEditar = 0x11
         }
+
     }
 }
