@@ -2,8 +2,11 @@
 using SlimFormaturas.Domain.Interfaces.Service;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using SlimFormaturas.Domain.Entities;
 
 namespace SlimFormaturas.Service.Services
 {
@@ -56,6 +59,12 @@ namespace SlimFormaturas.Service.Services
         public async Task<int> CountAll() => await _repository.CountAll();
  
         public async Task<int> CountWhere(Expression<Func<TEntity, bool>> predicate) => await _repository.CountWhere(predicate);
+
+        public PaginatedList<TEntity> PaginatedList(IList<TEntity> source, int pageIndex, int pageSize) {
+            var count = source.Count;
+            var items = source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+            return new PaginatedList<TEntity>(items, count, pageIndex, pageSize);
+        }
 
         public void Dispose() {
             _repository.Dispose();

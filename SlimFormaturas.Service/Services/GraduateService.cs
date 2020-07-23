@@ -82,7 +82,7 @@ namespace SlimFormaturas.Service.Services
 
             //NOTA# adicionar uma condição para se caso der errado para adiconar um novo usuario apagar o usuario criado
             if (!_notifications.HasNotifications) {
-                graduate.Photo = await _imageUploadService.SingleFile("Uploads/Images/Profile", graduateDto.Photo);
+                //graduate.Photo = await _imageUploadService.SingleFile("Uploads/Images/Profile", graduateDto.Photo);
                 await Post(graduate);
             }
 
@@ -119,9 +119,9 @@ namespace SlimFormaturas.Service.Services
             return await _graduateRepository.GetAllById(id);
         }
 
-        public async Task<IList<GraduateSearchResponse>> Search(GraduateSearch search) {
+        public async Task<IList<Graduate>> Search(GraduateSearch search) {
 
-            var Graduates = await _graduateRepository.GetWhere(
+            var graduates = await _graduateRepository.GetWhere(
                 c => c.Name.ToUpper().Contains(search.Name.ToUpper())           &&
                 c.Cpf.ToUpper().Contains(search.Cpf.ToUpper())                  &&
                 c.Rg.ToUpper().Contains(search.Rg.ToUpper())                    &&
@@ -130,13 +130,13 @@ namespace SlimFormaturas.Service.Services
                 c.Email.ToUpper().Contains(search.Email.ToUpper())
                 );
 
-            foreach (var graduate in Graduates) {
+            foreach (var graduate in graduates) {
                 graduate.Phone = await _phoneRepository.GetWhere(p => p.GraduateId == graduate.GraduateId && p.Default);
             }
            
-            var GraduatesResponse = _mapper.Map<IList<GraduateSearchResponse>>(Graduates);
+            //var GraduatesResponse = _mapper.Map<IList<GraduateSearchResponse>>(Graduates);
             
-            return GraduatesResponse;
+            return graduates;
         }
     }
 }

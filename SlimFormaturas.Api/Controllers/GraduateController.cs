@@ -32,9 +32,14 @@ namespace SlimFormaturas.Api.Controllers {
         /// Buscar formando com filtros especificos
         /// </summary>
         /// <returns>Os formandos encontrados</returns>
-        [HttpPost("Search")]
+        [HttpPost("SearchWithPagination")]
         public async Task<ActionResult<GraduateSearchResponse>> Search(GraduateSearch data) {
-            return Response(await _graduateService.Search(data));
+
+            List<Graduate> graduates = _graduateService.PaginatedList(await _graduateService.Search(data), data.PageNumber, data.PageSize);
+
+            var result = _mapper.Map<IList<GraduateSearchResponse>>(graduates);
+
+            return Response(result);
         }
 
         /// <summary>
@@ -63,7 +68,7 @@ namespace SlimFormaturas.Api.Controllers {
 
         // GET api/Graduate
         /// <summary>
-        /// Get all graduates
+        /// Retornar todos os dados de todos os formandos
         /// </summary>
         /// <remarks>This API will get the values.</remarks>
         /// 
@@ -75,11 +80,19 @@ namespace SlimFormaturas.Api.Controllers {
 
         }
 
+        // GET api/Graduate
+        /// <summary>
+        /// Retornar todos os dados de um formando especifico
+        /// </summary>
+        /// <remarks>This API will get the values.</remarks>
+        /// 
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Consultar")]
-        [HttpGet("GetById/{id}")]
+        [HttpGet("GetAllById/{id}")]
         public async Task<ActionResult<GraduateDto>> Get(string id) {
             var graduate = _mapper.Map<GraduateDto>(await _graduateService.GetAllById(id));
             return Response(graduate);
         }
+
+
     }
 }

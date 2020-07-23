@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using FluentValidation;
+using SlimFormaturas.Domain.Entities;
 
 namespace SlimFormaturas.Domain.Interfaces.Service {
     public interface IService<TEntity> where TEntity : class {
@@ -18,6 +20,8 @@ namespace SlimFormaturas.Domain.Interfaces.Service {
         Task<IList<TEntity>> GetWhere(Expression<Func<TEntity, bool>> predicate);
         Task<int> CountAll();
         Task<int> CountWhere(Expression<Func<TEntity, bool>> predicate);
+
+        PaginatedList<TEntity> PaginatedList(IList<TEntity> source, int pageIndex, int pageSize);
 
         void Dispose();
     }

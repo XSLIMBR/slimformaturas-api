@@ -21,7 +21,7 @@ namespace SlimFormaturas.Infra.Data.Repository {
         public async Task<TEntity> FirstOrDefault(Expression<Func<TEntity, bool>> predicate) => await Context.Set<TEntity>().FirstOrDefaultAsync(predicate);
 
         public async Task Insert(TEntity obj) {
-            Context.Set<TEntity>().Add(obj);
+            await Context.Set<TEntity>().AddAsync(obj);
             await Context.SaveChangesAsync();
         }
         public async Task<int> Update(TEntity obj) {
@@ -30,7 +30,7 @@ namespace SlimFormaturas.Infra.Data.Repository {
         }
 
         public async Task<int> Remove(string id) {
-            Context.Set<TEntity>().Remove(Context.Set<TEntity>().Find(id));
+            Context.Set<TEntity>().Remove(await Context.Set<TEntity>().FindAsync(id));
             return await Context.SaveChangesAsync();
         }
 
