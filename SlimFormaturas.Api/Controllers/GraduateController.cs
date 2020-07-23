@@ -43,7 +43,7 @@ namespace SlimFormaturas.Api.Controllers {
         /// <returns>O id do novo formando inserido</returns>
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Incluir")]
         [HttpPost("InsertNew")]
-        public async Task<IActionResult> Post([FromBody]GraduateForCreationDto graduateDto) {
+        public async Task<IActionResult> Post([FromBody] GraduateForCreationDto graduateDto) {
             return Response((await _graduateService.Insert(graduateDto)).GraduateId);
         }
 
