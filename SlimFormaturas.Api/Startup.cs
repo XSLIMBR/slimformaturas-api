@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using Microsoft.Extensions.FileProviders;
 using SlimFormaturas.Api.Configurations;
 using SlimFormaturas.Infra.CrossCutting.Identity.Models;
 using Microsoft.Extensions.Hosting;
@@ -131,6 +132,13 @@ namespace SlimFormaturas.Api {
             app.UseHsts();
 
             app.UseHttpsRedirection();
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(env.ContentRootPath, "Uploads")),
+                RequestPath = "/Uploads"
+            });
 
             app.UseRouting();
 
