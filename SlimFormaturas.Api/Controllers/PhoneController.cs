@@ -28,7 +28,7 @@ namespace SlimFormaturas.Api.Controllers
 
         //[CustomAuthorize.ClaimsAuthorize("Phone", "Incluir")]
         [HttpPost]
-        public async Task<ActionResult> Post ([FromBody]PhoneForCreationDto phoneForCreationDto) {
+        public async Task<ActionResult> Post ([FromBody]PhoneForCreationWithEntityDto phoneForCreationDto) {
             var phone = _mapper.Map<Phone>(phoneForCreationDto);
             _ = await _phoneService.Insert(phone);
             return Response(phone.PhoneId);

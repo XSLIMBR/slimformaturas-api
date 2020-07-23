@@ -28,7 +28,7 @@ namespace SlimFormaturas.Api.Controllers
 
         //[CustomAuthorize.ClaimsAuthorize("Address", "Incluir")]
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody]AddressForCreationDto addressForCreation) {
+        public async Task<ActionResult> Post([FromBody]AddressForCreationWithEntityDto addressForCreation) {
             var address = _mapper.Map<Address>(addressForCreation);
             _ = await _addressService.Insert(address);
             return Response(address.AddressId);
