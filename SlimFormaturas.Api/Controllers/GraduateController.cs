@@ -29,7 +29,21 @@ namespace SlimFormaturas.Api.Controllers {
         }
 
         /// <summary>
-        /// Buscar formando com filtros especificos
+        /// Buscar todos os formandos com paginacao
+        /// </summary>
+        /// <returns>Os formandos encontrados</returns>
+        [HttpGet("GetAllWithPagination")]
+        public async Task<ActionResult<GraduateSearchResponse>> Search(int pageNumber, int pageSize) {
+
+            List<Graduate> graduates = _graduateService.PaginatedList(await _graduateService.Get(), pageNumber, pageSize);
+
+            var result = _mapper.Map<IList<GraduateSearchResponse>>(graduates);
+
+            return Response(result);
+        }
+
+        /// <summary>
+        /// Buscar formando com filtros especificos com paginacao
         /// </summary>
         /// <returns>Os formandos encontrados</returns>
         [HttpPost("SearchWithPagination")]
