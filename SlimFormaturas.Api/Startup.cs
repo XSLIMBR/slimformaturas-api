@@ -140,6 +140,7 @@ namespace SlimFormaturas.Api {
             //    RequestPath = "/Uploads"
             //});
 
+            app.UseDefaultFiles();
             app.UseStaticFiles();
 
             app.UseRouting();
