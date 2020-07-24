@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json;
 using SlimFormaturas.Domain.Validators;
@@ -39,6 +40,11 @@ namespace SlimFormaturas.Domain.Entities {
 
         public void AddUser(string user) {
             UserId = user;
+        }
+
+        public string GetShortName() {
+            var names = this.Name.Split(' ');
+            return names.First() + " " + names.Last();
         }
     }
 }

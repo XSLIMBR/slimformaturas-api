@@ -29,7 +29,8 @@ namespace SlimFormaturas.Service.Mapper {
             CreateMap<Graduate, GraduateDto>();
             CreateMap<Graduate, GraduateForCreationDto>();
             CreateMap<Graduate, GraduateSearchResponse>()
-                .ForMember(c => c.PhoneNumber, opt => opt.MapFrom(s => s.Phone.FirstOrDefault().PhoneNumber));
+                .ForMember(c => c.PhoneNumber, opt => opt.MapFrom(s => s.Phone.FirstOrDefault().PhoneNumber))
+                .ForMember(n => n.ShortName, opt => opt.MapFrom(a => a.GetShortName()));
             #endregion
 
             CreateMap<Seller, SellerForCreationDto>();
