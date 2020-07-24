@@ -45,7 +45,7 @@ namespace SlimFormaturas.Infra.Data.Mapping {
                 .IsRequired();
 
             builder.Property(c => c.Photo)
-                .HasColumnType("varchar")
+                .HasColumnType("varchar(255)")
                 .HasMaxLength(255);
 
             builder.Property(c => c.Bank)
