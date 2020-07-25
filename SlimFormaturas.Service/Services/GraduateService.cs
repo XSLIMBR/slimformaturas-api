@@ -134,6 +134,14 @@ namespace SlimFormaturas.Service.Services
                 graduate.Phone = await _phoneRepository.GetWhere(p => p.GraduateId == graduate.GraduateId && p.Default);
             }
 
+
+            //var result = _mapper.Map<IList<GraduateSearchResponse>>((List<Graduate>)paginatedGraduates);
+
+            //object response = new {
+            //    totalPages = paginatedGraduates.TotalPages,
+            //    data = result
+            //};
+
             return graduates;
         }
     }

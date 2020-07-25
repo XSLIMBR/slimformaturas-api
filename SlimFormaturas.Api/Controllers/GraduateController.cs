@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using AutoMapper;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
 using SlimFormaturas.Domain.Dto.Graduate;
 
 namespace SlimFormaturas.Api.Controllers {
@@ -35,11 +36,18 @@ namespace SlimFormaturas.Api.Controllers {
         [HttpGet("GetAllWithPagination")]
         public async Task<ActionResult<GraduateSearchResponse>> Search(int pageNumber, int pageSize) {
 
-            List<Graduate> graduates = _graduateService.PaginatedList(await _graduateService.Get(), pageNumber, pageSize);
+            var graduatesGet = await _graduateService.Get();
 
-            var result = _mapper.Map<IList<GraduateSearchResponse>>(graduates);
+            var paginatedGraduates = _graduateService.PaginatedList(graduatesGet, pageNumber, pageSize);
 
-            return Response(result);
+            var result = _mapper.Map<IList<GraduateSearchResponse>>((List<Graduate>)paginatedGraduates);
+
+            object response = new {
+                totalData = graduatesGet.Count,
+                data = result
+            };
+
+            return Response(response);
         }
 
         /// <summary>
@@ -48,12 +56,19 @@ namespace SlimFormaturas.Api.Controllers {
         /// <returns>Os formandos encontrados</returns>
         [HttpPost("SearchWithPagination")]
         public async Task<ActionResult<GraduateSearchResponse>> Search(GraduateSearch data) {
+            var graduatesGet = await _graduateService.Search(data);
 
-            List<Graduate> graduates = _graduateService.PaginatedList(await _graduateService.Search(data), data.PageNumber, data.PageSize);
+            var paginatedGraduates =
+                _graduateService.PaginatedList(graduatesGet, data.PageNumber, data.PageSize);
 
-            var result = _mapper.Map<IList<GraduateSearchResponse>>(graduates);
+            var result = _mapper.Map<IList<GraduateSearchResponse>>((List<Graduate>)paginatedGraduates);
 
-            return Response(result);
+            object response = new {
+                totalData = graduatesGet.Count,
+                data = result
+            };
+
+            return Response(response);
         }
 
         /// <summary>
