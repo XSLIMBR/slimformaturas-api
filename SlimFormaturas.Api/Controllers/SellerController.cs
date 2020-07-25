@@ -42,13 +42,6 @@ namespace SlimFormaturas.Api.Controllers {
             return Response(sellerDto.SellerId);
         }
 
-        //[CustomAuthorize.ClaimsAuthorize("Graduate", "Excluir")]
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> Delete (string id) {
-            //await _sellerService.Delete(id);
-           // return Response("Success");
-        //}
-
         // GET api/Graduate
         /// <summary>
         /// Get all graduates

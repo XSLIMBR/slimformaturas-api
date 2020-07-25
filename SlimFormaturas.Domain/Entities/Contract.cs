@@ -17,6 +17,7 @@ namespace SlimFormaturas.Domain.Entities {
         //RESPONSÁVEL CERIMONIAL 
         public string Note { get; set; }
 
+
         public DateTime DateRegister { get; protected set; }
 
         public string CollegeId { get; set; }

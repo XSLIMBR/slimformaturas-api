@@ -133,9 +133,7 @@ namespace SlimFormaturas.Service.Services
             foreach (var graduate in graduates) {
                 graduate.Phone = await _phoneRepository.GetWhere(p => p.GraduateId == graduate.GraduateId && p.Default);
             }
-           
-            //var GraduatesResponse = _mapper.Map<IList<GraduateSearchResponse>>(Graduates);
-            
+
             return graduates;
         }
     }

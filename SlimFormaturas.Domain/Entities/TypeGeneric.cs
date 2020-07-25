@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace SlimFormaturas.Domain.Entities {
-    public class TypeGeneric : Entity{
+    public class TypeGeneric : Entity {
         public TypeGeneric() {
             TypeGenericId = Guid.NewGuid().ToString();
         }
@@ -14,11 +14,10 @@ namespace SlimFormaturas.Domain.Entities {
         public Locate Localization { get; set; }
 
         public DateTime DateRegister { get; protected set; }
-    }
 
-    public enum Locate {
-        Address = 1,
-        Telephone = 2
+        public enum Locate {
+            Address = 1,
+            Telephone = 2
+        }
     }
-
 }

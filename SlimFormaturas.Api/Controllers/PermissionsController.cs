@@ -11,7 +11,6 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace SlimFormaturas.Api.Controllers {
-    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PermissionsController : ApiController {
@@ -24,8 +23,6 @@ namespace SlimFormaturas.Api.Controllers {
 
         [HttpGet]
         public ActionResult<Permission> Get() {
-
-            //var teste = teste2.GetPermissionsToDisplay(typeof(Permissions));
 
             return Response(_permissionsService.GetPermissionsToDisplay());
         }

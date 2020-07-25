@@ -133,13 +133,6 @@ namespace SlimFormaturas.Api {
 
             app.UseHttpsRedirection();
 
-            //app.UseStaticFiles(new StaticFileOptions
-            //{
-            //    FileProvider = new PhysicalFileProvider(
-            //        Path.Combine(env.ContentRootPath, "Uploads")),
-            //    RequestPath = "/Uploads"
-            //});
-
             app.UseDefaultFiles();
             app.UseStaticFiles();
 

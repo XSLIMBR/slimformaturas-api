@@ -16,7 +16,7 @@ namespace SlimFormaturas.Domain.Validators
                 .Length(3, 100).WithMessage("O campo nome deve ter entre 3 e 100 caracteres");
             RuleFor(c => c.Cpf)
                 .NotEmpty().WithMessage("É necessário informar o Cpf.")
-                .IsValidCPF().WithMessage("CPF Invalido!")
+                //.IsValidCPF().WithMessage("CPF Invalido!")
                 .Length(11).WithMessage("O campo deve conter 11 caracteres")
                 .NotNull();
             RuleFor(c => c.Rg)

@@ -15,8 +15,6 @@ namespace SlimFormaturas.Domain.Entities {
             this.AddRange(items);
         }
 
-        public PaginatedList() {
-        }
 
         public bool PreviousPage => PageIndex > 1;
 
