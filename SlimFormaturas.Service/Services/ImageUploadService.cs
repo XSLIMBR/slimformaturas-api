@@ -17,20 +17,43 @@ namespace SlimFormaturas.Service.Services {
             throw new NotImplementedException();
         }
 
-        public async Task<string> SingleFile(string uploadDir, IFormFile file) {
+        public async Task<string> SingleFile(string uploadDir, string file) {
 
-            //var uploadDir = "Uploads/Images/Profile";
             var uploadPath = Path.Combine(_hostingEnv.WebRootPath, uploadDir);
 
             if (!Directory.Exists(uploadPath)) {
                 Directory.CreateDirectory(uploadPath);
             }
 
-            var fileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
-            var filePath = Path.Combine(uploadPath, fileName);
+            var fileName = "";
 
-            using (var stream = File.Create(filePath)) {
-                await file.CopyToAsync(stream);
+            if (file.Contains("data:image/png;base64")) {
+                var newFile = file.Replace("data:image/png;base64,", "");
+                var imageBytes = Convert.FromBase64String(newFile);
+                fileName = Guid.NewGuid() + ".png";
+
+                string filepath = Path.Combine(uploadPath, fileName);
+
+                if (imageBytes.Length > 0) {
+                    using (var stream = new FileStream(filepath, FileMode.Create)) {
+                        await stream.WriteAsync(imageBytes, 0, imageBytes.Length);
+                        stream.Flush();
+                    }
+                }
+
+            } else if (file.Contains("data:image/jpeg;base64,")) {
+                var newFile = file.Replace("data:image/jpeg;base64,", "");
+                var imageBytes = Convert.FromBase64String(newFile);
+                fileName = Guid.NewGuid() + ".jpeg";
+
+                string filepath = Path.Combine(uploadPath, fileName);
+
+                if (imageBytes.Length > 0) {
+                    using (var stream = new FileStream(filepath, FileMode.Create)) {
+                        await stream.WriteAsync(imageBytes, 0, imageBytes.Length);
+                        stream.Flush();
+                    }
+                }
             }
 
             return uploadDir + fileName;

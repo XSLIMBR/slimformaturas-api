@@ -82,7 +82,7 @@ namespace SlimFormaturas.Service.Services
 
             //NOTA# adicionar uma condição para se caso der errado para adiconar um novo usuario apagar o usuario criado
             if (!_notifications.HasNotifications) {
-                //graduate.Photo = await _imageUploadService.SingleFile("Uploads/Images/Profile", graduateDto.Photo);
+                graduate.Photo = await _imageUploadService.SingleFile(@"Uploads\Images\Profile\", graduateDto.Photo);
                 await Post(graduate);
             }
 
@@ -134,13 +134,6 @@ namespace SlimFormaturas.Service.Services
                 graduate.Phone = await _phoneRepository.GetWhere(p => p.GraduateId == graduate.GraduateId && p.Default);
             }
 
-
-            //var result = _mapper.Map<IList<GraduateSearchResponse>>((List<Graduate>)paginatedGraduates);
-
-            //object response = new {
-            //    totalPages = paginatedGraduates.TotalPages,
-            //    data = result
-            //};
 
             return graduates;
         }
