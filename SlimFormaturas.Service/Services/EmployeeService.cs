@@ -68,7 +68,7 @@ namespace SlimFormaturas.Service.Services
             }
 
             if (!_notifications.HasNotifications) {
-                obj.AddUser(await CreateUser(obj.Cpf, obj.Email));
+                obj.AddUser(await CreateUser(obj.Cpf, obj.Email).ConfigureAwait(false));
             }
 
 

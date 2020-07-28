@@ -77,7 +77,7 @@ namespace SlimFormaturas.Service.Services
             }
 
             if (!_notifications.HasNotifications) {
-                graduate.AddUser(await CreateUser(graduate.Cpf, graduate.Email));
+                graduate.AddUser(await CreateUser(graduate.Cpf, graduate.Email).ConfigureAwait(false));
             }
 
             //NOTA# adicionar uma condição para se caso der errado para adiconar um novo usuario apagar o usuario criado

@@ -36,7 +36,7 @@ namespace SlimFormaturas.Service.Services {
 
                 if (imageBytes.Length > 0) {
                     using (var stream = new FileStream(filepath, FileMode.Create)) {
-                        await stream.WriteAsync(imageBytes, 0, imageBytes.Length);
+                        await stream.WriteAsync(imageBytes, 0, imageBytes.Length).ConfigureAwait(false);
                         stream.Flush();
                     }
                 }
@@ -50,7 +50,7 @@ namespace SlimFormaturas.Service.Services {
 
                 if (imageBytes.Length > 0) {
                     using (var stream = new FileStream(filepath, FileMode.Create)) {
-                        await stream.WriteAsync(imageBytes, 0, imageBytes.Length);
+                        await stream.WriteAsync(imageBytes, 0, imageBytes.Length).ConfigureAwait(false);
                         stream.Flush();
                     }
                 }

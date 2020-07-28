@@ -39,7 +39,7 @@ namespace SlimFormaturas.Api.Controllers {
 
             var result = await _signInManager.PasswordSignInAsync(loginUser.UserName, loginUser.Password, false, true);
 
-            var token = await GetJWT(loginUser.UserName);
+            var token = await GetJWT(loginUser.UserName).ConfigureAwait(false);
 
             if (result.Succeeded) {
                 var data = new {
