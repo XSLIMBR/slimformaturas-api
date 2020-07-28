@@ -11,6 +11,6 @@ namespace SlimFormaturas.Domain.Interfaces.Service {
         Task<Graduate> Insert(GraduateForCreationDto graduateDto);
         Task<Graduate> Update(GraduateDto graduateDto);
         Task<Graduate> GetAllById (string id);
-        Task<IList<Graduate>> Search(GraduateSearch search);
+        Task<IList<Graduate>> Search(GraduateSearch data);
     }
 }

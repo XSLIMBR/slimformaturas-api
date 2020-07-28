@@ -59,7 +59,7 @@ namespace SlimFormaturas.Service.Services {
             throw new System.NotImplementedException();
         }
 
-        public Task<IList<ContractSearchResponse>> Search(ContractSearch search) {
+        public Task<IList<ContractSearchResponse>> Search(ContractSearch data) {
             throw new System.NotImplementedException();
         }
     }

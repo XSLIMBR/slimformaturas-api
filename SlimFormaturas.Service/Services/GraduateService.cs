@@ -119,7 +119,7 @@ namespace SlimFormaturas.Service.Services
             return await _graduateRepository.GetAllById(id);
         }
 
-        public async Task<IList<Graduate>> Search(GraduateSearch search) {
+        public async Task<IList<Graduate>> Search(GraduateSearch data) {
 
             var graduates = await _graduateRepository.GetWhere(
                 c => c.Name.ToUpper().Contains(search.Name.ToUpper())           &&

@@ -12,6 +12,6 @@ namespace SlimFormaturas.Domain.Interfaces.Service
         Task<Contract> Insert(ContractForCreationDto contractForCreationDto);
         Task<Contract> Update(ContractDto contractDto);
         Task<Contract> GetAllById(string id);
-        Task<IList<ContractSearchResponse>> Search(ContractSearch search);
+        Task<IList<ContractSearchResponse>> Search(ContractSearch data);
     }
 }
