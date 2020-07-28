@@ -9,7 +9,7 @@
         public CNPJValidator()
             : this("O CNPJ é inválido!") { }
 
-        protected override int[] FirstMultiplierCollection => new int[12] { 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
-        protected override int[] SecondMultiplierCollection => new int[13] { 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
+        protected override int[] FirstMultiplierCollection => new int[] { 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
+        protected override int[] SecondMultiplierCollection => new int[] { 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
     }
 }

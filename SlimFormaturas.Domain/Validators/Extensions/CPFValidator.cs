@@ -9,7 +9,7 @@
         public CPFValidator()
             : this("O CPF é inválido!") { }
 
-        protected override int[] FirstMultiplierCollection => new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
-        protected override int[] SecondMultiplierCollection => new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+        protected override int[] FirstMultiplierCollection => new int[] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+        protected override int[] SecondMultiplierCollection => new int[] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
     }
 }

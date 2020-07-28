@@ -122,12 +122,12 @@ namespace SlimFormaturas.Service.Services
         public async Task<IList<Graduate>> Search(GraduateSearch data) {
 
             var graduates = await _graduateRepository.GetWhere(
-                c => c.Name.ToUpper().Contains(search.Name.ToUpper())           &&
-                c.Cpf.ToUpper().Contains(search.Cpf.ToUpper())                  &&
-                c.Rg.ToUpper().Contains(search.Rg.ToUpper())                    &&
-                c.DadName.ToUpper().Contains(search.DadName.ToUpper())          &&
-                c.MotherName.ToUpper().Contains(search.MotherName.ToUpper())    &&
-                c.Email.ToUpper().Contains(search.Email.ToUpper())
+                c => c.Name.ToUpper().Contains(data.Name.ToUpper())           &&
+                c.Cpf.ToUpper().Contains(data.Cpf.ToUpper())                  &&
+                c.Rg.ToUpper().Contains(data.Rg.ToUpper())                    &&
+                c.DadName.ToUpper().Contains(data.DadName.ToUpper())          &&
+                c.MotherName.ToUpper().Contains(data.MotherName.ToUpper())    &&
+                c.Email.ToUpper().Contains(data.Email.ToUpper())
                 );
 
             foreach (var graduate in graduates) {
