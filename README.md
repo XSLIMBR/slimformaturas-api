@@ -1,13 +1,14 @@
 [![Actions Status](https://github.com/XSLIMBR/slimformaturas-api/workflows/CI/badge.svg)](https://github.com/XSLIMBR/slimformaturas-api)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/89e2f9a653224a5fa4bbf27e56d8a439)](https://www.codacy.com/gh/XSLIMBR/slimformaturas-api?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=XSLIMBR/slimformaturas-api&amp;utm_campaign=Badge_Grade)
+![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability-percentage/XSLIMBR/slimformaturas-api?style=flat-square)
 
 ## **SlimFormaturas - Sistema Gerenciador de empresas de formaturas**
 ## **Sobre**
 
-O SlimFormaturas propõe á automatizar os processos relacionados á empresas de formaturas
+O SlimFormaturas propõe á automatizar os processos relacionados á empresas de formaturas.
 
 ## **Principais Recursos do produto**
-- **Gestão Comercial** - Montar propostas em instantes e gerenciar vendas de eventos e fotografia!
+- **Gestão Comercial** - Montar propostas em instantes e gerenciar vendas de eventos e fotografia!!
 - **Gestão Financeira** - Administrar contas a pagar/receber, fluxo de caixa, cheques e o que precisar!
 - **Gestão de venda e Produção** - Gerenciar todas as vendas pós evento e Controlar a entrada e saída de todos os produtos.
 - **Gestão de Eventos** - Organizar todos os eventos com custos, escalas de profissionais e ordens de serviço!
