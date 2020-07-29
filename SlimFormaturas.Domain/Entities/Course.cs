@@ -8,7 +8,7 @@ namespace SlimFormaturas.Domain.Entities {
         }
         public string CourseId { get; set; }
         public string Name { get; set; }
-        public virtual IList<ContractCourse> ContractCourses { get; set; }
+
         public virtual IList<GraduateCeremonial> GraduateCeremonial { get; set; }
     }
 }
