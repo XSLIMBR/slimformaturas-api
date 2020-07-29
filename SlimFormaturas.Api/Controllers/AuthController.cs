@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using SlimFormaturas.Domain.Entities;
+using SlimFormaturas.Domain.Interfaces.Service;
 using SlimFormaturas.Domain.Notifications;
 using SlimFormaturas.Infra.CrossCutting.Identity.Models;
 
@@ -18,34 +20,74 @@ namespace SlimFormaturas.Api.Controllers {
     [ApiController]
     public class AuthController : ApiController {
 
-         readonly SignInManager<ApplicationUser> _signInManager;
-         readonly UserManager<ApplicationUser> _userManager;
-         readonly AppSettings _appSettings;
+        readonly SignInManager<ApplicationUser> _signInManager;
+        readonly UserManager<ApplicationUser> _userManager;
+        readonly AppSettings _appSettings;
         protected readonly NotificationHandler _notifications;
+        readonly IGraduateService _graduateService;
+        readonly IEmployeeService _employeeService;
+        readonly ISellerService _sellerService;
 
         public AuthController(SignInManager<ApplicationUser> signInManager, 
             UserManager<ApplicationUser> userManager,
+            IGraduateService graduateService,
+            IEmployeeService employeeService,
             NotificationHandler notifications,
+            ISellerService sellerService,
             IOptions<AppSettings> appSettings) : base(notifications){
             _signInManager = signInManager;
             _userManager = userManager;
+            _graduateService = graduateService;
+            _sellerService = sellerService;
+            _employeeService = employeeService;
+
             _notifications = notifications;
             _appSettings = appSettings.Value;
         }
 
         [HttpPost("Login")]
         public async Task<ActionResult> Login(Login loginUser){
-            //if (!ModelState.IsValid) return BadRequest(ModelState.Values.SelectMany(e => e.Errors));
-
             var result = await _signInManager.PasswordSignInAsync(loginUser.UserName, loginUser.Password, false, true);
 
-            var token = await GetJWT(loginUser.UserName).ConfigureAwait(false);
-
             if (result.Succeeded) {
+                var user = await _userManager.FindByNameAsync(loginUser.UserName);
+                var token = await GetJwt(user).ConfigureAwait(false);
+
+                string photo = "";
+                string name = "";
+
+                switch (user.User_Type) {
+                    case user_type.Colaborador:
+
+                        //var employee = (await _employeeService.GetWhere(a => a.UserId == user.Id)).FirstOrDefault();
+                        //if (employee != null) {
+                        //    photo = employee.Photo;
+                        //    name = employee.GetShortName();
+                        //}
+
+                        break;
+                    case user_type.Formando:
+                        var graduate = (await _graduateService.GetWhere(a => a.UserId == user.Id)).FirstOrDefault();
+                        if (graduate != null) {
+                            photo = graduate.Photo;
+                            name = graduate.GetShortName();
+                        }
+                        break;
+                    case user_type.Vendedor:
+                        //var seller = (await _sellerService.GetWhere(a => a.UserId == user.Id)).FirstOrDefault();
+                        //if (seller != null) {
+                        //    photo = seller.Photo;
+                        //   name = seller.GetShortName();
+                        //}
+                        break;
+                }
+
                 var data = new {
                     userData = new {
-                        displayName = "Julio Rodrigues",
-                        photoURL = @"/assets/images/portrait/small/avatar-s-11.jpg"
+                        uid = user.Id,
+                        displayName = name,
+                        photoURL = photo,
+                        userType = user.User_Type
                     },
                     accessToken = token
                 };
@@ -57,9 +99,7 @@ namespace SlimFormaturas.Api.Controllers {
             return Response();
         }
 
-        async Task<string> GetJWT(string username) {
-
-            var user = await _userManager.FindByNameAsync(username);
+        async Task<string> GetJwt(ApplicationUser user) {
 
             var identityClaims = new ClaimsIdentity();
             identityClaims.AddClaims(await _userManager.GetClaimsAsync(user));

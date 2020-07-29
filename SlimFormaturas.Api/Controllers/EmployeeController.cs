@@ -13,16 +13,16 @@ namespace SlimFormaturas.Api.Controllers {
     [ApiController]
     //[Authorize]
     public class EmployeeController : ApiController {
-         readonly IEmployeeService _EmployeeService;
+         readonly IEmployeeService _employeeService;
          readonly IMapper _mapper;
 
         public EmployeeController(
-            IEmployeeService EmployeeService,
+            IEmployeeService employeeService,
             NotificationHandler notifications,
             IMapper mapper
             ) : base (notifications)
         {
-            _EmployeeService = EmployeeService;
+            _employeeService = employeeService;
             _mapper = mapper;
         }
 
@@ -34,14 +34,14 @@ namespace SlimFormaturas.Api.Controllers {
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]EmployeeForCreationDto EmployeeDto) {
             var Employee = _mapper.Map<Employee>(EmployeeDto);
-            _ = await _EmployeeService.Insert(Employee);
+            _ = await _employeeService.Insert(Employee);
             return Response(Employee.EmployeeId);
         }
 
         //[CustomAuthorize.ClaimsAuthorize("Employee", "Editar")]
         [HttpPut]
         public async Task<IActionResult> Put([FromBody]EmployeeDto EmployeeDto) {
-            _ = await _EmployeeService.Update(EmployeeDto);
+            _ = await _employeeService.Update(EmployeeDto);
             return Response(EmployeeDto.EmployeeId);
         }
 
@@ -61,7 +61,7 @@ namespace SlimFormaturas.Api.Controllers {
        // [CustomAuthorize.ClaimsAuthorizeAttribute("Employee", "Consultar")]
         [HttpGet]
         public async Task<ActionResult<EmployeeDto>> Get() {
-            var Employee = _mapper.Map<IList<EmployeeDto>>(await _EmployeeService.Get());
+            var Employee = _mapper.Map<IList<EmployeeDto>>(await _employeeService.Get());
             return Response(Employee);
 
         }
@@ -69,7 +69,7 @@ namespace SlimFormaturas.Api.Controllers {
         //[CustomAuthorize.ClaimsAuthorize("Employee", "Consultar")]
         [HttpGet("{id}")]
         public async Task<ActionResult<EmployeeDto>> Get(string id) {
-            var Employee = _mapper.Map<EmployeeDto>(await _EmployeeService.GetAllById(id));
+            var Employee = _mapper.Map<EmployeeDto>(await _employeeService.GetAllById(id));
             return Response(Employee);
         }
     }
