@@ -8,7 +8,7 @@
 O SlimFormaturas propõe á automatizar os processos relacionados á empresas de formaturas.
 
 ## **Principais Recursos do produto**
-- **Gestão Comercial** - Montar propostas em instantes e gerenciar vendas de eventos e fotografia!
+- **Gestão Comercial** - Montar propostas em instantes e gerenciar vendas de eventos e fotografia!!
 - **Gestão Financeira** - Administrar contas a pagar/receber, fluxo de caixa, cheques e o que precisar!
 - **Gestão de venda e Produção** - Gerenciar todas as vendas pós evento e Controlar a entrada e saída de todos os produtos.
 - **Gestão de Eventos** - Organizar todos os eventos com custos, escalas de profissionais e ordens de serviço!
