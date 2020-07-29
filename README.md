@@ -5,7 +5,7 @@
 ## **SlimFormaturas - Sistema Gerenciador de empresas de formaturas**
 ## **Sobre**
 
-O SlimFormaturas propõe á automatizar os processos relacionados á empresas de formaturas
+O SlimFormaturas propõe á automatizar os processos relacionados á empresas de formaturas.
 
 ## **Principais Recursos do produto**
 - **Gestão Comercial** - Montar propostas em instantes e gerenciar vendas de eventos e fotografia!
