@@ -17,6 +17,8 @@ namespace SlimFormaturas.Infra.Data.Context {
         }
 
         public DbSet<Graduate> Graduate { get; set; }
+        public DbSet<GraduateAlbum> GraduateAlbum { get; set; }
+        public DbSet<GraduateCeremonial> GraduateCeremonial { get; set; }
         public DbSet<Contract> Contract { get; set; }
         public DbSet<Address> Address { get; set; }
         public DbSet<Phone> Phone { get; set; }
@@ -40,6 +42,7 @@ namespace SlimFormaturas.Infra.Data.Context {
             modelBuilder.ApplyConfiguration(new CourseMap());
             modelBuilder.ApplyConfiguration(new SellerMap());
             modelBuilder.ApplyConfiguration(new GraduateCeremonialMap());
+            modelBuilder.ApplyConfiguration(new GraduateAlbumMap());
             modelBuilder.ApplyConfiguration(new ContractMap());
 
             
