@@ -52,6 +52,10 @@ namespace SlimFormaturas.Service.Services {
 
         public async Task<Seller> Insert (Seller obj) {
 
+            if (await _sellerRepository.FirstOrDefault(a => a.Cpf == obj.Cpf) != null){
+                _notifications.AddNotification("404", "CPF", "Esse CPF já está cadastrado!");
+            }
+
             obj.Validate(obj, new SellerValidator());
             _notifications.AddNotifications(obj.ValidationResult);
 

@@ -42,6 +42,7 @@ namespace SlimFormaturas.Service.Services
         }
 
         public async Task<string> CreateUser(string cpf, string email) {
+
             var user = new ApplicationUser {
                 UserName = cpf,
                 Email = email,
@@ -49,12 +50,7 @@ namespace SlimFormaturas.Service.Services
                 User_Type = user_type.Formando
             };
 
-            var result = await _userManager.CreateAsync(user, cpf);
-
-            if (!result.Succeeded) {
-                _notifications.AddIdentityErrors(result);
-                return null;
-            }
+            await _userManager.CreateAsync(user, cpf);
 
             return user.Id;
         }
@@ -62,6 +58,10 @@ namespace SlimFormaturas.Service.Services
         public async Task<Graduate> Insert(GraduateForCreationDto graduateDto) {
 
             var graduate = _mapper.Map<Graduate>(graduateDto);
+
+            if(await _graduateRepository.FirstOrDefault(a => a.Cpf == graduate.Cpf) != null) {
+                _notifications.AddNotification("404","CPF","Esse CPF já está cadastrado!");
+            }
 
             graduate.Validate(graduate, new GraduateValidator());
             _notifications.AddNotifications(graduate.ValidationResult);
@@ -78,10 +78,6 @@ namespace SlimFormaturas.Service.Services
 
             if (!_notifications.HasNotifications) {
                 graduate.AddUser(await CreateUser(graduate.Cpf, graduate.Email).ConfigureAwait(false));
-            }
-
-            //NOTA# adicionar uma condição para se caso der errado para adiconar um novo usuario apagar o usuario criado
-            if (!_notifications.HasNotifications) {
                 graduate.Photo = await _imageUploadService.SingleFile(@"Uploads\Images\Profile\", graduateDto.Photo);
                 await Post(graduate);
             }

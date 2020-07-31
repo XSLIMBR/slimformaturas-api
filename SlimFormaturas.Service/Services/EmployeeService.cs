@@ -54,6 +54,10 @@ namespace SlimFormaturas.Service.Services
 
         public async Task<Employee> Insert(Employee obj) {
 
+            if (await _EmployeeRepository.FirstOrDefault(a => a.Cpf == obj.Cpf) != null){
+                _notifications.AddNotification("404", "CPF", "Esse CPF já está cadastrado!");
+            }
+
             obj.Validate(obj, new EmployeeValidator());
             _notifications.AddNotifications(obj.ValidationResult);
 

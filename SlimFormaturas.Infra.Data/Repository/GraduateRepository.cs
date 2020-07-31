@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using SlimFormaturas.Infra.CrossCutting.Identity.Models;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace SlimFormaturas.Infra.Data.Repository {
     public class GraduateRepository : BaseRepository<Graduate>, IGraduateRepository {
