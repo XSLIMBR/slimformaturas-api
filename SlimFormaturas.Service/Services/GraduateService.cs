@@ -89,6 +89,11 @@ namespace SlimFormaturas.Service.Services
 
             Graduate graduate = await _graduateRepository.GetAllById(graduateDto.GraduateId);
 
+            if (graduate == null) {
+                _notifications.AddNotification("404", "GraduateId", "Graduate with id = " + graduateDto.GraduateId + " not found");
+                return null;
+            }
+
             _mapper.Map(graduateDto, graduate);
 
             graduate.Validate(graduate, new GraduateValidator());
