@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using SlimFormaturas.Domain.Dto.Course;
+using SlimFormaturas.Domain.Dto.Course.Response;
 using SlimFormaturas.Domain.Entities;
 using SlimFormaturas.Domain.Interfaces.Repository;
 using SlimFormaturas.Domain.Interfaces.Service;
@@ -23,7 +24,7 @@ namespace SlimFormaturas.Service.Services {
             _mapper = mapper;
         }
 
-        public async Task<Course> Insert(CourseForCreationDto courseDto) {
+        public async Task<CourseResponse> Insert(CourseForCreationDto courseDto) {
 
             var course = _mapper.Map<Course>(courseDto);
 
@@ -31,13 +32,13 @@ namespace SlimFormaturas.Service.Services {
             _notifications.AddNotifications(course.ValidationResult);
 
             if (!_notifications.HasNotifications) {
-               return await Post(course);
+               await Post(course);
             }
 
-            return null;
+            return _mapper.Map<CourseResponse>(course);
         }
 
-        public async Task<Course> Update(CourseDto courseDto){
+        public async Task<CourseResponse> Update(CourseDto courseDto){
 
             Course course = await _courseRepository.GetById(courseDto.CourseId);
 
@@ -52,10 +53,10 @@ namespace SlimFormaturas.Service.Services {
             _notifications.AddNotifications(course.ValidationResult);
 
             if (!_notifications.HasNotifications){
-                return await Put(course);
+                await Put(course);
             }
 
-            return null;
+            return _mapper.Map<CourseResponse>(course);
         }
 
         public async Task<Course> GetAllById(string id) {

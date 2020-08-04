@@ -11,6 +11,7 @@ using SlimFormaturas.Infra.Data.Repository;
 using AutoMapper;
 using SlimFormaturas.Infra.CrossCutting.Identity.Models;
 using System.Collections.Generic;
+using SlimFormaturas.Domain.Dto.Graduate.Response;
 
 namespace SlimFormaturas.Service.Services
 {
@@ -55,7 +56,7 @@ namespace SlimFormaturas.Service.Services
             return user.Id;
         }
 
-        public async Task<Graduate> Insert(GraduateForCreationDto graduateDto) {
+        public async Task<GraduateResponse> Insert(GraduateForCreationDto graduateDto) {
 
             var graduate = _mapper.Map<Graduate>(graduateDto);
 
@@ -82,10 +83,10 @@ namespace SlimFormaturas.Service.Services
                 await Post(graduate);
             }
 
-            return graduate;
+            return _mapper.Map<GraduateResponse>(graduate);
         }
 
-        public async Task<Graduate> Update(GraduateDto graduateDto) {
+        public async Task<GraduateResponse> Update(GraduateDto graduateDto) {
 
             Graduate graduate = await _graduateRepository.GetAllById(graduateDto.GraduateId);
 
@@ -113,7 +114,7 @@ namespace SlimFormaturas.Service.Services
                 await Put(graduate);
             }
 
-            return graduate;
+            return _mapper.Map<GraduateResponse>(graduate);
         }
 
         public async Task<Graduate> GetAllById (string id) {

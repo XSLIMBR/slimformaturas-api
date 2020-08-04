@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SlimFormaturas.Domain.Dto.Course;
+using SlimFormaturas.Domain.Dto.Course.Response;
 using SlimFormaturas.Domain.Interfaces.Service;
 using SlimFormaturas.Domain.Notifications;
 using System.Collections.Generic;
@@ -23,13 +24,13 @@ namespace SlimFormaturas.Api.Controllers {
         }
 
         [HttpPost("InsertNew")]
-        public async Task<IActionResult> Post([FromBody]CourseForCreationDto courseDto) {
-            return Response((await _courseService.Insert(courseDto)).CourseId);
+        public async Task<ActionResult<CourseResponse>> Post([FromBody]CourseForCreationDto courseDto) {
+            return Response(await _courseService.Insert(courseDto));
         }
 
         [HttpPut("Update")]
-        public async Task<IActionResult> Put([FromBody]CourseDto CourseDto) {
-            return Response((await _courseService.Update(CourseDto)).CourseId);
+        public async Task<ActionResult<CourseResponse>> Put([FromBody]CourseDto CourseDto) {
+            return Response(await _courseService.Update(CourseDto));
         }
 
         [HttpGet("GetAll")]

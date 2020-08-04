@@ -10,6 +10,7 @@ using SlimFormaturas.Domain.Validators;
 using SlimFormaturas.Infra.Data.Repository;
 using AutoMapper;
 using SlimFormaturas.Infra.CrossCutting.Identity.Models;
+using SlimFormaturas.Domain.Dto.Employee.Response;
 
 namespace SlimFormaturas.Service.Services
 {
@@ -52,7 +53,7 @@ namespace SlimFormaturas.Service.Services
             return user.Id;
         }
 
-        public async Task<Employee> Insert(Employee obj) {
+        public async Task<EmployeeResponse> Insert(Employee obj) {
 
             if (await _EmployeeRepository.FirstOrDefault(a => a.Cpf == obj.Cpf) != null){
                 _notifications.AddNotification("404", "CPF", "Esse CPF já está cadastrado!");
@@ -81,10 +82,10 @@ namespace SlimFormaturas.Service.Services
                 await Post(obj);
             }
 
-            return obj;
+            return _mapper.Map<EmployeeResponse>(obj);
         }
 
-        public async Task<Employee> Update(EmployeeDto EmployeeDto) {
+        public async Task<EmployeeResponse> Update(EmployeeDto EmployeeDto) {
 
             Employee Employee = await _EmployeeRepository.GetAllById(EmployeeDto.EmployeeId);
 
@@ -107,7 +108,7 @@ namespace SlimFormaturas.Service.Services
                 await Put(Employee);
             }
 
-            return Employee;
+            return _mapper.Map<EmployeeResponse>(Employee);
         }
 
         public async Task<Employee> GetAllById (string id) {

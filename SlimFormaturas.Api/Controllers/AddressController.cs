@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using System.Collections.Generic;
 using SlimFormaturas.Domain.Dto.Address;
+using SlimFormaturas.Domain.Dto.Address.Response;
 
 namespace SlimFormaturas.Api.Controllers
 {
@@ -28,17 +29,15 @@ namespace SlimFormaturas.Api.Controllers
 
         //[CustomAuthorize.ClaimsAuthorize("Address", "Incluir")]
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody]AddressForCreationWithEntityDto addressForCreation) {
+        public async Task<ActionResult<AddressResponse>> Post([FromBody]AddressForCreationWithEntityDto addressForCreation) {
             var address = _mapper.Map<Address>(addressForCreation);
-            _ = await _addressService.Insert(address);
-            return Response(address.AddressId);
+            return Response(await _addressService.Insert(address));
         }
 
         //[CustomAuthorize.ClaimsAuthorize("Address", "Editar")]
         [HttpPut]
-        public async Task<ActionResult> Put(AddressDto addressDto) {
-            _ = await _addressService.Update(addressDto);
-            return Response(addressDto.AddressId);
+        public async Task<ActionResult<AddressResponse>> Put(AddressDto addressDto) {
+            return Response(await _addressService.Update(addressDto));
         }
 
         //[CustomAuthorize.ClaimsAuthorize("Address", "Excluir")]

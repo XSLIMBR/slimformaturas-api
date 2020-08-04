@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using System.Collections.Generic;
 using SlimFormaturas.Domain.Dto.Phone;
+using SlimFormaturas.Domain.Dto.Phone.Response;
 
 namespace SlimFormaturas.Api.Controllers
 {
@@ -28,17 +29,15 @@ namespace SlimFormaturas.Api.Controllers
 
         //[CustomAuthorize.ClaimsAuthorize("Phone", "Incluir")]
         [HttpPost]
-        public async Task<ActionResult> Post ([FromBody]PhoneForCreationWithEntityDto phoneForCreationDto) {
+        public async Task<ActionResult<PhoneResponse>> Post ([FromBody]PhoneForCreationWithEntityDto phoneForCreationDto) {
             var phone = _mapper.Map<Phone>(phoneForCreationDto);
-            _ = await _phoneService.Insert(phone);
-            return Response(phone.PhoneId);
+            return Response(await _phoneService.Insert(phone));
         }
 
         //[CustomAuthorize.ClaimsAuthorize("Phone", "Editar")]
         [HttpPut]
-        public async Task<ActionResult<string>> Put(PhoneDto phoneDto) {
-            _ = await _phoneService.Update(phoneDto);
-            return Response(phoneDto.PhoneId);
+        public async Task<ActionResult<PhoneResponse>> Put(PhoneDto phoneDto) {
+            return Response(await _phoneService.Update(phoneDto));
         }
 
         //[CustomAuthorize.ClaimsAuthorize("Phone", "Excluir")]

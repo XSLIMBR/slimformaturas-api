@@ -8,6 +8,7 @@ using SlimFormaturas.Infra.CrossCutting.Identity.Authorization;
 using System.Threading.Tasks;
 using AutoMapper;
 using System.Collections.Generic;
+using SlimFormaturas.Domain.Dto.TypeGeneric.Response;
 
 namespace SlimFormaturas.Api.Controllers
 {
@@ -28,17 +29,15 @@ namespace SlimFormaturas.Api.Controllers
 
         //[CustomAuthorize.ClaimsAuthorize("Type", "Incluir")]
         [HttpPost]
-        public async Task<ActionResult<string>> Post ([FromBody] TypeGenericForCreationDto typeGenericForCreationDto) {
+        public async Task<ActionResult<TypeGenericResponse>> Post ([FromBody] TypeGenericForCreationDto typeGenericForCreationDto) {
             var typeGeneric = _mapper.Map<TypeGeneric>(typeGenericForCreationDto);
-            _ = await _typeGenericService.Insert(typeGeneric);
-            return Response(typeGeneric.TypeGenericId);
+            return Response(await _typeGenericService.Insert(typeGeneric));
         }
 
         //[CustomAuthorize.ClaimsAuthorize("Type", "Editar")]
         [HttpPut]
-        public async Task<ActionResult<string>> Put([FromBody] TypeGenericDto typeGenericDto) {
-            _ = await _typeGenericService.Update(typeGenericDto);
-            return Response(typeGenericDto.TypeGenericId);
+        public async Task<ActionResult<TypeGenericResponse>> Put([FromBody] TypeGenericDto typeGenericDto) {
+            return Response(await _typeGenericService.Update(typeGenericDto));
         }
 
         // GET api/Graduate

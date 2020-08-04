@@ -11,6 +11,7 @@ using SlimFormaturas.Domain.Dto.TypeGeneric;
 using SlimFormaturas.Domain.Dto.College;
 using SlimFormaturas.Domain.Entities;
 using SlimFormaturas.Domain.Dto.Contract;
+using SlimFormaturas.Domain.Dto.Graduate.Response;
 
 namespace SlimFormaturas.Service.Mapper {
     public class ViewModelToDomainMappingProfile : Profile {

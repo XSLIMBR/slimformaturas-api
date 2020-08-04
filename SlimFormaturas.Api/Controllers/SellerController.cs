@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SlimFormaturas.Domain.Dto.Seller;
+using SlimFormaturas.Domain.Dto.Seller.Response;
 using SlimFormaturas.Domain.Entities;
 using SlimFormaturas.Domain.Interfaces.Service;
 using SlimFormaturas.Domain.Notifications;
@@ -29,17 +30,15 @@ namespace SlimFormaturas.Api.Controllers {
         /// <returns>O id do novo formando inserido</returns>
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Incluir")]
         [HttpPost]
-        public async Task<IActionResult> Post ([FromBody] SellerForCreationDto sellerForCreationDto) {
+        public async Task<ActionResult<SellerResponse>> Post ([FromBody] SellerForCreationDto sellerForCreationDto) {
             var seller = _mapper.Map<Seller>(sellerForCreationDto);
-            _ = await _sellerService.Insert(seller);
-            return Response(seller.SellerId);
+            return Response(await _sellerService.Insert(seller));
         }
 
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Editar")]
         [HttpPut]
-        public async Task<IActionResult> Put ([FromBody] SellerDto sellerDto) {
-            _ = await _sellerService.Update(sellerDto);
-            return Response(sellerDto.SellerId);
+        public async Task<ActionResult<SellerResponse>> Put ([FromBody] SellerDto sellerDto) {
+            return Response(await _sellerService.Update(sellerDto));
         }
 
         // GET api/Graduate

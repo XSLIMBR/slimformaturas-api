@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SlimFormaturas.Domain.Dto.Graduate {
+namespace SlimFormaturas.Domain.Dto.Graduate.Response {
     public class GraduateSearchResponse {
         public string GraduateId { get; set; }
         public string Name { get; set; }

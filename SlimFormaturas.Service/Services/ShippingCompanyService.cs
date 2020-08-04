@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using SlimFormaturas.Domain.Dto.ShippingCompany;
+using SlimFormaturas.Domain.Dto.ShippingCompany.Response;
 using SlimFormaturas.Domain.Entities;
 using SlimFormaturas.Domain.Interfaces.Repository;
 using SlimFormaturas.Domain.Interfaces.Service;
@@ -28,7 +29,7 @@ namespace SlimFormaturas.Service.Services {
             _mapper = mapper;
         }
 
-        public async Task<ShippingCompany> Insert (ShippingCompany obj) {
+        public async Task<ShippingCompanyResponse> Insert (ShippingCompany obj) {
 
             obj.Validate(obj, new ShippingCompanyValidator());
             _notifications.AddNotifications(obj.ValidationResult);
@@ -47,10 +48,10 @@ namespace SlimFormaturas.Service.Services {
                 await Post(obj);
             }
 
-            return obj;
+            return _mapper.Map< ShippingCompanyResponse >( obj);
         }
 
-        public async Task<ShippingCompany> Update (ShippingCompanyDto shippingCompanyDto) {
+        public async Task<ShippingCompanyResponse> Update (ShippingCompanyDto shippingCompanyDto) {
 
             ShippingCompany shippingCompany = await _shippingCompanyRepository.GetAllById(shippingCompanyDto.ShippingCompanyId);
 
@@ -73,7 +74,7 @@ namespace SlimFormaturas.Service.Services {
                 await Put(shippingCompany);
             }
 
-            return shippingCompany;
+            return _mapper.Map< ShippingCompanyResponse >( shippingCompany);
         }
 
         public async Task<ShippingCompany> GetAllById (string id) {

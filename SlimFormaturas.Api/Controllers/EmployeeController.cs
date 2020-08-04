@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using AutoMapper;
 using System.Collections.Generic;
 using SlimFormaturas.Domain.Dto.Employee;
+using SlimFormaturas.Domain.Dto.Employee.Response;
 
 namespace SlimFormaturas.Api.Controllers {
     [Route("api/[controller]")]
@@ -32,17 +33,15 @@ namespace SlimFormaturas.Api.Controllers {
         /// <returns>O id do novo formando inserido</returns>
         //[CustomAuthorize.ClaimsAuthorize("Employee", "Incluir")]
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody]EmployeeForCreationDto EmployeeDto) {
+        public async Task<ActionResult<EmployeeResponse>> Post([FromBody]EmployeeForCreationDto EmployeeDto) {
             var Employee = _mapper.Map<Employee>(EmployeeDto);
-            _ = await _employeeService.Insert(Employee);
-            return Response(Employee.EmployeeId);
+            return Response(await _employeeService.Insert(Employee));
         }
 
         //[CustomAuthorize.ClaimsAuthorize("Employee", "Editar")]
         [HttpPut]
-        public async Task<IActionResult> Put([FromBody]EmployeeDto EmployeeDto) {
-            _ = await _employeeService.Update(EmployeeDto);
-            return Response(EmployeeDto.EmployeeId);
+        public async Task<ActionResult<EmployeeResponse>> Put([FromBody]EmployeeDto EmployeeDto) {
+            return Response(await _employeeService.Update(EmployeeDto));
         }
 
         //[CustomAuthorize.ClaimsAuthorize("Employee", "Excluir")]

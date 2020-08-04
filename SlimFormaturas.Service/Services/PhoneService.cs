@@ -8,6 +8,7 @@ using SlimFormaturas.Domain.Validators;
 using SlimFormaturas.Infra.Data.Repository;
 using AutoMapper;
 using SlimFormaturas.Domain.Dto.Phone;
+using SlimFormaturas.Domain.Dto.Phone.Response;
 
 namespace SlimFormaturas.Service.Services
 {
@@ -32,7 +33,7 @@ namespace SlimFormaturas.Service.Services
             _graduateRepository = graduateRepository;
         }
 
-        public async Task<Phone> Insert(Phone phone) {
+        public async Task<PhoneResponse> Insert(Phone phone) {
             //Phone phone = new Phone(obj.Ddd, obj.PhoneNumber, await _typeGenericRepository.GetById(obj.TypeGenericId));
 
             phone.Validate(phone, new PhoneValidator());
@@ -50,10 +51,10 @@ namespace SlimFormaturas.Service.Services
                 await Post(phone);
             }
 
-            return phone;
+            return _mapper.Map<PhoneResponse>(phone);
         }
 
-        public async Task<Phone> Update(PhoneDto phoneDto) {
+        public async Task<PhoneResponse> Update(PhoneDto phoneDto) {
 
             Phone phone = await _phoneRepository.GetById(phoneDto.PhoneId);
 
@@ -72,7 +73,7 @@ namespace SlimFormaturas.Service.Services
                 _notifications.AddNotification("404", "PhoneId", "Phone with id = " + phoneDto.PhoneId + " not found");
             }
 
-            return phone;
+            return _mapper.Map<PhoneResponse>(phone);
         }
     }
 }

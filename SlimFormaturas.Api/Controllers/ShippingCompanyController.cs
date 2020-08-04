@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SlimFormaturas.Domain.Dto.ShippingCompany;
+using SlimFormaturas.Domain.Dto.ShippingCompany.Response;
 using SlimFormaturas.Domain.Entities;
 using SlimFormaturas.Domain.Interfaces.Service;
 using SlimFormaturas.Domain.Notifications;
@@ -30,17 +31,15 @@ namespace SlimFormaturas.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post ([FromBody] ShippingCompanyForCreationDto companyForCreationDto) {
+        public async Task<ActionResult<ShippingCompanyResponse>> Post ([FromBody] ShippingCompanyForCreationDto companyForCreationDto) {
             var shippingCompany = _mapper.Map<ShippingCompany>(companyForCreationDto);
-            _ = await _shippingCompanyService.Insert(shippingCompany);
-            return Response(shippingCompany.ShippingCompanyId);
+            return Response(await _shippingCompanyService.Insert(shippingCompany));
         }
 
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Editar")]
         [HttpPut]
-        public async Task<IActionResult> Put ([FromBody] ShippingCompanyDto shippingCompanyDto) {
-            _ = await _shippingCompanyService.Update(shippingCompanyDto);
-            return Response(shippingCompanyDto.ShippingCompanyId);
+        public async Task<ActionResult<ShippingCompanyResponse>> Put ([FromBody] ShippingCompanyDto shippingCompanyDto) {
+            return Response(await _shippingCompanyService.Update(shippingCompanyDto));
         }
 
         // [CustomAuthorize.ClaimsAuthorizeAttribute("Graduate", "Consultar")]

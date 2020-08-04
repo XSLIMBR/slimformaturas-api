@@ -8,6 +8,7 @@ using AutoMapper;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using SlimFormaturas.Domain.Dto.Graduate;
+using SlimFormaturas.Domain.Dto.Graduate.Response;
 
 namespace SlimFormaturas.Api.Controllers {
     [Route("api/[controller]")]
@@ -78,14 +79,14 @@ namespace SlimFormaturas.Api.Controllers {
         /// <response code="404">Se contiver dados invalidos</response>   
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Incluir")]
         [HttpPost("InsertNew")]
-        public async Task<IActionResult> Post([FromBody] GraduateForCreationDto graduateDto) {
-            return Response((await _graduateService.Insert(graduateDto)).GraduateId);
+        public async Task<ActionResult<GraduateResponse>> Post([FromBody] GraduateForCreationDto graduateDto) {
+            return Response(await _graduateService.Insert(graduateDto));
         }
 
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Editar")]
         [HttpPut("Update")]
-        public async Task<IActionResult> Put([FromBody]GraduateDto graduateDto) {
-            return Response((await _graduateService.Update(graduateDto)).GraduateId);
+        public async Task<ActionResult<GraduateResponse>> Put([FromBody]GraduateDto graduateDto) {
+            return Response(await _graduateService.Update(graduateDto));
         }
 
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Excluir")]
