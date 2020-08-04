@@ -1,6 +1,7 @@
 ﻿using System;
 using FluentValidation;
 using SlimFormaturas.Domain.Entities;
+using SlimFormaturas.Domain.Validators.Extensions;
 
 namespace SlimFormaturas.Domain.Validators {
     public class CollegeValidator : AbstractValidator<College> {
@@ -17,9 +18,10 @@ namespace SlimFormaturas.Domain.Validators {
                 .NotNull()
                 .Length(1, 50);
             RuleFor(c => c.CNPJ)
-                .NotEmpty()
-                .NotNull()
-                .Length(14);
+                .NotEmpty().WithMessage("É necessário informar o CNPJ.")
+                .IsValidCPF().WithMessage("CNPJ Invalido!")
+                .Length(14).WithMessage("O campo deve conter 14 caracteres")
+                .NotNull();
         }
     }
 }

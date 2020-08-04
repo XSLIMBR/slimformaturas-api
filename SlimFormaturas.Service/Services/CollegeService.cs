@@ -25,26 +25,28 @@ namespace SlimFormaturas.Service.Services {
             _mapper = mapper;
         }
 
-        public async Task<College> Insert (College obj) {
+        public async Task<College> Insert (CollegeForCreationDto collegeForCreationDto) {
 
-            obj.Validate(obj, new CollegeValidator());
-            _notifications.AddNotifications(obj.ValidationResult);
+            var college = _mapper.Map<College>(collegeForCreationDto);
 
-            foreach (var item in obj.Address) {
+            college.Validate(college, new CollegeValidator());
+            _notifications.AddNotifications(college.ValidationResult);
+
+            foreach (var item in college.Address) {
                 item.Validate(item, new AddressValidator());
                 _notifications.AddNotifications(item.ValidationResult);
             }
 
-            foreach (var item in obj.Phone) {
+            foreach (var item in college.Phone) {
                 item.Validate(item, new PhoneValidator());
                 _notifications.AddNotifications(item.ValidationResult);
             }
 
             if (!_notifications.HasNotifications) {
-                await Post(obj);
+                return await Post(college);
             }
 
-            return obj;
+            return null;
         }
 
         public async Task<College> Update (CollegeDto CollegeDto) {
@@ -67,10 +69,10 @@ namespace SlimFormaturas.Service.Services {
             }
 
             if (!_notifications.HasNotifications) {
-                await Put(College);
+                return await Put(College);
             }
 
-            return College;
+            return null;
         }
 
         public async Task<College> GetAllById (string id) {

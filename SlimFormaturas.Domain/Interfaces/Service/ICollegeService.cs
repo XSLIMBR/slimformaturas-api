@@ -7,7 +7,7 @@ using SlimFormaturas.Domain.Entities;
 
 namespace SlimFormaturas.Domain.Interfaces.Service {
     public interface ICollegeService : IService<College> {
-        Task<College> Insert(College obj);
+        Task<College> Insert(CollegeForCreationDto collegeForCreationDto);
         Task<College> Update(CollegeDto CollegeDto);
         Task<College> GetAllById (string id);
     }

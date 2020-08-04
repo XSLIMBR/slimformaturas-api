@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using SlimFormaturas.Domain.Dto.Address;
 using SlimFormaturas.Domain.Dto.Phone;
-using SlimFormaturas.Domain.Validators;
 
 namespace SlimFormaturas.Domain.Dto.College {
     public class CollegeDto {
@@ -22,6 +21,5 @@ namespace SlimFormaturas.Domain.Dto.College {
 
         public IList<AddressDto> Address { get; set; }
         public IList<PhoneDto> Phone { get; set; }
-        //public IList<ContractDto> Contract { get; set; }
     }
 }

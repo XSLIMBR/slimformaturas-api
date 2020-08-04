@@ -16,6 +16,7 @@ namespace SlimFormaturas.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Consumes("application/json")]
     public class CollegeController : ApiController
     {
         private readonly ICollegeService _CollegeService;
@@ -29,33 +30,28 @@ namespace SlimFormaturas.Api.Controllers
             _mapper = mapper;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Post ([FromBody] CollegeForCreationDto companyForCreationDto) {
-            var College = _mapper.Map<College>(companyForCreationDto);
-            _ = await _CollegeService.Insert(College);
-            return Response(College.CollegeId);
+        [HttpPost("InsertNew")]
+        public async Task<IActionResult> Post ([FromBody] CollegeForCreationDto collegeForCreationDto) {
+            return Response((await _CollegeService.Insert(collegeForCreationDto)).CollegeId);
         }
 
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Editar")]
-        [HttpPut]
+        [HttpPut("Update")]
         public async Task<IActionResult> Put ([FromBody] CollegeDto CollegeDto) {
-            _ = await _CollegeService.Update(CollegeDto);
-            return Response(CollegeDto.CollegeId);
+            return Response((await _CollegeService.Update(CollegeDto)).CollegeId);
         }
 
         // [CustomAuthorize.ClaimsAuthorizeAttribute("Graduate", "Consultar")]
-        [HttpGet]
+        [HttpGet("GetAll")]
         public async Task<ActionResult<CollegeDto>> Get () {
-            var shippingCompanies = _mapper.Map<IList<CollegeDto>>(await _CollegeService.Get());
-            return Response(shippingCompanies);
+            return Response(_mapper.Map<IList<CollegeDto>>(await _CollegeService.Get()));
 
         }
 
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Consultar")]
-        [HttpGet("{id}")]
+        [HttpGet("GetAllById/{id}")]
         public async Task<ActionResult<CollegeDto>> Get (string id) {
-            var College = _mapper.Map<CollegeDto>(await _CollegeService.GetAllById(id));
-            return Response(College);
+            return Response(_mapper.Map<CollegeDto>(await _CollegeService.GetAllById(id)));
         }
     }
 }

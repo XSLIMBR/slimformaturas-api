@@ -13,6 +13,7 @@ namespace SlimFormaturas.Api.Controllers {
     [Route("api/[controller]")]
     [ApiController]
     //[Authorize]
+    [Consumes("application/json")]
     public class GraduateController : ApiController {
         readonly IGraduateService _graduateService;
         
@@ -74,7 +75,9 @@ namespace SlimFormaturas.Api.Controllers {
         /// <summary>
         /// Inserir um novo formando na base
         /// </summary>
-        /// <returns>O id do novo formando inserido</returns>
+        /// <returns>O Id do novo formando</returns>
+        /// <response code="200">Retorna se o novo formando for inserido</response>
+        /// <response code="404">Se contiver dados invalidos</response>   
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Incluir")]
         [HttpPost("InsertNew")]
         public async Task<IActionResult> Post([FromBody] GraduateForCreationDto graduateDto) {
@@ -84,8 +87,7 @@ namespace SlimFormaturas.Api.Controllers {
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Editar")]
         [HttpPut("Update")]
         public async Task<IActionResult> Put([FromBody]GraduateDto graduateDto) {
-            _ = await _graduateService.Update(graduateDto);
-            return Response(graduateDto.GraduateId);
+            return Response((await _graduateService.Update(graduateDto)).GraduateId);
         }
 
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Excluir")]

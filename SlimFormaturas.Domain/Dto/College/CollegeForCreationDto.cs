@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
 using SlimFormaturas.Domain.Dto.Address;
 using SlimFormaturas.Domain.Dto.Phone;
-using SlimFormaturas.Domain.Validators;
 
 namespace SlimFormaturas.Domain.Dto.College {
     public class CollegeForCreationDto {
