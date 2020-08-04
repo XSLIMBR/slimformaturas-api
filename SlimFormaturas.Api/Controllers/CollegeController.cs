@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SlimFormaturas.Domain.Dto.College;
+using SlimFormaturas.Domain.Dto.College.Response;
 using SlimFormaturas.Domain.Entities;
 using SlimFormaturas.Domain.Interfaces.Service;
 using SlimFormaturas.Domain.Notifications;
@@ -31,14 +32,14 @@ namespace SlimFormaturas.Api.Controllers
         }
 
         [HttpPost("InsertNew")]
-        public async Task<IActionResult> Post ([FromBody] CollegeForCreationDto collegeForCreationDto) {
-            return Response((await _CollegeService.Insert(collegeForCreationDto)).CollegeId);
+        public async Task<ActionResult<CollegeResponse>> Post ([FromBody] CollegeForCreationDto collegeForCreationDto) {
+            return Response(await _CollegeService.Insert(collegeForCreationDto));
         }
 
         //[CustomAuthorize.ClaimsAuthorize("Graduate", "Editar")]
         [HttpPut("Update")]
-        public async Task<IActionResult> Put ([FromBody] CollegeDto CollegeDto) {
-            return Response((await _CollegeService.Update(CollegeDto)).CollegeId);
+        public async Task<ActionResult<CollegeResponse>> Put ([FromBody] CollegeDto CollegeDto) {
+            return Response(await _CollegeService.Update(CollegeDto));
         }
 
         // [CustomAuthorize.ClaimsAuthorizeAttribute("Graduate", "Consultar")]

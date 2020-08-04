@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using SlimFormaturas.Domain.Dto.College;
+using SlimFormaturas.Domain.Dto.College.Response;
 using SlimFormaturas.Domain.Entities;
 using SlimFormaturas.Domain.Interfaces.Repository;
 using SlimFormaturas.Domain.Interfaces.Service;
@@ -25,7 +26,7 @@ namespace SlimFormaturas.Service.Services {
             _mapper = mapper;
         }
 
-        public async Task<College> Insert (CollegeForCreationDto collegeForCreationDto) {
+        public async Task<CollegeResponse> Insert (CollegeForCreationDto collegeForCreationDto) {
 
             var college = _mapper.Map<College>(collegeForCreationDto);
 
@@ -43,13 +44,13 @@ namespace SlimFormaturas.Service.Services {
             }
 
             if (!_notifications.HasNotifications) {
-                return await Post(college);
+                await Post(college);
             }
 
-            return null;
+            return _mapper.Map<CollegeResponse>(college);
         }
 
-        public async Task<College> Update (CollegeDto CollegeDto) {
+        public async Task<CollegeResponse> Update (CollegeDto CollegeDto) {
 
             College College = await _CollegeRepository.GetAllById(CollegeDto.CollegeId);
 
@@ -69,10 +70,10 @@ namespace SlimFormaturas.Service.Services {
             }
 
             if (!_notifications.HasNotifications) {
-                return await Put(College);
+                await Put(College);
             }
 
-            return null;
+            return _mapper.Map<CollegeResponse>(College);
         }
 
         public async Task<College> GetAllById (string id) {

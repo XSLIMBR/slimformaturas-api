@@ -16,15 +16,13 @@ namespace SlimFormaturas.Api.Controllers {
     [Consumes("application/json")]
     public class GraduateController : ApiController {
         readonly IGraduateService _graduateService;
-        
         readonly IMapper _mapper;
 
         public GraduateController(
             IGraduateService graduateService,
             NotificationHandler notifications,
             IMapper mapper
-            ) : base (notifications)
-        {
+            ) : base (notifications) {
             
             _graduateService = graduateService;
             _mapper = mapper;

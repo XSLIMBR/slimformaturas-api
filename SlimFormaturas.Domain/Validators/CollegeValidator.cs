@@ -12,14 +12,14 @@ namespace SlimFormaturas.Domain.Validators {
             RuleFor(c => c.CorporateName)
                 .NotEmpty()
                 .NotNull()
-                .Length(1, 50);
+                .Length(1, 100);
             RuleFor(c => c.FantasyName)
                 .NotEmpty()
                 .NotNull()
-                .Length(1, 50);
+                .Length(1, 100);
             RuleFor(c => c.CNPJ)
                 .NotEmpty().WithMessage("É necessário informar o CNPJ.")
-                .IsValidCPF().WithMessage("CNPJ Invalido!")
+                .IsValidCNPJ().WithMessage("CNPJ Invalido!")
                 .Length(14).WithMessage("O campo deve conter 14 caracteres")
                 .NotNull();
         }

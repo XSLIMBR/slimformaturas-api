@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using SlimFormaturas.Domain.Validators;
 
 namespace SlimFormaturas.Domain.Entities {
     public class Contract : Entity {

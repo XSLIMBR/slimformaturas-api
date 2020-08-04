@@ -7,8 +7,6 @@ namespace SlimFormaturas.Domain.Entities {
     [NotMapped]
     public abstract class Entity {
         [NotMapped]
-        public Guid Id { get; private set; }
-        [NotMapped]
         public bool Valid { get;  private set; }
         [NotMapped]
         public bool Invalid => !Valid;

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using SlimFormaturas.Domain.Dto.Contract;
+using SlimFormaturas.Domain.Dto.Contract.Response;
 using SlimFormaturas.Domain.Entities;
 using SlimFormaturas.Domain.Interfaces.Repository;
 using SlimFormaturas.Domain.Interfaces.Service;
@@ -26,7 +27,7 @@ namespace SlimFormaturas.Service.Services {
             _mapper = mapper;
         }
 
-        public async Task<Contract> Insert(ContractForCreationDto contractDto) {
+        public async Task<ContractResponse> Insert(ContractForCreationDto contractDto) {
             var contract = _mapper.Map<Contract>(contractDto);
 
             contract.Validate(contract, new ContractValidator());
@@ -36,12 +37,12 @@ namespace SlimFormaturas.Service.Services {
                 await Post(contract);
             }
 
-            return contract;
+            return _mapper.Map<ContractResponse>(contract);
         }
 
-        public async Task<Contract> Update(ContractDto contractDto) {
+        public async Task<ContractResponse> Update(ContractDto contractDto) {
 
-            Contract contract = await _contractRepository.GetAllById(contractDto.ContractId);
+            var contract = await _contractRepository.GetAllById(contractDto.ContractId);
 
             _mapper.Map(contractDto, contract);
 
@@ -52,11 +53,11 @@ namespace SlimFormaturas.Service.Services {
                 await Put(contract);
             }
 
-            return contract;
+            return _mapper.Map<ContractResponse>(contract);
         }
 
         public Task<Contract> GetAllById(string id) {
-            throw new System.NotImplementedException();
+            return _contractRepository.GetAllById(id);
         }
 
         public Task<IList<ContractSearchResponse>> Search(ContractSearch data) {

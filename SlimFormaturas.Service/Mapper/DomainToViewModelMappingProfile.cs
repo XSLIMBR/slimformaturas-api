@@ -12,6 +12,8 @@ using SlimFormaturas.Domain.Dto.College;
 using SlimFormaturas.Domain.Entities;
 using SlimFormaturas.Domain.Dto.Contract;
 using System.Linq;
+using SlimFormaturas.Domain.Dto.College.Response;
+using SlimFormaturas.Domain.Dto.Contract.Response;
 
 namespace SlimFormaturas.Service.Mapper {
     public class DomainToViewModelMappingProfile : Profile{
@@ -24,6 +26,7 @@ namespace SlimFormaturas.Service.Mapper {
 
             CreateMap<College, CollegeDto>();
             CreateMap<College, CollegeForCreationDto>();
+            CreateMap<College, CollegeResponse>();
 
             #region Formando
             CreateMap<Graduate, GraduateDto>();
@@ -50,6 +53,8 @@ namespace SlimFormaturas.Service.Mapper {
 
             CreateMap<Contract, ContractDto>();
             CreateMap<Contract, ContractForCreationDto>();
+            CreateMap<Contract, ContractResponse>();
+
         }
     }
 }

@@ -9,18 +9,14 @@ namespace SlimFormaturas.Domain.Validators {
                 .NotNull()
                 .OnAnyFailure(x => throw new ArgumentNullException("O objeto não foi encontrado!"));
             RuleFor(c => c.Code)
-                .NotEmpty()
+                .NotEmpty().WithMessage("É necessário informar o codigo do contrato")
                 .NotNull()
-                .Length(1, 50);
+                .Length(1, 100);
             RuleFor(c => c.Semester)
-                .NotEmpty().WithMessage(" É necessário informar o semestre ")
+                .NotEmpty().WithMessage("É necessário informar o semestre do contrato")
                 .NotNull();
             RuleFor(c => c.Year)
-                .NotEmpty().WithMessage(" É necessário informar o ano que o aluno está cursando ")
-                .NotNull();
-
-            RuleFor(c => c.Note)
-                .NotEmpty().WithMessage(" É necessário informar a nota obtida pelo aluno no curso ")
+                .NotEmpty().WithMessage("É necessário informar o ano do contrato!")
                 .NotNull();
         }
     }
