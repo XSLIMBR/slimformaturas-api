@@ -70,6 +70,7 @@ namespace SlimFormaturas.Service.Mapper {
             CreateMap<Contract, ContractDto>();
             CreateMap<Contract, ContractForCreationDto>();
             CreateMap<Contract, ContractResponse>();
+            CreateMap<Contract, ContractSearchResponse>();
 
         }
     }

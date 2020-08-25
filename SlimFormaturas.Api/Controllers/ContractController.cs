@@ -44,5 +44,11 @@ namespace SlimFormaturas.Api.Controllers {
         public async Task<ActionResult<ContractDto>> Get(string id){
             return Response(_mapper.Map<ContractDto>(await _contractService.GetAllById(id)));
         }
+
+
+        [HttpGet("GetByAnyKey/{Key}")]
+        public async Task<ActionResult<ContractSearchResponse>> GetByAnyKey(string Key) {
+            return Response(await _contractService.GetByAnyKey(Key));
+        }
     }
 }

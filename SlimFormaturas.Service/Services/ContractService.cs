@@ -7,6 +7,7 @@ using SlimFormaturas.Domain.Interfaces.Service;
 using SlimFormaturas.Domain.Notifications;
 using SlimFormaturas.Domain.Validators;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SlimFormaturas.Service.Services {
@@ -62,6 +63,11 @@ namespace SlimFormaturas.Service.Services {
 
         public Task<IList<ContractSearchResponse>> Search(ContractSearch data) {
             throw new System.NotImplementedException();
+        }
+
+        public async Task<IList<ContractSearchResponse>> GetByAnyKey(string key) {
+            var contracts = await _contractRepository.GetWhere(c => c.Code.ToUpper().Contains(key.ToUpper()));
+            return _mapper.Map<IList<ContractSearchResponse>>(contracts);
         }
     }
 }

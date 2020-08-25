@@ -12,6 +12,7 @@ using SlimFormaturas.Domain.Dto.College;
 using SlimFormaturas.Domain.Entities;
 using SlimFormaturas.Domain.Dto.Contract;
 using SlimFormaturas.Domain.Dto.Graduate.Response;
+using SlimFormaturas.Domain.Dto.Contract.Response;
 
 namespace SlimFormaturas.Service.Mapper {
     public class ViewModelToDomainMappingProfile : Profile {
@@ -48,6 +49,7 @@ namespace SlimFormaturas.Service.Mapper {
 
             CreateMap<ContractDto, Contract>();
             CreateMap<ContractForCreationDto, Contract>();
+            CreateMap<ContractSearchResponse, Contract>();
         }
     }
 }
