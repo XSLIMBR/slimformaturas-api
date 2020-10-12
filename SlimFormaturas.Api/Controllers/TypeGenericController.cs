@@ -30,8 +30,7 @@ namespace SlimFormaturas.Api.Controllers
         //[CustomAuthorize.ClaimsAuthorize("Type", "Incluir")]
         [HttpPost]
         public async Task<ActionResult<TypeGenericResponse>> Post ([FromBody] TypeGenericForCreationDto typeGenericForCreationDto) {
-            var typeGeneric = _mapper.Map<TypeGeneric>(typeGenericForCreationDto);
-            return Response(await _typeGenericService.Insert(typeGeneric));
+            return Response(await _typeGenericService.Insert(typeGenericForCreationDto));
         }
 
         //[CustomAuthorize.ClaimsAuthorize("Type", "Editar")]

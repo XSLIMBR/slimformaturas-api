@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SlimFormaturas.Domain.Interfaces.Service {
     public interface ITypeGenericService : IService<TypeGeneric> {
-        Task<TypeGenericResponse> Insert(TypeGeneric obj);
+        Task<TypeGenericResponse> Insert(TypeGenericForCreationDto obj);
         Task<TypeGenericResponse> Update(TypeGenericDto obj);
     }
 }

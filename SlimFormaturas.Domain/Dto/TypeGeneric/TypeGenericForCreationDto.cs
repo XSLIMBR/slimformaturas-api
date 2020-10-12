@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using SlimFormaturas.Domain.Dto.TypeGeneric.Enum;
 
 namespace SlimFormaturas.Domain.Dto.TypeGeneric {
     public class TypeGenericForCreationDto {
         public string Name { get; set; }
-        public LocateForCreationDto Localization { get; set; }
-        public enum LocateForCreationDto {
-            Address = 1,
-            Telephone = 2
-        }
+        public LocationDto Localization { get; set; }
     }
 }
